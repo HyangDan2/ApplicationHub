@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="ko"><head><!--HEAD--></head><body>
+<html lang="en"><head><!--HEAD--></head><body>
 <!--HEADER-->
 <main id="main">
 <section class="hero shell" aria-labelledby="page-title">
   <div class="hero-copy">
     <p class="eyebrow"><span class="status-dot"></span> THE HD2LAB APP SHELF</p>
     <h1 id="page-title">Pick your<br>next <span class="word">app<svg viewBox="0 0 300 16" aria-hidden="true"><path d="M3 11Q150-2 297 8"/></svg></span><span class="accent">.</span></h1>
-    <p class="hero-description">매일 쓰는 작은 도구부터 실험적인 웹 앱까지.<br>설치 없이 브라우저에서 바로 열리는 HD2Lab의 앱들.</p>
-    <a class="hero-action" href="#apps">앱 둘러보기 <span aria-hidden="true">↓</span></a>
-    <div class="hero-notes"><span>설치 없이 브라우저에서</span><span>계정 없이 바로</span></div>
+    <p class="hero-description">From daily essentials to experimental web tools.<br>Clean, fast, zero install.</p>
+    <a class="hero-action" href="#apps">Explore Apps <span aria-hidden="true">↓</span></a>
+    <div class="hero-notes"><span>Runs in your browser</span><span>No account required</span></div>
   </div>
   <div class="hero-art" aria-hidden="true">
     <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
@@ -30,27 +30,27 @@
 
 <section class="collection shell" id="apps" aria-labelledby="collection-title">
   <div class="section-heading">
-    <div><p class="eyebrow muted">THE CATALOG</p><h2 id="collection-title">어떤 앱이 필요하세요?<span id="app-count" class="count" hidden>00</span></h2></div>
-    <p class="section-note">필요한 도구를 골라 바로 열어 보세요.</p>
+    <div><p class="eyebrow muted">THE CATALOG</p><h2 id="collection-title">What do you need today?<span id="app-count" class="count" hidden>00</span></h2></div>
+    <p class="section-note">Select a tool and open it instantly.</p>
   </div>
   <form id="search-form" class="toolbar" role="search">
     <label class="search-box">
-      <span class="sr-only">앱 검색</span>
+      <span class="sr-only">Search apps</span>
       <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
-      <input id="search" name="q" type="search" maxlength="200" placeholder="앱 이름, 기능, 태그로 검색" autocomplete="off">
+      <input id="search" name="q" type="search" maxlength="200" placeholder="Search by name, feature, or tag..." autocomplete="off">
     </label>
-    <button id="reset" class="reset-button" type="button" disabled>초기화</button>
+    <button id="reset" class="reset-button" type="button" disabled>Reset</button>
   </form>
-  <div id="filters" class="filters" role="group" aria-label="카테고리 필터"></div>
-  <div id="app-grid" class="app-grid" aria-busy="true"><p class="load-message" role="status">앱을 불러오는 중입니다…</p></div>
-  <noscript><p class="empty">앱 목록을 보려면 JavaScript를 켜주세요.</p></noscript>
-  <div class="collection-bottom"><span><span class="tiny-dot"></span> 브라우저에서 바로 열리는 앱</span><span>설치도, 계정도 없이.</span></div>
+  <div id="filters" class="filters" role="group" aria-label="Category filters"></div>
+  <div id="app-grid" class="app-grid" aria-busy="true"><p class="load-message" role="status">Loading apps…</p></div>
+  <noscript><p class="empty">Turn on JavaScript to see the app list.</p></noscript>
+  <div class="collection-bottom"><span><span class="tiny-dot"></span> Apps that open right in your browser</span><span>No install, no account.</span></div>
 </section>
 
 <section class="app-guide shell" aria-labelledby="guide-title">
-  <div><p class="eyebrow muted">HOW IT WORKS</p><h2 id="guide-title">골라서 바로 쓰세요.</h2></div>
-  <div class="guide-item"><span class="guide-number">01</span><div><h3>설치도 가입도 없이</h3><p>카드의 ‘앱 열기’를 누르면 새 탭 없이 바로 열립니다.</p></div></div>
-  <div class="guide-item"><span class="guide-number">02</span><div><h3>기록은 이 브라우저에</h3><p>작업과 사진은 기기 안에서만 다뤄지고 서버로 보내지 않습니다.</p></div></div>
-  <div class="guide-item"><span class="guide-number">03</span><div><h3>필요한 것만 골라서</h3><p>분야로 좁히고, 이름이나 태그로 바로 찾습니다.</p></div></div>
+  <div><p class="eyebrow muted">HOW IT WORKS</p><h2 id="guide-title">Pick and run instantly.</h2></div>
+  <div class="guide-item"><span class="guide-number">01</span><div><h3>No install, no sign-up</h3><p>Press “Open App” on a card and it opens right here, with no new tab.</p></div></div>
+  <div class="guide-item"><span class="guide-number">02</span><div><h3>Your data stays in this browser</h3><p>Work and photos are handled on your device and never sent to a server.</p></div></div>
+  <div class="guide-item"><span class="guide-number">03</span><div><h3>Only what you need</h3><p>Narrow by category, or find it by name or tag.</p></div></div>
 </section>
 </main><!--FOOTER--><script type="module" src="./js/app.js"></script></body></html>

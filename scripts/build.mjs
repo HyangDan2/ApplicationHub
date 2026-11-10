@@ -23,8 +23,8 @@ const origin = resolveOrigin(process.env.PUBLIC_URL);
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({ amp: '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] ?? c));
 
 function head(prefix) {
-  const title = 'ApplicationHub — HD2Lab의 웹 앱 서가';
-  const description = 'HD2Lab의 웹 애플리케이션을 한 곳에서. 할 일 관리부터 사진, 필름 현상, 머신러닝 실습까지 설치 없이 브라우저에서 바로 엽니다.';
+  const title = 'ApplicationHub — HD2Lab’s web app shelf';
+  const description = 'HD2Lab’s web applications in one place. To-dos, photos, film developing, and machine-learning practice — all open right in your browser, no install.';
   return [
     '<meta charset="utf-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
@@ -47,11 +47,11 @@ function head(prefix) {
   ].filter(Boolean).join('');
 }
 
-const header = prefix => `<a class="skip-link" href="#main">본문으로 이동</a>
+const header = prefix => `<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header shell">
-  <a class="brand" href="${prefix}" aria-label="ApplicationHub 홈"><span class="mark" aria-hidden="true"></span><span class="brand-name">HD2Lab</span><em>ApplicationHub</em></a>
-  <nav aria-label="메인 메뉴">
-    <a class="nav-active" href="${prefix}#apps">앱 둘러보기</a>
+  <a class="brand" href="${prefix}" aria-label="ApplicationHub home"><span class="mark" aria-hidden="true"></span><span class="brand-name">HD2Lab</span><em>ApplicationHub</em></a>
+  <nav aria-label="Main menu">
+    <a class="nav-active" href="${prefix}#apps">Browse Apps</a>
     <a class="hub-link" href="https://hyangdan2.github.io/GameHub/">GameHub <span aria-hidden="true">↗</span></a>
     <a class="hub-link" href="https://hyangdan2.github.io/TechnicalHub/">TechnicalHub <span aria-hidden="true">↗</span></a>
     <a class="web-hq-link" href="https://hyangdan2.github.io/">Web-HQ <span aria-hidden="true">↗</span></a>

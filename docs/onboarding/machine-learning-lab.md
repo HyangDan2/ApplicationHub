@@ -3,7 +3,7 @@
 - App card ID: `machine-learning-lab`
 - Live URL: https://hyangdan2.github.io/EDPilot0001/ — checked 2026-11-10, HTTP 200, page title `개인적인 머신러닝 공부 | HD2Lab`
 - Source: https://github.com/HyangDan2/EDPilot0001 (public, `main`, last push 2026-10-24)
-- Category / tags: `Learning` / 인터랙티브 · 실험 5개 · 한국어
+- Category / tags: `Learning` / Interactive · 5 Labs · Korean
 - Thumbnail: `assets/apps/machine-learning-lab.jpg` — 16:9 crop of a 1440×810 capture of the live cover page, resized to 960×540. The site header was trimmed out of the crop.
 
 ## What this record claims

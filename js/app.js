@@ -30,9 +30,9 @@ function card(app, index) {
   image.decoding = 'async';
   image.addEventListener('error', () => {
     image.src = './assets/apps/placeholder.svg';
-    image.alt = `${app.title} — 미리보기 준비 중`;
+    image.alt = `${app.title} — preview coming soon`;
   }, { once: true });
-  picture.append(image, element('span', 'image-caption', app.imageKind === 'artwork' ? '공식 소개 이미지' : '실제 화면'));
+  picture.append(image, element('span', 'image-caption', app.imageKind === 'artwork' ? 'Official Art' : 'Live UI'));
 
   const body = element('div', 'card-body');
   const kicker = element('div', 'card-kicker');
@@ -40,7 +40,7 @@ function card(app, index) {
 
   const meta = element('div', 'card-meta');
   for (const tag of app.tags) meta.append(element('span', 'meta-pill', tag));
-  meta.append(element('span', 'meta-pill', '브라우저에서 바로'));
+  meta.append(element('span', 'meta-pill', 'Runs in browser'));
 
   body.append(
     kicker,
@@ -51,15 +51,15 @@ function card(app, index) {
   );
 
   if (app.status === 'published' && safeUrl(app.launchUrl)) {
-    const link = element('a', 'action-link', '앱 열기');
+    const link = element('a', 'action-link', 'Open App');
     link.href = app.launchUrl;
-    link.setAttribute('aria-label', `${app.title} 열기`);
+    link.setAttribute('aria-label', `Open ${app.title}`);
     const arrow = element('span', '', '↗');
     arrow.setAttribute('aria-hidden', 'true');
     link.append(arrow);
     body.append(link);
   } else {
-    body.append(element('span', 'action-link unavailable', '지금은 점검 중이에요'));
+    body.append(element('span', 'action-link unavailable', 'Under maintenance right now'));
   }
 
   article.append(picture, body);
@@ -69,7 +69,7 @@ function card(app, index) {
 function renderFilters() {
   filters.replaceChildren();
   for (const category of ['', ...categories.filter(item => apps.some(app => app.category === item))]) {
-    const button = element('button', 'filter-chip', category || '전체');
+    const button = element('button', 'filter-chip', category || 'All');
     button.type = 'button';
     button.dataset.category = category;
     button.setAttribute('aria-pressed', String(state.category === category));
@@ -85,11 +85,11 @@ function emptyState() {
   const box = element('div', 'empty');
   box.append(
     element('span', 'empty-icon', '⌕'),
-    element('h3', '', apps.length ? '아직 찾는 앱이 없어요.' : '새 앱을 준비하고 있어요.'),
-    element('p', '', apps.length ? '다른 검색어를 입력하거나 필터를 초기화해 보세요.' : '곧 이 자리에 새 도구가 들어옵니다.'),
+    element('h3', '', apps.length ? 'No app matches that yet.' : 'New apps are on the way.'),
+    element('p', '', apps.length ? 'Try another search term or reset the filters.' : 'A new tool will land here soon.'),
   );
   if (apps.length) {
-    const button = element('button', 'primary', '전체 앱 보기');
+    const button = element('button', 'primary', 'Show all apps');
     button.type = 'button';
     button.addEventListener('click', resetAll);
     box.append(button);
@@ -130,8 +130,8 @@ async function load() {
   } catch {
     const message = element('div', 'load-message');
     message.setAttribute('role', 'alert');
-    message.append(element('p', '', '앱 목록을 불러오지 못했어요. 연결을 확인하고 다시 시도해 주세요.'));
-    const retry = element('button', '', '다시 불러오기');
+    message.append(element('p', '', 'Couldn’t load the app list. Check your connection and try again.'));
+    const retry = element('button', '', 'Try again');
     retry.type = 'button';
     retry.addEventListener('click', load);
     message.append(retry);

@@ -3,7 +3,7 @@
 - App card ID: `photos`
 - Live URL: https://hyangdan2.github.io/PKPilot0001/ — checked 2026-11-10, HTTP 200, page title `HD2Lab | Photos (PKPilot0001)`
 - Source: https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0001 (folder inside the Web-HQ repository; no standalone repository exists)
-- Category / tags: `Photo` / PWA · EXIF · 필터
+- Category / tags: `Photo` / PWA · EXIF · Filter
 - Thumbnail: `assets/apps/photos.jpg` — 16:9 crop of a 1440×810 capture of the live Library screen, resized to 960×540. The library holds the app's own mock photo set.
 
 ## What this record claims

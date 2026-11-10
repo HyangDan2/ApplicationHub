@@ -3,7 +3,7 @@
 - App card ID: `todo-master`
 - Live URL: https://hyangdan2.github.io/AGPilot0002/ — checked 2026-11-10, HTTP 200, page title `HD2Lab | Todo Master`
 - Source: https://github.com/HyangDan2/AGPilot0002 (public, `main`, last push 2026-11-07)
-- Category / tags: `Productivity` / PWA · 오프라인 · 로컬 저장
+- Category / tags: `Productivity` / PWA · Offline · Local Storage
 - Thumbnail: `assets/apps/todo-master.jpg` — 16:9 crop of a 1440×810 capture of the live app, resized to 960×540. The visible tasks are the app's own built-in sample records (`js/services/storage.js` → `getDefaultTodos()`), not user data.
 
 ## What this record claims
