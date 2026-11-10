@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises';
 import { chromium } from '@playwright/test';
 
-const base = process.env.PUBLIC_URL;
-if (!base || !base.startsWith('https://') || !base.endsWith('/ApplicationHub/')) {
-  throw Error('No deployment configured. Set PUBLIC_URL to the confirmed HTTPS /ApplicationHub/ URL after authorized deployment.');
-}
+import { BASE, resolveOrigin } from './base.mjs';
+
+const base = resolveOrigin(process.env.PUBLIC_URL);
+if (!base) throw Error(`No deployment configured. Set PUBLIC_URL to the confirmed HTTPS ${BASE} URL after authorized deployment.`);
 const local = JSON.parse(await fs.readFile('dist/release.json', 'utf8'));
 const remote = await fetch(`${base}release.json`, { signal: AbortSignal.timeout(10000) })
   .then(response => { if (!response.ok) throw Error(`Release HTTP ${response.status}`); return response.json(); });
