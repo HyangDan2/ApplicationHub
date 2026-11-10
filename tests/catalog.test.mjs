@@ -16,23 +16,25 @@ test('catalog satisfies the app schema and publishes a stable order', () => {
   assert.ok(visible.every(app => safeUrl(app.launchUrl)));
 });
 
-test('Korean and Latin search match title, description, category, and tags with AND semantics', () => {
-  const photos = filterApps(catalog.apps, { q: '사진', category: '' });
-  assert.ok(photos.some(app => app.id === 'photos'));
-  assert.ok(photos.some(app => app.id === 'film-studio'));
-  assert.equal(filterApps(catalog.apps, { q: '사진', category: 'Learning' }).length, 0);
+test('Search matches title, subtitle, description, category, and tags with AND semantics', () => {
+  const photo = filterApps(catalog.apps, { q: 'photo', category: '' });
+  assert.ok(photo.some(app => app.id === 'photos'));
+  assert.ok(photo.some(app => app.id === 'film-studio'));
+  assert.equal(filterApps(catalog.apps, { q: 'photo', category: 'Learning' }).length, 0);
   assert.ok(filterApps(catalog.apps, { q: 'webgl2', category: '' }).some(app => app.id === 'film-studio'));
   assert.ok(filterApps(catalog.apps, { q: 'pwa', category: '' }).length >= 2);
-  assert.equal(filterApps(catalog.apps, { q: '없는검색어', category: '' }).length, 0);
+  assert.ok(filterApps(catalog.apps, { q: 'LOCAL storage', category: 'Productivity' }).some(app => app.id === 'todo-master'));
+  assert.deepEqual(filterApps(catalog.apps, { q: 'photo library', category: '' }).map(app => app.id), ['photos']);
+  assert.equal(filterApps(catalog.apps, { q: 'nomatchterm', category: '' }).length, 0);
 });
 
 test('category state is validated against the catalog and round-trips through the query string', () => {
   assert.equal(readState('?category=Learning', catalog.apps).category, 'Learning');
   assert.equal(readState('?category=Unknown', catalog.apps).category, '');
   assert.equal(readState('', catalog.apps).category, '');
-  const query = stateQuery({ q: '필름', category: 'Photo' });
-  assert.equal(query, '?q=%ED%95%84%EB%A6%84&category=Photo');
-  assert.deepEqual(readState(query, catalog.apps), { q: '필름', category: 'Photo' });
+  const query = stateQuery({ q: 'film studio', category: 'Photo' });
+  assert.equal(query, '?q=film+studio&category=Photo');
+  assert.deepEqual(readState(query, catalog.apps), { q: 'film studio', category: 'Photo' });
   assert.equal(stateQuery({ q: '', category: '' }), '');
 });
 

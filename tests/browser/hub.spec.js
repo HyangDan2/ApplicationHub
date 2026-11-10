@@ -12,7 +12,7 @@ const ready = async page => {
 test('published apps render with their exact launch destination', async ({ page }) => {
   await ready(page);
   for (const app of published) {
-    const link = page.getByRole('link', { name: `${app.title} 열기` });
+    const link = page.getByRole('link', { name: `Open ${app.title}` });
     await expect(link).toHaveAttribute('href', app.launchUrl);
   }
   await expect(page.locator('#app-count')).toHaveText(String(published.length).padStart(2, '0'));
@@ -36,11 +36,11 @@ for (const width of [360, 390, 768, 1440]) {
 
 test('search, category filter, reset, and browser history stay in sync', async ({ page }) => {
   await ready(page);
-  await page.getByRole('searchbox', { name: '앱 검색' }).fill('사진');
+  await page.getByRole('searchbox', { name: 'Search apps' }).fill('photo');
   await expect(page.locator('.app-card')).toHaveCount(2);
   await page.getByRole('button', { name: 'Learning', exact: true }).click();
-  await expect(page.getByText('아직 찾는 앱이 없어요.')).toBeVisible();
-  await page.getByRole('button', { name: '전체 앱 보기' }).click();
+  await expect(page.getByText('No app matches that yet.')).toBeVisible();
+  await page.getByRole('button', { name: 'Show all apps' }).click();
   await expect(page.locator('.app-card')).toHaveCount(published.length);
   await expect(page.locator('#search')).toHaveValue('');
   await page.getByRole('button', { name: 'Photo', exact: true }).click();
@@ -48,9 +48,9 @@ test('search, category filter, reset, and browser history stay in sync', async (
   await expect(page).toHaveURL(/category=Photo/);
   await page.goBack();
   await expect(page.locator('.app-card')).toHaveCount(published.length);
-  await expect(page.getByRole('button', { name: '초기화' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Reset' })).toBeDisabled();
   await page.getByRole('button', { name: 'Photo', exact: true }).click();
-  await page.getByRole('button', { name: '초기화' }).click();
+  await page.getByRole('button', { name: 'Reset' }).click();
   await expect(page.locator('.app-card')).toHaveCount(published.length);
   await expect(page).not.toHaveURL(/category=/);
 });
@@ -61,7 +61,7 @@ test('catalog failure offers a working retry', async ({ page }) => {
   await page.goto('./');
   await expect(page.getByRole('alert')).toBeVisible();
   fail = false;
-  await page.getByRole('button', { name: '다시 불러오기' }).click();
+  await page.getByRole('button', { name: 'Try again' }).click();
   await expect(page.locator('.app-card')).toHaveCount(published.length);
 });
 
@@ -102,9 +102,9 @@ test('HD2Lab brand, cross-hub navigation, and icon links are in place', async ({
 test('keyboard order reaches the skip link and an app action link with visible focus', async ({ page }) => {
   await ready(page);
   await page.keyboard.press('Tab');
-  await expect(page.getByText('본문으로 이동')).toBeFocused();
+  await expect(page.getByText('Skip to content')).toBeFocused();
   const app = appById('film-studio');
-  const target = page.getByRole('link', { name: `${app.title} 열기` });
+  const target = page.getByRole('link', { name: `Open ${app.title}` });
   for (let i = 0; i < 24 && !(await target.evaluate(node => node === document.activeElement)); i++) await page.keyboard.press('Tab');
   await expect(target).toBeFocused();
   expect(await target.evaluate(node => getComputedStyle(node).outlineStyle)).toBe('solid');

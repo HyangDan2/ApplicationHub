@@ -1,5 +1,11 @@
 # Change log
 
+## 2026-11-10 — English localization
+
+- Localized the whole interface to English: page title and meta description, header navigation ("Browse Apps"), skip link, hero copy and CTA, catalog heading, search placeholder and reset button, filter chips ("All"), loading, empty, error, and maintenance messages, guide section, collection bottom bar, and card labels ("Live UI", "Official Art", "Runs in browser", "Open App ↗" with `aria-label="Open <title>"`).
+- Translated the four catalog entries in `data/apps.json` (`description`, `tags`, `thumbnailAlt`) to English; product names and launch URLs are unchanged.
+- Updated unit and Chromium tests to the English interface and search terms, and the hosted acceptance check to the new action label.
+
 ## 2026-11-10 — EduHub → ApplicationHub revamp
 
 - Renamed the product from the learning archive to ApplicationHub: a catalog of HD2Lab's browser apps. The repository rename is still pending; the build derives its base path from the repository name, so the site keeps working at `/EduHub/` until then.

@@ -10,7 +10,7 @@ Read this file, then [docs/OPERATIONS.md](docs/OPERATIONS.md) before deployment 
 - `schema/apps.schema.json` validates the catalog; `scripts/validate-catalog.mjs` also checks asset and evidence files, safe HTTPS destinations, unique IDs, and unique launch URLs.
 - Only `published` apps enter `dist/`, the search data, and `release.json`. `draft` and `maintenance` entries stay out of every public artifact.
 - Every app card links to the app's own live URL in the same tab. The hub does not host the apps.
-- Documentation stays in English; the interface stays Korean.
+- Documentation and the interface are both in English.
 - Preserve the apps' own repositories and deployments. Changes to an app are separate work in that app's repository.
 - Do not claim deployment, hosted acceptance, or device testing that was not actually performed.
 
@@ -18,11 +18,11 @@ Read this file, then [docs/OPERATIONS.md](docs/OPERATIONS.md) before deployment 
 
 Cards follow the GameHub spec, and ApplicationHub should stay visually interchangeable with GameHub:
 
-- `.card-image` — 16:9 thumbnail with an `.image-caption` label ("실제 화면" / "공식 소개 이미지")
+- `.card-image` — 16:9 thumbnail with an `.image-caption` label ("Live UI" / "Official Art")
 - `.card-kicker` — category in caps plus the two-digit `.card-index`
 - `.card-title`, `.card-subtitle`, `.card-description`
-- `.card-meta` — `.meta-pill` tags plus the fixed "브라우저에서 바로" pill
-- `.action-link` — "앱 열기 ↗" with `aria-label="<title> 열기"`
+- `.card-meta` — `.meta-pill` tags plus the fixed "Runs in browser" pill
+- `.action-link` — "Open App ↗" with `aria-label="Open <title>"`
 
 ## Brand
 

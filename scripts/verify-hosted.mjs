@@ -19,7 +19,7 @@ try {
   await page.locator('.app-card').first().waitFor();
   if (await page.locator('.app-card').count() !== local.count) throw Error('Card count mismatch');
   for (const app of apps) {
-    const link = page.getByRole('link', { name: `${app.title} 열기` });
+    const link = page.getByRole('link', { name: `Open ${app.title}` });
     if (await link.getAttribute('href') !== app.launchUrl) throw Error(`Launch link mismatch: ${app.id}`);
   }
   for (const icon of await page.locator('link[rel="icon"], link[rel="apple-touch-icon"]').all()) {
