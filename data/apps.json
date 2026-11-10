@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "apps": [
+    {
+      "id": "todo-master",
+      "title": "Todo Master",
+      "subtitle": "Today, in order.",
+      "description": "자연어 한 줄로 마감일·우선순위·반복 주기까지 잡는 할 일 관리. 세부 항목, 오늘 포커스, 백업과 복원까지 브라우저 안에서 동작합니다.",
+      "category": "Productivity",
+      "tags": [
+        "PWA",
+        "오프라인",
+        "로컬 저장"
+      ],
+      "thumbnail": "assets/apps/todo-master.jpg",
+      "thumbnailAlt": "Todo Master 화면: 오늘 포커스 탭과 작업 목록, 진행률 요약",
+      "launchUrl": "https://hyangdan2.github.io/AGPilot0002/",
+      "repositoryUrl": "https://github.com/HyangDan2/AGPilot0002",
+      "status": "published",
+      "sortOrder": 10,
+      "updatedAt": "2026-11-07",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/todo-master.md"
+    },
+    {
+      "id": "photos",
+      "title": "Photos",
+      "subtitle": "A quiet photo library.",
+      "description": "iOS 사진 앱의 감성을 옮긴 사진 라이브러리. 앨범과 EXIF 보기, 필터 보정, 비밀 앨범, 정회원 패스코드 인증을 정적 페이지 하나에 담았습니다.",
+      "category": "Photo",
+      "tags": [
+        "PWA",
+        "EXIF",
+        "필터"
+      ],
+      "thumbnail": "assets/apps/photos.jpg",
+      "thumbnailAlt": "Photos 화면: 라이브러리 보관함과 게스트 모드 안내, 사진 그리드",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0001/",
+      "repositoryUrl": "https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0001",
+      "status": "published",
+      "sortOrder": 20,
+      "updatedAt": "2026-11-10",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/photos.md"
+    },
+    {
+      "id": "film-studio",
+      "title": "Film Studio",
+      "subtitle": "Nine films, one browser.",
+      "description": "9종의 오리지널 필름 프로파일로 사진의 색을 현상하는 WebGL2 필름 시뮬레이터. 3D LUT와 그레인을 실시간으로 조정하고, 사진은 기기 밖으로 나가지 않습니다.",
+      "category": "Photo",
+      "tags": [
+        "WebGL2",
+        "PWA",
+        "로컬 처리"
+      ],
+      "thumbnail": "assets/apps/film-studio.jpg",
+      "thumbnailAlt": "Film Studio 화면: 사진 열기와 보정 샘플, 9종 필름 시그니처 목록",
+      "launchUrl": "https://hyangdan2.github.io/AGPilot0007/",
+      "repositoryUrl": "https://github.com/HyangDan2/AGPilot0007",
+      "status": "published",
+      "sortOrder": 30,
+      "updatedAt": "2026-11-09",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/film-studio.md"
+    },
+    {
+      "id": "machine-learning-lab",
+      "title": "Machine Learning Lab",
+      "subtitle": "Learn by experiment.",
+      "description": "7개 장과 5개 실험실로 이어지는 머신러닝 학습 사이트. 개념, 계산, 비교 그림과 Notebook을 브라우저에서 바로 실습합니다.",
+      "category": "Learning",
+      "tags": [
+        "인터랙티브",
+        "실험 5개",
+        "한국어"
+      ],
+      "thumbnail": "assets/apps/machine-learning-lab.jpg",
+      "thumbnailAlt": "Machine Learning Lab 화면: 학습 사이트 표지와 데이터·모델·실험 다이어그램",
+      "launchUrl": "https://hyangdan2.github.io/EDPilot0001/",
+      "repositoryUrl": "https://github.com/HyangDan2/EDPilot0001",
+      "status": "published",
+      "sortOrder": 40,
+      "updatedAt": "2026-10-24",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/machine-learning-lab.md"
+    }
+  ]
+}

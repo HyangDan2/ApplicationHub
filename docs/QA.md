@@ -43,3 +43,27 @@ Release verification before initial push: catalog validation passed with one cou
 - `PUBLIC_URL=https://hyangdan2.github.io/EduHub/ npm run verify:hosted` passed against the public release digest. Confirmed intro-page reload, launch to course, direct nested chapter, and return to the Hub card.
 - Exactly one published record and one generated detail page remain. Production artifacts contain no localhost/loopback links. Earlier local-only and sample results above are historical.
 - Physical devices remain untested.
+
+## ApplicationHub revamp — 2026-11-10
+
+Scope: local verification of the rebuilt catalog. No deployment; the repository rename and the public URL change were not yet in effect when these checks ran.
+
+Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with Chromium 156.0.8078.4, Linux.
+
+- `npm run validate`: `Validated 4 apps (4 published).`
+- `npm test`: 8 unit checks passed — catalog order, Korean/Latin search with AND terms, category/query round-trip, draft/maintenance exclusion, duplicate ID and duplicate launch URL rejection, unsafe URL rejection, bad thumbnail/evidence path and invalid date rejection, symlink escape rejection.
+- `npm run build`: `Built 4 published apps in dist/ (base /ApplicationHub/).`
+- `npm run test:e2e`: 13 Chromium checks passed — exact launch destinations, layouts at 360/390/768/1440 with no horizontal overflow and all thumbnails at natural width 960, search/category/reset/history state, catalog failure retry, broken-thumbnail placeholder, draft and hostile metadata handling, brand header plus cross-hub and icon links, keyboard focus and Enter activation, long titles at 140% text, reduced motion.
+- `npm run check:links`: 11 external destinations (four app launches, four repositories, Web-HQ, GameHub, TechnicalHub) returned HTTP 200.
+- Visual review: full-page desktop (1440) and mobile (390) captures in [evidence](evidence/) were inspected after the palette, card, and hero-art changes.
+
+### Fixes found during this run
+
+- A leftover reference to the removed `#status` element made the catalog render its error state; the reference was deleted.
+- A rotated decorative orbit overflowed the viewport by 4 px at 768 px; the second orbit was narrowed and the hero clips horizontal overflow.
+- The browser test attempted to click a correctly disabled reset button after Back navigation; the assertion now checks the disabled state, then filters and resets.
+
+### Not verified
+
+- No hosted acceptance (`verify:hosted`), no physical iOS/Android device test, and no Safari/Firefox run.
+- The app screenshots show each app's own cover/library view; individual app features and their data handling were not re-tested here (see each `docs/onboarding/<id>.md`).

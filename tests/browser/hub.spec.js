@@ -1,8 +1,130 @@
-import {test,expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
-test('course catalog, filters, intro reload, return and history',async({page})=>{await page.goto('./');await expect(page.locator('.entry-card')).toHaveCount(1);await expect(page.locator('.sample')).toHaveCount(0);await page.getByRole('searchbox',{name:'학습 기록 검색'}).fill('머신러닝');await page.getByRole('button',{name:'머신러닝',exact:true}).click();await page.locator('#kind').selectOption('course');await page.locator('.intro-link').click();await page.reload();await expect(page.locator('h1')).toHaveText('개인적인 머신러닝 공부');await page.locator('#back-link').click();await expect(page.locator('#search')).toHaveValue('머신러닝');await expect(page.locator('#kind')).toHaveValue('course');await page.getByRole('button',{name:'필터 초기화'}).click();await page.goBack();await expect(page.locator('#kind')).toHaveValue('course');});
-test('empty search and failed fetch recovery',async({page})=>{await page.route('**/data/search.json',r=>r.abort());await page.goto('./');await expect(page.getByRole('button',{name:'다시 시도'})).toBeVisible();await page.unroute('**/data/search.json');await page.getByRole('button',{name:'다시 시도'}).click();await page.locator('#search').fill('없는검색어');await expect(page.getByText('아직 찾는 기록이 없어요.')).toBeVisible();await page.getByRole('button',{name:'전체 기록 보기'}).click();await expect(page.locator('.entry-card')).toHaveCount(1);});
-test('removed content absent and keyboard intro navigation works',async({page,request})=>{for(const id of ['private-draft','learning-notes','semantic-html','css-layout','small-experiments','reading-map','review-loop'])expect((await request.get(`./entries/${id}/`)).status()).toBe(404);const data=JSON.parse(await fs.readFile('dist/data/search.json','utf8'));expect(data.map(e=>e.id)).toEqual(['edpilot0001']);await page.goto('./');await page.keyboard.press('Tab');await expect(page.locator('.skip-link')).toBeFocused();await page.locator('.intro-link').focus();await page.keyboard.press('Enter');await expect(page.locator('.prose')).toBeVisible();expect(await page.locator('link[rel=stylesheet]').evaluate(async e=>(await fetch(e.href)).status)).toBe(200);});
-for(const width of [360,390,768,1440])test(`layout at ${width}px`,async({page})=>{await page.setViewportSize({width,height:950});for(const route of ['./','./entries/edpilot0001/']){await page.goto(route);await page.locator(route==='./'?'.entry-card':'.prose').first().waitFor();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}});
-test('safe rendering, long text, empty catalog and unknown filters',async({page})=>{const data=JSON.parse(await fs.readFile('dist/data/search.json','utf8'));data[0].title='<img src=x onerror=alert(1)>'+ '아주긴제목'.repeat(15);data[0].summary='긴 요약 '.repeat(40);await page.route('**/data/search.json',r=>r.fulfill({json:data}));await page.setViewportSize({width:360,height:950});await page.goto('./?topic=unknown&kind=unknown');await expect(page.locator('.entry-card')).toHaveCount(1);await expect(page.locator('.entry-card img')).toHaveCount(0);await page.addStyleTag({content:'.entry-card h3{font-size:36px}'});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.unroute('**/data/search.json');await page.route('**/data/search.json',r=>r.fulfill({json:[]}));await page.reload();await expect(page.getByText('첫 번째 배움을 기다리고 있어요.')).toBeVisible();});
-test('Hub navigation destinations and course return contract',async({page})=>{await page.goto('./');await expect(page.locator('.hq-link')).toHaveAttribute('href','https://hyangdan2.github.io/');const launch=page.locator('#entry-edpilot0001 .entry-link');await expect(launch).toHaveAttribute('href','/EDPilot0001/');await page.route('**/EDPilot0001/',route=>route.fulfill({contentType:'text/html; charset=utf-8',body:'<a href="/EduHub/#entry-edpilot0001">EduHub로</a>'}));await launch.click();await page.getByRole('link',{name:'EduHub로'}).click();await page.waitForURL('**/EduHub/#entry-edpilot0001');await expect(page.locator('#entry-edpilot0001')).toBeInViewport();await page.locator('.intro-link').click();await expect(page.locator('.hq-link')).toHaveAttribute('href','https://hyangdan2.github.io/');await expect(page.getByRole('link',{name:'학습 시작'})).toHaveAttribute('href','/EDPilot0001/');});
+
+const catalog = JSON.parse(await fs.readFile(new URL('../../data/apps.json', import.meta.url), 'utf8'));
+const published = catalog.apps.filter(app => app.status === 'published');
+const appById = id => catalog.apps.find(app => app.id === id);
+const ready = async page => {
+  await page.goto('./');
+  await expect(page.locator('.app-card')).toHaveCount(published.length);
+};
+
+test('published apps render with their exact launch destination', async ({ page }) => {
+  await ready(page);
+  for (const app of published) {
+    const link = page.getByRole('link', { name: `${app.title} 열기` });
+    await expect(link).toHaveAttribute('href', app.launchUrl);
+  }
+  await expect(page.locator('#app-count')).toHaveText(String(published.length).padStart(2, '0'));
+});
+
+for (const width of [360, 390, 768, 1440]) {
+  test(`layout and assets at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await ready(page);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    for (const image of await page.locator('.card-image img').all()) {
+      await expect(image).toHaveJSProperty('naturalWidth', 960);
+    }
+    const broken = await page.locator('.card-image img').evaluateAll(nodes => nodes.filter(node => !node.complete || node.naturalWidth === 0).length);
+    expect(broken).toBe(0);
+    expect(errors).toEqual([]);
+  });
+}
+
+test('search, category filter, reset, and browser history stay in sync', async ({ page }) => {
+  await ready(page);
+  await page.getByRole('searchbox', { name: '앱 검색' }).fill('사진');
+  await expect(page.locator('.app-card')).toHaveCount(2);
+  await page.getByRole('button', { name: 'Learning', exact: true }).click();
+  await expect(page.getByText('아직 찾는 앱이 없어요.')).toBeVisible();
+  await page.getByRole('button', { name: '전체 앱 보기' }).click();
+  await expect(page.locator('.app-card')).toHaveCount(published.length);
+  await expect(page.locator('#search')).toHaveValue('');
+  await page.getByRole('button', { name: 'Photo', exact: true }).click();
+  await expect(page.locator('.app-card')).toHaveCount(2);
+  await expect(page).toHaveURL(/category=Photo/);
+  await page.goBack();
+  await expect(page.locator('.app-card')).toHaveCount(published.length);
+  await expect(page.getByRole('button', { name: '초기화' })).toBeDisabled();
+  await page.getByRole('button', { name: 'Photo', exact: true }).click();
+  await page.getByRole('button', { name: '초기화' }).click();
+  await expect(page.locator('.app-card')).toHaveCount(published.length);
+  await expect(page).not.toHaveURL(/category=/);
+});
+
+test('catalog failure offers a working retry', async ({ page }) => {
+  let fail = true;
+  await page.route('**/data/apps.json', route => fail ? route.fulfill({ status: 503, body: '' }) : route.fulfill({ json: catalog }));
+  await page.goto('./');
+  await expect(page.getByRole('alert')).toBeVisible();
+  fail = false;
+  await page.getByRole('button', { name: '다시 불러오기' }).click();
+  await expect(page.locator('.app-card')).toHaveCount(published.length);
+});
+
+test('broken thumbnail falls back to the local placeholder', async ({ page }) => {
+  await page.route('**/assets/apps/photos.jpg', route => route.abort());
+  await ready(page);
+  await expect(page.locator('[data-app="photos"] img')).toHaveAttribute('src', './assets/apps/placeholder.svg');
+});
+
+test('draft, maintenance, and hostile metadata render safely', async ({ page }) => {
+  const data = structuredClone(catalog);
+  data.apps.find(app => app.id === 'photos').status = 'draft';
+  data.apps.find(app => app.id === 'film-studio').status = 'maintenance';
+  data.apps.find(app => app.id === 'todo-master').title = '<img src=x onerror=alert(1)>';
+  await page.route('**/data/apps.json', route => route.fulfill({ json: data }));
+  await page.goto('./');
+  await expect(page.locator('.app-card')).toHaveCount(published.length - 2);
+  await expect(page.locator('[data-app="film-studio"]')).toHaveCount(0);
+  await expect(page.locator('[data-app="todo-master"] h3')).toHaveText('<img src=x onerror=alert(1)>');
+  await expect(page.locator('[data-app="todo-master"] h3 img')).toHaveCount(0);
+});
+
+test('HD2Lab brand, cross-hub navigation, and icon links are in place', async ({ page }) => {
+  await ready(page);
+  await expect(page.locator('.brand .brand-name')).toHaveText('HD2Lab');
+  await expect(page.locator('.brand em')).toHaveText('ApplicationHub');
+  await expect(page.getByRole('link', { name: 'GameHub' })).toHaveAttribute('href', 'https://hyangdan2.github.io/GameHub/');
+  await expect(page.getByRole('link', { name: 'TechnicalHub' })).toHaveAttribute('href', 'https://hyangdan2.github.io/TechnicalHub/');
+  await expect(page.locator('.web-hq-link')).toHaveAttribute('href', 'https://hyangdan2.github.io/');
+  await expect(page.locator('link[rel="icon"][type="image/svg+xml"]')).toHaveAttribute('href', './assets/branding/favicon.svg');
+  await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute('href', './assets/branding/apple-touch-icon.png');
+  for (const href of ['./assets/branding/favicon.svg', './assets/branding/favicon-32x32.png', './assets/branding/apple-touch-icon.png', './assets/branding/favicon.ico']) {
+    expect(await page.evaluate(async url => (await fetch(url)).status, href)).toBe(200);
+  }
+  await expect(page.locator('.mark')).toHaveCount(1);
+});
+
+test('keyboard order reaches the skip link and an app action link with visible focus', async ({ page }) => {
+  await ready(page);
+  await page.keyboard.press('Tab');
+  await expect(page.getByText('본문으로 이동')).toBeFocused();
+  const app = appById('film-studio');
+  const target = page.getByRole('link', { name: `${app.title} 열기` });
+  for (let i = 0; i < 24 && !(await target.evaluate(node => node === document.activeElement)); i++) await page.keyboard.press('Tab');
+  await expect(target).toBeFocused();
+  expect(await target.evaluate(node => getComputedStyle(node).outlineStyle)).toBe('solid');
+  await page.route(app.launchUrl, route => route.fulfill({ body: '<h1>App destination</h1>', contentType: 'text/html' }));
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(app.launchUrl);
+});
+
+test('long titles and enlarged text fit a small screen', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  const data = structuredClone(catalog);
+  data.apps.find(app => app.id === 'machine-learning-lab').title = 'A very long application name for a small browser window';
+  await page.route('**/data/apps.json', route => route.fulfill({ json: data }));
+  await ready(page);
+  await page.addStyleTag({ content: 'p,a,h2,h3,span,small {font-size:140% !important}' });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('reduced motion removes card transitions', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await ready(page);
+  expect(await page.locator('.app-card').first().evaluate(node => getComputedStyle(node).transitionDuration)).toBe('0s');
+});

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img" aria-label="미리보기 준비 중">
+  <rect width="960" height="540" fill="#242220"/>
+  <g fill="none" stroke="#ff824f" stroke-width="11" opacity=".85">
+    <path d="M410 196L540 136V296L410 356Z"/>
+    <path d="M500 220L630 160V320L500 380Z"/>
+  </g>
+  <text x="480" y="450" text-anchor="middle" fill="#aaa9a1" font-family="Arial, sans-serif" font-size="22" letter-spacing="5">PREVIEW SOON</text>
+</svg>

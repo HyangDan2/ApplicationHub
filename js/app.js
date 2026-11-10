@@ -1,27 +1,164 @@
-import {kinds,readState,stateQuery,filterEntries} from './catalog.js';
-const grid=document.querySelector('#entry-grid'), search=document.querySelector('#search'), kind=document.querySelector('#kind'), topics=document.querySelector('#topics'), result=document.querySelector('#result-count');
-let entries=[],state={q:'',topic:'',kind:''};
-const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
-function update(push=true) {
- const query=stateQuery(state);if(push&&location.search!==query)history.pushState(null,'',location.pathname+query+'#collection');
- search.value=state.q;kind.value=state.kind;
- for(const b of topics.children)b.setAttribute('aria-pressed',String(b.dataset.topic===state.topic));
- const matches=filterEntries(entries,state);result.textContent=`${matches.length}개의 기록${state.q?` · “${state.q}” 검색 결과`:''}`;
- grid.replaceChildren();
- if(!matches.length){const box=el('div','empty');box.append(el('span','empty-icon','⌕'),el('h3','',entries.length?'아직 찾는 기록이 없어요.':'첫 번째 배움을 기다리고 있어요.'),el('p','',entries.length?'다른 검색어를 입력하거나 필터를 초기화해 보세요.':'학습 기록을 추가하면 여기에 차곡차곡 모입니다.'));if(entries.length){const b=el('button','primary','전체 기록 보기');b.onclick=reset;box.append(b);}grid.append(box);}
- for(const e of matches){const card=el('article','entry-card');card.dataset.kind=e.kind;card.id=`entry-${e.id}`;
- const top=el('div','card-top');top.append(el('span','topic-label',e.topic),el('span','card-symbol',({note:'▤',project:'⌘',course:'◷',article:'↗',video:'▷'})[e.kind]));
- const meta=el('div','card-meta');meta.append(el('span','kind-label',kinds[e.kind]));if(e.sample)meta.append(el('span','sample','예시'));
- const h=el('h3'),a=el('a','entry-link',e.title);a.href=e.learningUrl||`./entries/${e.id}/${query}`;h.append(a);if(e.learningUrl){const intro=el('a','intro-link','자료 소개');intro.href=`./entries/${e.id}/${query}`;meta.append(intro);}
- const tags=el('div','tags');for(const tag of e.tags)tags.append(el('span','',`#${tag}`));
- const foot=el('div','card-foot');foot.append(el('span','',e.studiedAt||'학습일 미기록'),el('span','read-more',e.learningUrl?'학습 시작 ↗':'정리 읽기 ↗'));
- card.append(top,meta,h,el('p','card-description',e.summary),tags,foot);grid.append(card);}
+import { categories, filterApps, readState, safeUrl, stateQuery, visibleApps } from './catalog.js';
+
+const grid = document.querySelector('#app-grid');
+const search = document.querySelector('#search');
+const filters = document.querySelector('#filters');
+const reset = document.querySelector('#reset');
+const count = document.querySelector('#app-count');
+
+let apps = [];
+let state = { q: '', category: '' };
+
+const element = (tag, className, text) => {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+function card(app, index) {
+  const article = element('article', 'app-card');
+  article.dataset.app = app.id;
+
+  const picture = element('div', 'card-image');
+  const image = element('img');
+  image.src = `./${app.thumbnail}`;
+  image.alt = app.thumbnailAlt;
+  image.width = 960;
+  image.height = 540;
+  image.loading = 'lazy';
+  image.decoding = 'async';
+  image.addEventListener('error', () => {
+    image.src = './assets/apps/placeholder.svg';
+    image.alt = `${app.title} — 미리보기 준비 중`;
+  }, { once: true });
+  picture.append(image, element('span', 'image-caption', app.imageKind === 'artwork' ? '공식 소개 이미지' : '실제 화면'));
+
+  const body = element('div', 'card-body');
+  const kicker = element('div', 'card-kicker');
+  kicker.append(element('span', '', app.category.toUpperCase()), element('span', 'card-index', String(index + 1).padStart(2, '0')));
+
+  const meta = element('div', 'card-meta');
+  for (const tag of app.tags) meta.append(element('span', 'meta-pill', tag));
+  meta.append(element('span', 'meta-pill', '브라우저에서 바로'));
+
+  body.append(
+    kicker,
+    element('h3', 'card-title', app.title),
+    element('p', 'card-subtitle', app.subtitle ?? ''),
+    element('p', 'card-description', app.description),
+    meta,
+  );
+
+  if (app.status === 'published' && safeUrl(app.launchUrl)) {
+    const link = element('a', 'action-link', '앱 열기');
+    link.href = app.launchUrl;
+    link.setAttribute('aria-label', `${app.title} 열기`);
+    const arrow = element('span', '', '↗');
+    arrow.setAttribute('aria-hidden', 'true');
+    link.append(arrow);
+    body.append(link);
+  } else {
+    body.append(element('span', 'action-link unavailable', '지금은 점검 중이에요'));
+  }
+
+  article.append(picture, body);
+  return article;
 }
-function reset(){state={q:'',topic:'',kind:''};update();}
-async function load(){grid.setAttribute('aria-busy','true');try{const response=await fetch('./data/search.json');if(!response.ok)throw Error('load');entries=await response.json();if(!Array.isArray(entries))throw Error('format');state=readState(location.search,entries);topics.replaceChildren();for(const topic of ['',...new Set(entries.map(e=>e.topic))]){const b=el('button','topic',topic||'전체');b.type='button';b.dataset.topic=topic;b.onclick=()=>{state.topic=topic;update();};topics.append(b);}document.querySelector('#total-count').textContent=entries.length;update(false);if(location.hash.startsWith('#entry-'))requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView());}catch{result.textContent='기록을 불러오지 못했습니다.';const box=el('div','empty');box.append(el('h3','','아카이브를 불러오지 못했어요.'),el('p','','잠시 후 다시 시도해 주세요.'));const b=el('button','primary','다시 시도');b.onclick=load;box.append(b);grid.replaceChildren(box);}finally{grid.setAttribute('aria-busy','false');}}
-document.querySelector('#search-form').onsubmit=e=>{e.preventDefault();state.q=search.value.trim();update();};
-search.addEventListener('input',e=>{if(e.isComposing)return;state.q=search.value;update();});
-search.addEventListener('compositionend',()=>{state.q=search.value;update();});
-kind.onchange=()=>{state.kind=kind.value;update();};document.querySelector('#clear').onclick=reset;
-window.addEventListener('popstate',()=>{state=readState(location.search,entries);update(false);});
+
+function renderFilters() {
+  filters.replaceChildren();
+  for (const category of ['', ...categories.filter(item => apps.some(app => app.category === item))]) {
+    const button = element('button', 'filter-chip', category || '전체');
+    button.type = 'button';
+    button.dataset.category = category;
+    button.setAttribute('aria-pressed', String(state.category === category));
+    button.addEventListener('click', () => {
+      state.category = category;
+      update();
+    });
+    filters.append(button);
+  }
+}
+
+function emptyState() {
+  const box = element('div', 'empty');
+  box.append(
+    element('span', 'empty-icon', '⌕'),
+    element('h3', '', apps.length ? '아직 찾는 앱이 없어요.' : '새 앱을 준비하고 있어요.'),
+    element('p', '', apps.length ? '다른 검색어를 입력하거나 필터를 초기화해 보세요.' : '곧 이 자리에 새 도구가 들어옵니다.'),
+  );
+  if (apps.length) {
+    const button = element('button', 'primary', '전체 앱 보기');
+    button.type = 'button';
+    button.addEventListener('click', resetAll);
+    box.append(button);
+  }
+  return box;
+}
+
+function update(push = true) {
+  const query = stateQuery(state);
+  if (push && location.search !== query) history.pushState(null, '', location.pathname + query + '#apps');
+  search.value = state.q;
+  for (const chip of filters.children) chip.setAttribute('aria-pressed', String(chip.dataset.category === state.category));
+  const matches = filterApps(apps, state);
+  count.textContent = String(matches.length).padStart(2, '0');
+  count.hidden = false;
+  grid.replaceChildren();
+  if (!matches.length) grid.append(emptyState());
+  for (const [index, app] of matches.entries()) grid.append(card(app, index));
+  reset.disabled = !state.q && !state.category;
+}
+
+function resetAll() {
+  state = { q: '', category: '' };
+  update();
+}
+
+async function load() {
+  grid.setAttribute('aria-busy', 'true');
+  try {
+    const response = await fetch('./data/apps.json');
+    if (!response.ok) throw new Error('Catalog unavailable');
+    const catalog = await response.json();
+    if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.apps)) throw new Error('Invalid catalog');
+    apps = visibleApps(catalog);
+    state = readState(location.search, apps);
+    renderFilters();
+    update(false);
+  } catch {
+    const message = element('div', 'load-message');
+    message.setAttribute('role', 'alert');
+    message.append(element('p', '', '앱 목록을 불러오지 못했어요. 연결을 확인하고 다시 시도해 주세요.'));
+    const retry = element('button', '', '다시 불러오기');
+    retry.type = 'button';
+    retry.addEventListener('click', load);
+    message.append(retry);
+    grid.replaceChildren(message);
+    count.hidden = true;
+  } finally {
+    grid.setAttribute('aria-busy', 'false');
+  }
+}
+
+document.querySelector('#search-form').addEventListener('submit', event => {
+  event.preventDefault();
+  state.q = search.value.trim();
+  update();
+});
+search.addEventListener('input', event => {
+  if (event.isComposing) return;
+  state.q = search.value;
+  update();
+});
+search.addEventListener('compositionend', () => {
+  state.q = search.value;
+  update();
+});
+reset.addEventListener('click', resetAll);
+window.addEventListener('popstate', () => {
+  state = readState(location.search, apps);
+  update(false);
+});
 load();
