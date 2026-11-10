@@ -4,7 +4,13 @@ import { createHash } from 'node:crypto';
 import { root, loadCatalog } from './validate-catalog.mjs';
 import { sortApps } from '../js/catalog.js';
 
-const BASE = '/ApplicationHub/';
+// The public path follows the repository name, so the site keeps working when the
+// repository is renamed. Set PUBLIC_URL for canonical links; if its base segment still
+// names another hub path it is corrected (and reported) instead of failing the build,
+// because GitHub App tokens without the `workflows` permission cannot edit the workflow.
+const HUB_BASES = ['/ApplicationHub/', '/EduHub/'];
+const repoName = (process.env.GITHUB_REPOSITORY ?? '').split('/')[1] || 'ApplicationHub';
+const BASE = `/${repoName}/`;
 const catalog = await loadCatalog();
 const out = path.join(root, 'dist');
 
@@ -18,18 +24,16 @@ const publicApps = apps.map(({ evidencePath, ...app }) => app);
 await fs.mkdir(path.join(out, 'data'));
 await fs.writeFile(path.join(out, 'data/apps.json'), JSON.stringify({ schemaVersion: catalog.schemaVersion, apps: publicApps }));
 
-// The Pages workflow still exports the previous hub URL. GitHub App tokens without the
-// `workflows` permission cannot edit .github/workflows, so the stale value is mapped here
-// and reported until the workflow itself is updated.
-const LEGACY_BASE = '/EduHub/';
 let origin = process.env.PUBLIC_URL;
 if (origin) {
   if (!origin.startsWith('https://')) throw new Error('PUBLIC_URL must be a confirmed HTTPS URL');
-  if (origin.endsWith(LEGACY_BASE)) {
-    origin = origin.slice(0, -LEGACY_BASE.length) + BASE;
-    console.warn(`PUBLIC_URL still ends with ${LEGACY_BASE}; building with ${origin} until the Pages workflow is updated.`);
+  const url = new URL(origin);
+  const current = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`;
+  if (current !== BASE) {
+    if (!HUB_BASES.includes(current)) throw new Error(`PUBLIC_URL must end with ${BASE}`);
+    origin = `${url.origin}${BASE}`;
+    console.warn(`PUBLIC_URL base ${current} does not match ${BASE}; building with ${origin}.`);
   }
-  if (!origin.endsWith(BASE)) throw new Error(`PUBLIC_URL must end with ${BASE}`);
 }
 
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({ amp: '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] ?? c));

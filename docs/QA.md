@@ -46,7 +46,7 @@ Release verification before initial push: catalog validation passed with one cou
 
 ## ApplicationHub revamp — 2026-11-10
 
-Scope: local verification of the rebuilt catalog. No deployment; the repository rename and the public URL change were not yet in effect when these checks ran.
+Scope: local verification of the rebuilt catalog. No deployment. The repository rename to `ApplicationHub` was requested and refused by the connected GitHub App (`gh repo rename` → HTTP 403), so the site still serves from `/EduHub/`.
 
 Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with Chromium 156.0.8078.4, Linux.
 
@@ -65,5 +65,6 @@ Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with Chromium 156.0.8078
 
 ### Not verified
 
+- Base-path handling was checked in three build modes: no `PUBLIC_URL` (`/ApplicationHub/`), `GITHUB_REPOSITORY=HyangDan2/EduHub` with `PUBLIC_URL=https://hyangdan2.github.io/EduHub/` (`/EduHub/`, no warning), and `GITHUB_REPOSITORY=HyangDan2/ApplicationHub` with the stale `/EduHub/` value (corrected to `/ApplicationHub/` with a warning).
 - No hosted acceptance (`verify:hosted`), no physical iOS/Android device test, and no Safari/Firefox run.
 - The app screenshots show each app's own cover/library view; individual app features and their data handling were not re-tested here (see each `docs/onboarding/<id>.md`).

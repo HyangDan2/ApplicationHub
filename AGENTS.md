@@ -1,6 +1,6 @@
 # ApplicationHub agent entry point
 
-Repository: `HyangDan2/ApplicationHub` (renamed from `EduHub` on 2026-11-10). Public URL: https://hyangdan2.github.io/ApplicationHub/. Publishing branch: main. Pages source: GitHub Actions.
+Repository: `HyangDan2/EduHub` (the product is ApplicationHub; the repository rename to `ApplicationHub` is still pending — see [docs/OPERATIONS.md](docs/OPERATIONS.md)). Public URL follows the repository name: https://hyangdan2.github.io/EduHub/ today, https://hyangdan2.github.io/ApplicationHub/ once renamed. `scripts/build.mjs` derives the base path from `GITHUB_REPOSITORY`, so no code change is needed after the rename. Publishing branch: main. Pages source: GitHub Actions.
 
 Read this file, then [docs/OPERATIONS.md](docs/OPERATIONS.md) before deployment and [README.md](README.md) for the catalog workflow. The learning-archive guides in `docs/legacy/` describe the retired EduHub product; they are history, not the current contract.
 
@@ -41,7 +41,7 @@ Node 24.19.0, `npm ci`.
 - `npm run test:e2e` — Chromium checks against the existing `dist/` on port 4175.
 - `npm run verify` — validate, test, build, and browser checks.
 - `npm run check:links` — external destination checks.
-- `npm run verify:hosted` — hosted release acceptance; requires `PUBLIC_URL` ending in `/ApplicationHub/`.
+- `npm run verify:hosted` — hosted release acceptance; requires `PUBLIC_URL` for the site's current base path.
 
 ## Onboard an app
 
