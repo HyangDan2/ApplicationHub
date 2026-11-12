@@ -88,3 +88,14 @@ Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with Chromium (headless)
 - Hosted acceptance (`verify:hosted`) for this release is recorded in the next section after deployment.
 - No physical iOS/Android device test and no Safari/Firefox run.
 - Midpoint's drive mode, alternative midpoint modes, share-link round trips, routing deep links, and live Overpass restaurant/cafe lookups were not exercised for this card (see `docs/onboarding/midpoint.md`).
+
+## Hosted acceptance — 2026-11-13
+
+- Release: squash merge of PR #3, commit `393bd6d66cc1fa2d158fba77b6831cf9e1b27b94`, [Actions run 43256426329](https://github.com/HyangDan2/ApplicationHub/actions/runs/43256426329) — build and deploy jobs both succeeded.
+- `PUBLIC_URL=https://hyangdan2.github.io/ApplicationHub/ npm run verify:hosted` → `Hosted release verified: 5 apps, launch links and icons intact.` The built release digest matched the public `release.json`.
+- https://hyangdan2.github.io/ApplicationHub/ returned HTTP 200 and rendered 5 cards in Chromium 1440×1100 and 390×900 with no page or console errors and no horizontal overflow.
+- Card structure on the live page: 5 × `a.app-card`, 0 × `.action-link`, no nested link or button inside a card. Hrefs: AGPilot0002, PKPilot0001, PKPilot0002, AGPilot0007, EDPilot0001. Accessible names: `Open Todo Master`, `Open Photos`, `Open Midpoint`, `Open Film Studio`, `Open Machine Learning Lab`.
+- Click-through on the live site: desktop click on the Photos card body → https://hyangdan2.github.io/PKPilot0001/; mobile tap on the Midpoint card → https://hyangdan2.github.io/PKPilot0002/. Both in the same tab.
+- Captures: `browser/apphub-live-desktop-2026-11-13.png`, `browser/apphub-live-hover-midpoint-2026-11-13.png`, `browser/apphub-live-mobile-midpoint-2026-11-13.png` (workspace evidence, not part of this repository).
+
+Not verified: physical iOS/Android devices, Safari and Firefox. The Midpoint destination itself was checked only as far as its first screen (see `docs/onboarding/midpoint.md`).
