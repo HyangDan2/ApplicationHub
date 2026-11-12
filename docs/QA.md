@@ -68,3 +68,23 @@ Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with Chromium 156.0.8078
 - Base-path handling was checked in three build modes: no `PUBLIC_URL` (`/ApplicationHub/`), `GITHUB_REPOSITORY=HyangDan2/EduHub` with `PUBLIC_URL=https://hyangdan2.github.io/EduHub/` (`/EduHub/`, no warning), and `GITHUB_REPOSITORY=HyangDan2/ApplicationHub` with the stale `/EduHub/` value (corrected to `/ApplicationHub/` with a warning).
 - No hosted acceptance (`verify:hosted`), no physical iOS/Android device test, and no Safari/Firefox run.
 - The app screenshots show each app's own cover/library view; individual app features and their data handling were not re-tested here (see each `docs/onboarding/<id>.md`).
+
+## Full-card links and Midpoint registration — 2026-11-13
+
+Scope: local verification before publication. No deployment at the time of this run.
+
+Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with Chromium (headless), Linux.
+
+- `npm run validate`: `Validated 5 apps (5 published).`
+- `npm test`: 8 unit checks passed, including the new `midpoint` record (schema, asset, evidence, date, unique ID and launch URL).
+- `npm run build`: `Built 5 published apps in dist/ (base /ApplicationHub/)`, built with `PUBLIC_URL=https://hyangdan2.github.io/ApplicationHub/`.
+- `npm run test:e2e`: 14 Chromium checks passed — including the new full-card link check (every published card is one `a.app-card[href]`, no `.action-link` and no nested interactive element remains, and clicking the card title navigates to the launch URL) and the existing layouts at 360/390/768/1440, search/category/history state, failure retry, broken thumbnail, draft and hostile metadata, brand and cross-hub links, keyboard focus, long titles, and reduced motion.
+- `npm run check:links`: 13 external destinations returned HTTP 200 (five app launches, five repository or source links, Web-HQ, GameHub, TechnicalHub). A 200 does not establish content accuracy.
+- Live check of the new destination: https://hyangdan2.github.io/PKPilot0002/ returned HTTP 200, page title `HD2Lab | Midpoint (PKPilot0002)`; Chromium at 1440×810 loaded it with no page or console errors, and the transit presets 강남역 + 홍대입구역 produced a midpoint near 이촌역 with two equal 5.63 km distances and a 100% fairness score. The card thumbnail is a 960×540 resize of that capture.
+- Visual review: desktop 1440 and mobile 390 captures plus a hovered-card capture were inspected. No horizontal overflow at any tested width, the Midpoint card renders in the third slot, and the `.card-open` hint turns orange with the border on hover and focus.
+
+### Not verified
+
+- Hosted acceptance (`verify:hosted`) for this release is recorded in the next section after deployment.
+- No physical iOS/Android device test and no Safari/Firefox run.
+- Midpoint's drive mode, alternative midpoint modes, share-link round trips, routing deep links, and live Overpass restaurant/cafe lookups were not exercised for this card (see `docs/onboarding/midpoint.md`).

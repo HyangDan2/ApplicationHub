@@ -44,6 +44,27 @@
       "evidencePath": "docs/onboarding/photos.md"
     },
     {
+      "id": "midpoint",
+      "title": "Midpoint",
+      "subtitle": "Fair meeting point finder.",
+      "description": "Drop starting points for any group across South Korea. Midpoint calculates the fairest center on NAVER Maps, matches transit hubs and highway ICs, and recommends nearby dining and cafe courses.",
+      "category": "Utility",
+      "tags": [
+        "NAVER Maps",
+        "Transit & Drive",
+        "Course Pairing"
+      ],
+      "thumbnail": "assets/apps/midpoint.jpg",
+      "thumbnailAlt": "Midpoint screen: a NAVER map with a central meeting point between Gangnam and Hongdae, equal 5.63 km distances, and a 100% fairness score.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0002/",
+      "repositoryUrl": "https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0002",
+      "status": "published",
+      "sortOrder": 25,
+      "updatedAt": "2026-11-13",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/midpoint.md"
+    },
+    {
       "id": "film-studio",
       "title": "Film Studio",
       "subtitle": "Nine films, one browser.",

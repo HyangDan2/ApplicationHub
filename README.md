@@ -2,7 +2,7 @@
 
 **Public site:** https://hyangdan2.github.io/ApplicationHub/
 
-A catalog of HD2Lab's browser apps, styled and structured like GameHub: a catalog-driven grid of 16:9 cards with a category filter, keyword search, and a launch action straight into each app. Every app runs in the browser with no install and no account.
+A catalog of HD2Lab's browser apps, styled and structured like GameHub: a catalog-driven grid of 16:9 cards with a category filter and keyword search, where clicking anywhere on a card opens that app in the same tab. Every app runs in the browser with no install and no account.
 
 **Local preview:** http://127.0.0.1:4174/ApplicationHub/
 
@@ -42,4 +42,4 @@ Do not invent a launch URL, a feature, or an update date. Only `published` apps 
 
 ## Relationship to the other hubs
 
-Navigation is ApplicationHub ↔ GameHub / TechnicalHub ↔ Web-HQ. ApplicationHub opens apps in the same tab; each app owns its own back navigation. The retired learning-archive guides are kept for reference in [`docs/legacy/`](docs/legacy/README.md).
+Navigation is ApplicationHub ↔ GameHub / TechnicalHub ↔ Web-HQ. ApplicationHub opens apps in the same tab from the card itself; each app owns its own back navigation. The retired learning-archive guides are kept for reference in [`docs/legacy/`](docs/legacy/README.md).
