@@ -1,5 +1,13 @@
 # Change log
 
+## 2026-11-13 — Full-card links and Midpoint registration
+
+- Made the whole card the launch link: `card()` now renders `<a class="app-card" href="<launchUrl>" target="_self" aria-label="Open <title>">` instead of an `<article>` plus a separate action button. An entry that is not published or has an unsafe destination still builds as an inert `<article class="app-card unavailable">`.
+- Removed the `Open App ↗` button (`.action-link`) and replaced it with `.card-open`, a quiet "Open app ↗" hint line inside the card link that turns orange on hover or keyboard focus. Cards now highlight with an orange border, a small lift, and a soft shadow on hover and `:focus-visible`; the reduced-motion rule removes all of it.
+- Registered Midpoint (PKPilot0002) as the fifth published app: `id: midpoint`, category `Utility`, tags NAVER Maps / Transit & Drive / Course Pairing, launch URL https://hyangdan2.github.io/PKPilot0002/, sort order 25, thumbnail `assets/apps/midpoint.jpg` (960×540 from a live 1440×810 capture), evidence `docs/onboarding/midpoint.md`.
+- Updated the guide copy to "Click any card and the app opens right here, in the same tab." and the hero art counter to `05 APPS`.
+- Tests: added a Chromium check that every card is the single link, that no `.action-link` or nested interactive element remains, and that clicking the card body navigates to the launch URL (14 browser checks, 8 unit checks).
+
 ## 2026-11-10 — English localization
 
 - Localized the whole interface to English: page title and meta description, header navigation ("Browse Apps"), skip link, hero copy and CTA, catalog heading, search placeholder and reset button, filter chips ("All"), loading, empty, error, and maintenance messages, guide section, collection bottom bar, and card labels ("Live UI", "Official Art", "Runs in browser", "Open App ↗" with `aria-label="Open <title>"`).

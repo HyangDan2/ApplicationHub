@@ -109,8 +109,9 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
 .filter-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #191714; font-weight: 700; }
 
 .app-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-.app-card { min-width: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: border-color .18s, transform .18s; }
-.app-card:hover { border-color: #6b4c3b; transform: translateY(-4px); }
+.app-card { min-width: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s, box-shadow .2s; }
+.app-card:hover, .app-card:focus-visible { border-color: var(--accent); transform: translateY(-4px) scale(1.012); box-shadow: 0 20px 44px #00000066; }
+.app-card.unavailable:hover { border-color: var(--line); transform: none; box-shadow: none; }
 .card-image { aspect-ratio: 16 / 9; position: relative; overflow: hidden; background: #242220; }
 .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
 .app-card:hover .card-image img { transform: scale(1.035); }
@@ -123,10 +124,10 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
 .card-description { font-size: 13px; line-height: 1.8; color: #c2bdb5; margin: 0 0 20px; flex: 1; word-break: keep-all; overflow-wrap: anywhere; }
 .card-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
 .meta-pill { font-size: 10px; color: #c7c1ba; border: 1px solid #3f3833; padding: 5px 8px; border-radius: 4px; }
-.action-link { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 47px; padding: 13px 16px; background: var(--panel-raised); border: 1px solid var(--line-strong); border-radius: 6px; font-size: 13px; font-weight: 700; color: #f0e9e3; transition: background .15s, border-color .15s, color .15s; }
-.action-link:hover { background: var(--accent); border-color: var(--accent); color: #191714; }
-.action-link span { font-size: 19px; }
-.action-link.unavailable { color: #b0aaa3; background: var(--panel-raised); border-color: #3a332e; justify-content: center; }
+.card-open { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 15px; border-top: 1px solid var(--line); font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #a8a19a; transition: color .15s; }
+.card-open span { font-size: 16px; }
+.app-card:hover .card-open, .app-card:focus-visible .card-open { color: var(--accent); }
+.app-card.unavailable .card-open { color: var(--dim); }
 
 .empty { grid-column: 1 / -1; text-align: center; background: var(--panel); padding: 56px 20px; border: 1px dashed #4b3f37; border-radius: 10px; }
 .empty-icon { font-size: 38px; color: var(--accent); }
@@ -194,13 +195,13 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
   .card-title { font-size: 28px; }
   .card-description { font-size: 14px; }
   .meta-pill { font-size: 11px; }
-  .action-link { min-height: 50px; font-size: 14px; }
+  .card-open { font-size: 12px; }
   .collection-bottom > span:last-child { display: none; }
   .app-guide { margin-top: 40px; grid-template-columns: 1fr; gap: 23px; padding-block: 30px; }
   .guide-item { gap: 16px; }
   .guide-item p { max-width: none; font-size: 12px; }
   .site-footer { align-items: flex-start; padding-top: 27px; }
-  .app-card:hover { transform: none; }
+  .app-card:hover, .app-card:focus-visible { transform: none; box-shadow: none; }
 }
 
 @media (max-width: 370px) {
@@ -215,5 +216,5 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *:before, *:after { transition: none !important; animation: none !important; }
-  .app-card:hover, .app-card:hover .card-image img { transform: none; }
+  .app-card:hover, .app-card:focus-visible, .app-card:hover .card-image img { transform: none; }
 }

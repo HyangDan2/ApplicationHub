@@ -17,8 +17,16 @@ const element = (tag, className, text) => {
 };
 
 function card(app, index) {
-  const article = element('article', 'app-card');
-  article.dataset.app = app.id;
+  const launchable = app.status === 'published' && safeUrl(app.launchUrl);
+  const item = element(launchable ? 'a' : 'article', 'app-card');
+  item.dataset.app = app.id;
+  if (launchable) {
+    item.href = app.launchUrl;
+    item.target = '_self';
+    item.setAttribute('aria-label', `Open ${app.title}`);
+  } else {
+    item.classList.add('unavailable');
+  }
 
   const picture = element('div', 'card-image');
   const image = element('img');
@@ -50,20 +58,16 @@ function card(app, index) {
     meta,
   );
 
-  if (app.status === 'published' && safeUrl(app.launchUrl)) {
-    const link = element('a', 'action-link', 'Open App');
-    link.href = app.launchUrl;
-    link.setAttribute('aria-label', `Open ${app.title}`);
+  const note = element('span', 'card-open', launchable ? 'Open app' : 'Under maintenance right now');
+  if (launchable) {
     const arrow = element('span', '', '↗');
     arrow.setAttribute('aria-hidden', 'true');
-    link.append(arrow);
-    body.append(link);
-  } else {
-    body.append(element('span', 'action-link unavailable', 'Under maintenance right now'));
+    note.append(arrow);
   }
+  body.append(note);
 
-  article.append(picture, body);
-  return article;
+  item.append(picture, body);
+  return item;
 }
 
 function renderFilters() {

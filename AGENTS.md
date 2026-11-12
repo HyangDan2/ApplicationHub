@@ -9,7 +9,7 @@ Read this file, then [docs/OPERATIONS.md](docs/OPERATIONS.md) before deployment 
 - Static HTML/CSS/JavaScript. `data/apps.json` is the only app list; do not hardcode cards.
 - `schema/apps.schema.json` validates the catalog; `scripts/validate-catalog.mjs` also checks asset and evidence files, safe HTTPS destinations, unique IDs, and unique launch URLs.
 - Only `published` apps enter `dist/`, the search data, and `release.json`. `draft` and `maintenance` entries stay out of every public artifact.
-- Every app card links to the app's own live URL in the same tab. The hub does not host the apps.
+- Every app card links to the app's own live URL in the same tab, and the whole card is that link: no separate "Open App" button.
 - Documentation and the interface are both in English.
 - Preserve the apps' own repositories and deployments. Changes to an app are separate work in that app's repository.
 - Do not claim deployment, hosted acceptance, or device testing that was not actually performed.
@@ -22,7 +22,8 @@ Cards follow the GameHub spec, and ApplicationHub should stay visually interchan
 - `.card-kicker` — category in caps plus the two-digit `.card-index`
 - `.card-title`, `.card-subtitle`, `.card-description`
 - `.card-meta` — `.meta-pill` tags plus the fixed "Runs in browser" pill
-- `.action-link` — "Open App ↗" with `aria-label="Open <title>"`
+- `.app-card` — one `<a href>` around the whole card with `aria-label="Open <title>"`; a non-launchable entry renders as an inert `<article class="app-card unavailable">`
+- `.card-open` — the quiet "Open app ↗" hint line at the bottom of the card (a hint inside the link, not a button)
 
 ## Brand
 

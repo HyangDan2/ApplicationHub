@@ -9,13 +9,31 @@ const ready = async page => {
   await expect(page.locator('.app-card')).toHaveCount(published.length);
 };
 
-test('published apps render with their exact launch destination', async ({ page }) => {
+test('published apps render as full-card links to their exact launch destination', async ({ page }) => {
   await ready(page);
   for (const app of published) {
     const link = page.getByRole('link', { name: `Open ${app.title}` });
     await expect(link).toHaveAttribute('href', app.launchUrl);
+    await expect(link).toHaveClass(/app-card/);
   }
   await expect(page.locator('#app-count')).toHaveText(String(published.length).padStart(2, '0'));
+});
+
+test('the card itself is the link and no separate action button remains', async ({ page }) => {
+  await ready(page);
+  await expect(page.locator('a.app-card')).toHaveCount(published.length);
+  await expect(page.locator('.action-link')).toHaveCount(0);
+  await expect(page.locator('a.app-card button, a.app-card a')).toHaveCount(0);
+  for (const app of published) {
+    const card = page.locator(`[data-app="${app.id}"]`);
+    await expect(card).toHaveCount(1);
+    expect(await card.evaluate(node => node.tagName)).toBe('A');
+    await expect(card.locator('.card-open')).toHaveCount(1);
+  }
+  const target = page.locator(`[data-app="${published[0].id}"]`);
+  await page.route(published[0].launchUrl, route => route.fulfill({ body: '<h1>App destination</h1>', contentType: 'text/html' }));
+  await target.locator('.card-title').click();
+  await expect(page).toHaveURL(published[0].launchUrl);
 });
 
 for (const width of [360, 390, 768, 1440]) {
@@ -99,7 +117,7 @@ test('HD2Lab brand, cross-hub navigation, and icon links are in place', async ({
   await expect(page.locator('.mark')).toHaveCount(1);
 });
 
-test('keyboard order reaches the skip link and an app action link with visible focus', async ({ page }) => {
+test('keyboard order reaches the skip link and a card link with visible focus', async ({ page }) => {
   await ready(page);
   await page.keyboard.press('Tab');
   await expect(page.getByText('Skip to content')).toBeFocused();
