@@ -19,6 +19,9 @@ await fs.mkdir(path.join(out, 'data'));
 await fs.writeFile(path.join(out, 'data/apps.json'), JSON.stringify({ schemaVersion: catalog.schemaVersion, apps: publicApps }));
 
 const origin = resolveOrigin(process.env.PUBLIC_URL);
+// Social card: same HD2Lab header spec as PKPilot0001~0003 (100px mark + 62px wordmark).
+// The image URL is absolute so previews resolve even from a local build.
+const socialImage = `${origin ?? 'https://hyangdan2.github.io/ApplicationHub/'}assets/branding/share.png?v=20261114`;
 
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({ amp: '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] ?? c));
 
@@ -37,8 +40,16 @@ function head(prefix) {
     `<meta property="og:description" content="${escapeHtml(description)}">`,
     origin ? `<link rel="canonical" href="${escapeHtml(origin)}">` : '',
     origin ? `<meta property="og:url" content="${escapeHtml(origin)}">` : '',
-    origin ? `<meta property="og:image" content="${escapeHtml(origin)}assets/branding/share.png">` : '',
+    `<meta property="og:image" content="${escapeHtml(socialImage)}">`,
+    `<meta property="og:image:secure_url" content="${escapeHtml(socialImage)}">`,
+    '<meta property="og:image:type" content="image/png">',
+    '<meta property="og:image:width" content="1200">',
+    '<meta property="og:image:height" content="630">',
+    '<meta property="og:image:alt" content="HD2Lab | ApplicationHub — pick your next app.">',
     '<meta name="twitter:card" content="summary_large_image">',
+    `<meta name="twitter:title" content="${escapeHtml(title)}">`,
+    `<meta name="twitter:description" content="${escapeHtml(description)}">`,
+    `<meta name="twitter:image" content="${escapeHtml(socialImage)}">`,
     `<link rel="icon" href="${prefix}assets/branding/favicon.svg" type="image/svg+xml">`,
     `<link rel="icon" href="${prefix}assets/branding/favicon-32x32.png" sizes="32x32" type="image/png">`,
     `<link rel="apple-touch-icon" href="${prefix}assets/branding/apple-touch-icon.png" sizes="180x180">`,
