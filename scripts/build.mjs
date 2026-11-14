@@ -19,7 +19,7 @@ await fs.mkdir(path.join(out, 'data'));
 await fs.writeFile(path.join(out, 'data/apps.json'), JSON.stringify({ schemaVersion: catalog.schemaVersion, apps: publicApps }));
 
 const origin = resolveOrigin(process.env.PUBLIC_URL);
-// Social card: same HD2Lab header spec as PKPilot0001~0003 (100px mark + 62px wordmark).
+// Social card: same HD2Lab header spec as PKPilot0001~0003 (104px official logo badge + 62px wordmark).
 // The image URL is absolute so previews resolve even from a local build.
 const socialImage = `${origin ?? 'https://hyangdan2.github.io/ApplicationHub/'}assets/branding/share.png?v=20261114`;
 
@@ -60,7 +60,7 @@ function head(prefix) {
 
 const header = prefix => `<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header shell">
-  <a class="brand" href="${prefix}" aria-label="ApplicationHub home"><span class="mark" aria-hidden="true"></span><span class="brand-name">HD2Lab</span><em>ApplicationHub</em></a>
+  <a class="brand" href="${prefix}" aria-label="ApplicationHub home"><img class="brand-logo" src="${prefix}assets/branding/logo.png" alt="" width="34" height="34"><span class="brand-name">HD2Lab</span><em>ApplicationHub</em></a>
   <nav aria-label="Main menu">
     <a class="nav-active" href="${prefix}#apps">Browse Apps</a>
     <a class="hub-link" href="https://hyangdan2.github.io/GameHub/">GameHub <span aria-hidden="true">↗</span></a>
