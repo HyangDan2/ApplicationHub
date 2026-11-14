@@ -116,7 +116,7 @@ test('HD2Lab brand, cross-hub navigation, and icon links are in place', async ({
   for (const href of ['./assets/branding/favicon.svg', './assets/branding/favicon-32x32.png', './assets/branding/apple-touch-icon.png', './assets/branding/favicon.ico']) {
     expect(await page.evaluate(async url => (await fetch(url)).status, href)).toBe(200);
   }
-  await expect(page.locator('.mark')).toHaveCount(1);
+  await expect(page.locator('.brand-logo')).toHaveCount(1);
 });
 
 test('keyboard order reaches the skip link and a card link with visible focus', async ({ page }) => {
