@@ -99,3 +99,22 @@ Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with Chromium (headless)
 - Captures: `browser/apphub-live-desktop-2026-11-13.png`, `browser/apphub-live-hover-midpoint-2026-11-13.png`, `browser/apphub-live-mobile-midpoint-2026-11-13.png` (workspace evidence, not part of this repository).
 
 Not verified: physical iOS/Android devices, Safari and Firefox. The Midpoint destination itself was checked only as far as its first screen (see `docs/onboarding/midpoint.md`).
+
+## Shutterplate registration — 2026-11-14
+
+Scope: local verification before publication.
+
+Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chromium, Linux.
+
+- `npm run validate`: `Validated 6 apps (6 published).`
+- `npm test`: 8 unit checks passed, including the new `shutterplate` record (schema, asset, evidence file, date, unique ID and launch URL).
+- `npm run build`: `Built 6 published apps in dist/ (base /ApplicationHub/)`.
+- `npm run test:e2e`: 14 Chromium checks passed. The search and category assertions no longer hardcode card counts; they derive the expected matches from `js/catalog.js`, so a new Photo app no longer breaks them (a `photo` search now returns three cards).
+- `npm run check:links`: 15 external destinations returned HTTP 200 (six app launches, six repository or source links, Web-HQ, GameHub, TechnicalHub). A 200 does not establish content accuracy.
+- Live check of the new destination: https://hyangdan2.github.io/PKPilot0003/ returned HTTP 200, page title `Shutterplate — HD2Lab Photo Frame Studio`, and loaded in Chromium at 1600×900 with no page or console errors. Frame switching, inline EXIF editing, emblem selection and a JPEG export were exercised on the live site; the details and the untested parts are in `docs/onboarding/shutterplate.md`. The card thumbnail is a 960×540 resize of that 1600×900 capture, taken with the bundled Sony sample loaded.
+- Visual review: desktop 1440 full page and mobile 390 captures were inspected. The Shutterplate card renders in the fifth slot, between Film Studio and Machine Learning Lab; its thumbnail loads at a natural size of 960×540, the whole card is one link to `https://hyangdan2.github.io/PKPilot0003/`, and there is no horizontal overflow at 390 px.
+
+### Not verified
+
+- Hosted acceptance for this release is recorded in the next section after deployment.
+- No physical iOS/Android device test and no Safari/Firefox run.

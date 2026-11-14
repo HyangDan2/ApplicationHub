@@ -86,6 +86,27 @@
       "evidencePath": "docs/onboarding/film-studio.md"
     },
     {
+      "id": "shutterplate",
+      "title": "Shutterplate",
+      "subtitle": "Your photo, one studio plate.",
+      "description": "A browser-local photo frame studio. A photo's EXIF becomes a plate signature, and one of eight signature frames with ten maker emblems turns it into a finished plate — drawn and exported at the photo's own pixel size, with nothing uploaded.",
+      "category": "Photo",
+      "tags": [
+        "EXIF",
+        "8 Frames",
+        "Local Processing"
+      ],
+      "thumbnail": "assets/apps/shutterplate.jpg",
+      "thumbnailAlt": "Shutterplate screen: a Sony sample photo framed in the Clean Horizon plate with its EXIF signature, above the eight-frame library strip.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0003/",
+      "repositoryUrl": "https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0003",
+      "status": "published",
+      "sortOrder": 32,
+      "updatedAt": "2026-11-14",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/shutterplate.md"
+    },
+    {
       "id": "machine-learning-lab",
       "title": "Machine Learning Lab",
       "subtitle": "Learn by experiment.",
