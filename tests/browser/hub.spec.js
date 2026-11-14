@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
+import { filterApps } from '../../js/catalog.js';
 
 const catalog = JSON.parse(await fs.readFile(new URL('../../data/apps.json', import.meta.url), 'utf8'));
 const published = catalog.apps.filter(app => app.status === 'published');
 const appById = id => catalog.apps.find(app => app.id === id);
+const matching = state => filterApps(catalog.apps, { q: '', category: '', ...state }).length;
 const ready = async page => {
   await page.goto('./');
   await expect(page.locator('.app-card')).toHaveCount(published.length);
@@ -55,14 +57,14 @@ for (const width of [360, 390, 768, 1440]) {
 test('search, category filter, reset, and browser history stay in sync', async ({ page }) => {
   await ready(page);
   await page.getByRole('searchbox', { name: 'Search apps' }).fill('photo');
-  await expect(page.locator('.app-card')).toHaveCount(2);
+  await expect(page.locator('.app-card')).toHaveCount(matching({ q: 'photo' }));
   await page.getByRole('button', { name: 'Learning', exact: true }).click();
   await expect(page.getByText('No app matches that yet.')).toBeVisible();
   await page.getByRole('button', { name: 'Show all apps' }).click();
   await expect(page.locator('.app-card')).toHaveCount(published.length);
   await expect(page.locator('#search')).toHaveValue('');
   await page.getByRole('button', { name: 'Photo', exact: true }).click();
-  await expect(page.locator('.app-card')).toHaveCount(2);
+  await expect(page.locator('.app-card')).toHaveCount(matching({ category: 'Photo' }));
   await expect(page).toHaveURL(/category=Photo/);
   await page.goBack();
   await expect(page.locator('.app-card')).toHaveCount(published.length);
