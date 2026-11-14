@@ -118,3 +118,14 @@ Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chromium, 
 
 - Hosted acceptance for this release is recorded in the next section after deployment.
 - No physical iOS/Android device test and no Safari/Firefox run.
+
+## Hosted acceptance — 2026-11-14
+
+- Release: squash merge of PR #6, commit `06e1ae47acc3b0076852f545af330a2d89e1fd07`, [Actions run 43542512967](https://github.com/HyangDan2/ApplicationHub/actions/runs/43542512967) — build and deploy jobs both succeeded.
+- `PUBLIC_URL=https://hyangdan2.github.io/ApplicationHub/ npm run verify:hosted` → `Hosted release verified: 6 apps, launch links and icons intact.`
+- https://hyangdan2.github.io/ApplicationHub/ returned HTTP 200 and rendered 6 cards in Chromium 1440×1000 and 390×844 with no page or console errors and no horizontal overflow.
+- Shutterplate card on the live page: `a.app-card` with href `https://hyangdan2.github.io/PKPilot0003/` and accessible name `Open Shutterplate`, kicker `PHOTO 05`, tags EXIF · 8 Frames · Local Processing · Runs in browser. The thumbnail `assets/apps/shutterplate.jpg` answered HTTP 200 as `image/jpeg`, 88,718 bytes, natural size 960×540.
+- Click-through on the live site: a desktop click on the card title and a mobile tap both opened `https://hyangdan2.github.io/PKPilot0003/` in the same tab, and the destination loaded with the title `Shutterplate — HD2Lab Photo Frame Studio`.
+- Captures: `browser/apphub-shutterplate-2026-11-14/` (workspace evidence, not part of this repository).
+
+Not verified: physical iOS/Android devices, Safari and Firefox.
