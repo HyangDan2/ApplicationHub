@@ -147,3 +147,14 @@ Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chromium, 
 ### Not verified
 
 - No physical iOS/Android device test and no Safari/Firefox run. Social preview caches (KakaoTalk and others) may still serve the previous `share.png` until the URL is re-scraped.
+
+## Hosted acceptance — 2026-11-15 (thumbnail refresh)
+
+- Release: squash merge of PR #10, commit `1afb9ab537474dbb88c4c300672fcf0d2c94cda5`, [Actions run 43696750910](https://github.com/HyangDan2/ApplicationHub/actions/runs/43696750910) — build and deploy jobs both succeeded.
+- `PUBLIC_URL=https://hyangdan2.github.io/ApplicationHub/ npm run verify:hosted` → `Hosted release verified: 6 apps, launch links and icons intact.`
+- https://hyangdan2.github.io/ApplicationHub/ returned HTTP 200. The served `index.html` differs from the local `dist/index.html` only by the `PUBLIC_URL` canonical and `og:url` tags, and its head carries `assets/branding/share.png?v=20261115-thumbs`.
+- Asset hashes on the live site match the committed files byte for byte: `assets/apps/shutterplate.jpg` (78,388 B), `assets/apps/film-studio.jpg` (52,321 B), `assets/apps/midpoint.jpg` (145,099 B), `assets/branding/share.png` (185,799 B).
+- Live render in Chromium 1440×1100 and 390×900: 6 cards, all thumbnails at natural size 960×540, no console errors, no horizontal overflow (scrollWidth = clientWidth at both widths). The refreshed Midpoint, Film Studio, and Shutterplate cards carry the dual-skew `HD2Lab | <App>` header; the untouched Todo Master and Photos thumbnails already used the same header.
+- Captures: `browser/apphub-live-2026-11-15-desktop.png`, `browser/apphub-live-2026-11-15-mobile.png` (workspace evidence, not part of this repository).
+
+Not verified: physical iOS/Android devices, Safari and Firefox. Social preview caches (KakaoTalk and others) keep serving the previous `share.png` until the URL is re-scraped.
