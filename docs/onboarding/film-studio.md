@@ -4,7 +4,7 @@
 - Live URL: https://hyangdan2.github.io/AGPilot0007/ — checked 2026-11-10, HTTP 200, page title `Film Studio | HD2Lab`
 - Source: https://github.com/HyangDan2/AGPilot0007 (public, `main`, last push 2026-11-09)
 - Category / tags: `Photo` / WebGL2 · PWA · Local Processing
-- Thumbnail: `assets/apps/film-studio.jpg` — 16:9 crop of a 1440×810 capture of the live landing screen, resized to 960×540.
+- Thumbnail: `assets/apps/film-studio.jpg` — 16:9 capture of the live landing screen in a 1280×720 Chromium viewport (device scale 2, so 2560×1440 pixels downsampled), resized to 960×540. Captured 2026-11-15: the `HD2Lab | Film Studio` dual-skew header, the hero mark, the Open Photograph and Calibration Samples cards, and the first row of the nine film signatures.
 
 ## What this record claims
 

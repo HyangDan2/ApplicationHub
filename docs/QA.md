@@ -129,3 +129,21 @@ Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chromium, 
 - Captures: `browser/apphub-shutterplate-2026-11-14/` (workspace evidence, not part of this repository).
 
 Not verified: physical iOS/Android devices, Safari and Firefox.
+
+## Thumbnail refresh — 2026-11-15
+
+Scope: local verification before publication. Replaces the three app card thumbnails and the share card so every visible HD2Lab mark is the dual-skew `.mark` header set on 2026-11-15 (PR #9), not the retired rounded-box SVG badge.
+
+Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chromium, Linux.
+
+- Captures: `assets/apps/shutterplate.jpg`, `film-studio.jpg`, and `midpoint.jpg` were taken from the live pages (https://hyangdan2.github.io/PKPilot0003/, /AGPilot0007/, /PKPilot0002/) in a 1280×720 Chromium viewport at device scale 2 and downsampled to 960×540. Shutterplate was captured after loading the bundled Sony sample; Midpoint after adding 강남역 and 홍대입구역 from the preset chips (5.63 km + 5.63 km, 100% fairness).
+- `assets/branding/share.png` was rebuilt at 1200×630 with the 100px dual-skew mark header and the new Film Studio capture in its third showcase tile; the previous tile still showed the retired rounded-box hero icon.
+- `npm run validate`: `Validated 6 apps (6 published).`
+- `npm test`: 8 unit checks passed.
+- `npm run build`: `Built 6 published apps in dist/ (base /ApplicationHub/).` The built head carries `assets/branding/share.png?v=20261115-thumbs`.
+- `npm run test:e2e`: 14 Chromium checks passed, including the thumbnail natural-size check at 360/390/768/1440.
+- Visual review: a card mock of the built `dist/` at 1366 px was inspected — the three refreshed thumbnails render at natural size 960×540 with their `Live UI` caption, the dual-skew header is legible at card width, and the grid has no layout shift.
+
+### Not verified
+
+- No physical iOS/Android device test and no Safari/Firefox run. Social preview caches (KakaoTalk and others) may still serve the previous `share.png` until the URL is re-scraped.
