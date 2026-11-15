@@ -1,5 +1,11 @@
 # Change log
 
+## 2026-11-15 — Catalog thumbnails and share card refreshed to the dual-skew header
+
+- Re-captured the three out-of-date app card thumbnails from their live pages, so every card image now carries the unified `[.mark] HD2Lab | <App>` header instead of the retired rounded-box SVG badge: `assets/apps/shutterplate.jpg` (editor with the bundled Sony sample, 8-frame strip, EXIF inspector), `assets/apps/film-studio.jpg` (landing with the dual-skew hero mark and the nine film signatures), `assets/apps/midpoint.jpg` (Gangnam + Hongdae transit midpoint, 100% fairness). Each is a 16:9 1280×720 Chromium capture at device scale 2, downsampled to 960×540.
+- Regenerated `assets/branding/share.png`: same 1200×630 HD2Lab layout and 100px dual-skew mark header, with the embedded Film Studio mini card showing the new landing capture instead of the retired rounded-box hero icon. The `og:image` / `twitter:image` cache buster moved to `?v=20261115-thumbs`.
+- Recorded the new capture basis in `docs/onboarding/shutterplate.md`, `film-studio.md`, and `midpoint.md`.
+
 ## 2026-11-13 — Full-card links and Midpoint registration
 
 - Made the whole card the launch link: `card()` now renders `<a class="app-card" href="<launchUrl>" target="_self" aria-label="Open <title>">` instead of an `<article>` plus a separate action button. An entry that is not published or has an unsafe destination still builds as an inert `<article class="app-card unavailable">`.

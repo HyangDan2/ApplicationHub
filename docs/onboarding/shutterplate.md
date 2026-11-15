@@ -4,7 +4,7 @@
 - Live URL: https://hyangdan2.github.io/PKPilot0003/ — checked 2026-11-14, HTTP 200, page title `Shutterplate — HD2Lab Photo Frame Studio`
 - Source: https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0003 (folder inside the Web-HQ repository; no standalone repository exists)
 - Category / tags: `Photo` / EXIF · 8 Frames · Local Processing
-- Thumbnail: `assets/apps/shutterplate.jpg` — 16:9 capture of the live site in a 1600×900 Chromium viewport after loading the bundled Sony sample (device scale 1), resized to 960×540. The screen shows the Clean Horizon plate with its EXIF signature and an unedited ISO 100, the one-line session card, and all eight frames in the library strip.
+- Thumbnail: `assets/apps/shutterplate.jpg` — 16:9 capture of the live site in a 1280×720 Chromium viewport (device scale 2, so 2560×1440 pixels downsampled), resized to 960×540. Captured 2026-11-15 after loading the bundled Sony sample: the `HD2Lab | Shutterplate` dual-skew header, the Clean Horizon plate with its EXIF signature and an unedited ISO 100, the one-line session card, the frame strip from Clean Horizon through Minimal Edge (the strip continues past the card edge), and the EXIF inspector.
 
 ## What this record claims
 
