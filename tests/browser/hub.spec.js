@@ -46,6 +46,7 @@ for (const width of [360, 390, 768, 1440]) {
     await ready(page);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     for (const image of await page.locator('.card-image img').all()) {
+      await image.scrollIntoViewIfNeeded();   // thumbnails are loading="lazy"; bring each one into view first
       await expect(image).toHaveJSProperty('naturalWidth', 960);
     }
     const broken = await page.locator('.card-image img').evaluateAll(nodes => nodes.filter(node => !node.complete || node.naturalWidth === 0).length);
