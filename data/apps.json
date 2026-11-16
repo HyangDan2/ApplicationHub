@@ -13,7 +13,7 @@
         "Local Storage"
       ],
       "thumbnail": "assets/apps/todo-master.jpg",
-      "thumbnailAlt": "Todo Master screen: the Today's Focus tab with its task list and progress summary.",
+      "thumbnailAlt": "Todo Master screen: the All Tasks board with its progress summary, task rows and the day's schedule panel.",
       "launchUrl": "https://hyangdan2.github.io/AGPilot0002/",
       "repositoryUrl": "https://github.com/HyangDan2/AGPilot0002",
       "status": "published",
@@ -76,7 +76,7 @@
         "Local Processing"
       ],
       "thumbnail": "assets/apps/film-studio.jpg",
-      "thumbnailAlt": "Film Studio screen: photo opening and adjustment samples beside the list of nine film signatures.",
+      "thumbnailAlt": "Film Studio screen: a portrait photo developed with the VÆRN heritage-negative profile, beside the nine film signatures and the adjustment panel.",
       "launchUrl": "https://hyangdan2.github.io/AGPilot0007/",
       "repositoryUrl": "https://github.com/HyangDan2/AGPilot0007",
       "status": "published",
@@ -97,7 +97,7 @@
         "Local Processing"
       ],
       "thumbnail": "assets/apps/shutterplate.jpg",
-      "thumbnailAlt": "Shutterplate screen: a Sony sample photo framed in the Clean Horizon plate with its EXIF signature, above the eight-frame library strip.",
+      "thumbnailAlt": "Shutterplate screen: a Sony sample photo framed in the Clean Horizon plate with its EXIF signature, above the thirteen-signature frame library strip.",
       "launchUrl": "https://hyangdan2.github.io/PKPilot0003/",
       "repositoryUrl": "https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0003",
       "status": "published",

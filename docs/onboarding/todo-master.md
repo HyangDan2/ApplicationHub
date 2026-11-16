@@ -4,7 +4,7 @@
 - Live URL: https://hyangdan2.github.io/AGPilot0002/ — checked 2026-11-10, HTTP 200, page title `HD2Lab | Todo Master`
 - Source: https://github.com/HyangDan2/AGPilot0002 (public, `main`, last push 2026-11-07)
 - Category / tags: `Productivity` / PWA · Offline · Local Storage
-- Thumbnail: `assets/apps/todo-master.jpg` — 16:9 crop of a 1440×810 capture of the live app, resized to 960×540. The visible tasks are the app's own built-in sample records (`js/services/storage.js` → `getDefaultTodos()`), not user data.
+- Thumbnail: `assets/apps/todo-master.jpg` — 16:9 capture of the live app in a 1280×720 Chromium viewport (device scale 2, so 2560×1440 pixels downsampled), resized to 960×540. Captured 2026-11-16 in the Soft Iris light theme on the All Tasks board: the `HD2Lab | Todo Master` mark, the dataset switcher and the 33% progress summary, the task rows with their category and priority chips, and the date-schedule panel with today's items. The visible tasks are the app's own built-in sample records (`js/services/storage.js` → `getDefaultTodos()`), not user data.
 
 ## What this record claims
 

@@ -4,7 +4,7 @@
 - Live URL: https://hyangdan2.github.io/PKPilot0002/ — checked 2026-11-13, HTTP 200, page title `HD2Lab | Midpoint (PKPilot0002)`
 - Source: https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0002 (folder inside the Web-HQ repository; no standalone repository exists)
 - Category / tags: `Utility` / NAVER Maps · Transit & Drive · Course Pairing
-- Thumbnail: `assets/apps/midpoint.jpg` — 16:9 capture of the live site in a 1280×720 Chromium viewport (device scale 2, so 2560×1440 pixels downsampled), resized to 960×540. Captured 2026-11-15 with the `HD2Lab | Midpoint` dual-skew header: transit-mode midpoint between Gangnam and Hongdae with equal 5.63 km distances and a 100% fairness score.
+- Thumbnail: `assets/apps/midpoint.jpg` — 16:9 capture of the live site in a 1280×720 Chromium viewport (device scale 2, so 2560×1440 pixels downsampled), resized to 960×540. Captured 2026-11-16 in the Soft Iris light theme with the `HD2Lab | Midpoint` mark: transit-mode midpoint between Gangnam and Hongdae with equal 5.63 km distances, the 100% fairness card, and the nearest meeting point (이촌역). The panel is scrolled to the transport-mode toggle so the result card is in frame.
 
 ## What this record claims
 

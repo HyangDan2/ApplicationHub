@@ -4,7 +4,7 @@
 - Live URL: https://hyangdan2.github.io/PKPilot0001/ — checked 2026-11-10, HTTP 200, page title `HD2Lab | Photos (PKPilot0001)`
 - Source: https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0001 (folder inside the Web-HQ repository; no standalone repository exists)
 - Category / tags: `Photo` / PWA · EXIF · Filter
-- Thumbnail: `assets/apps/photos.jpg` — 16:9 crop of a 1440×810 capture of the live Library screen, resized to 960×540. The library holds the app's own mock photo set.
+- Thumbnail: `assets/apps/photos.jpg` — 16:9 capture of the live app in a 1280×720 Chromium viewport (device scale 2, so 2560×1440 pixels downsampled), resized to 960×540. Captured 2026-11-16 in the Soft Iris light theme with the `모든 사진` tab selected: the `HD2Lab | Photos` header, the 보관함 title with the 20-item count, the guest-mode notice, and the November 2026 grid. The library holds the app's own mock photo set.
 
 ## What this record claims
 

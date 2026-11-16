@@ -158,3 +158,28 @@ Environment: Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chromium, 
 - Captures: `browser/apphub-live-2026-11-15-desktop.png`, `browser/apphub-live-2026-11-15-mobile.png` (workspace evidence, not part of this repository).
 
 Not verified: physical iOS/Android devices, Safari and Firefox. Social preview caches (KakaoTalk and others) keep serving the previous `share.png` until the URL is re-scraped.
+
+## Thumbnail refresh — 2026-11-16 (Soft Iris capture of all seven cards)
+
+Scope: local verification before publication. Every app card thumbnail in `assets/apps/` was re-captured from the live site after the Soft Iris (white & violet) rollout, so no card still shows a pre-Soft Iris dark/orange screen. Catalog content, evidence paths and launch URLs are unchanged; `thumbnailAlt` was updated where the captured screen changed.
+
+Environment: Linux, Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chromium.
+
+- Captures: each live page was loaded in a 1280×720 Chromium viewport at device scale 2 (2560×1440 pixels) and downsampled to a 960×540 JPEG (quality 88, 4:4:4).
+  - `todo-master.jpg` (70,708 B) — https://hyangdan2.github.io/AGPilot0002/, Soft Iris light theme, All Tasks board with the 33% progress summary and the date-schedule panel.
+  - `photos.jpg` (84,775 B) — https://hyangdan2.github.io/PKPilot0001/, `모든 사진` tab so the grid fills the frame.
+  - `midpoint.jpg` (181,207 B) — https://hyangdan2.github.io/PKPilot0002/, `강남` + `홍대입구` presets added (5.63 km · 5.63 km, 100% fairness, 이촌역); the sidebar was scrolled to the transport-mode toggle so the fairness card sits in frame.
+  - `film-studio.jpg` (152,665 B) — https://hyangdan2.github.io/AGPilot0007/, `?theme=light` is not honoured by the app, so the header's `Switch to light theme` control was used and the bundled Portrait sample opened; the VÆRN signature and its adjustment groups are visible.
+  - `shutterplate.jpg` (94,048 B) — https://hyangdan2.github.io/PKPilot0003/, bundled Sony sample loaded, Clean Horizon frame, stage switched to its light background.
+  - `dos-player.jpg` (119,332 B) — https://hyangdan2.github.io/PKPilot0006/, shareware DOOM booted to its title screen, page scrolled to the player panel.
+  - `machine-learning-lab.jpg` (57,828 B) — https://hyangdan2.github.io/EDPilot0001/. This app was not part of the Soft Iris rollout and keeps its Learning Archive palette; the capture is a fresh 2× supersampled frame of the same cover view.
+- Every one of the seven live URLs returned HTTP 200 before its capture.
+- `npm run validate`: `Validated 7 apps (7 published).`
+- `npm test`: 8 unit checks passed.
+- `npm run build`: `Built 7 published apps in dist/ (base /ApplicationHub/).`
+- `npm run test:e2e`: 14 Chromium checks passed, including the thumbnail natural-size check at 360/390/768/1440.
+- Visual review: the built `dist/` was rendered in Chromium at 1366×900 and 390×844 — 7 cards, every `assets/apps/*.jpg` at natural size 960×540 with its `Live UI` caption, no console errors, no horizontal overflow.
+
+### Not verified
+
+- No physical iOS/Android device test and no Safari/Firefox run. The hosted release is verified after the Pages workflow completes.
