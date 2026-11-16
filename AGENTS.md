@@ -27,7 +27,7 @@ Cards follow the GameHub spec, and ApplicationHub should stay visually interchan
 
 ## Brand
 
-- Ground `#101110`, panels `#1b1d1a`, signature orange `--accent: #ff824f`.
+- Soft Iris language (token source: `HyangDan2/Server-HQ` · `HD2Lab/hub-common.css`): ground `#FAFAFD`, panels `#FFFFFF`, soft panel `#F4F1FC`, line `#E8E4F2`, text `#1D192B`, muted `#68627A`, signature violet `--accent: #8B6CE8` (hover `#7655D9`, small-text `--accent-text: #6B4CD6`).
 - Header: `.mark` (HD2Lab dual-skew mark), `HD2Lab` wordmark, `<em>ApplicationHub</em>`, then links to GameHub, TechnicalHub, and Web-HQ.
 - Icons: `assets/branding/favicon.svg`, `favicon-32x32.png`, `apple-touch-icon.png`, `favicon.ico`, plus a 1200×630 `share.png`.
 

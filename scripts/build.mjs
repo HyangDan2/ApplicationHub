@@ -21,7 +21,7 @@ await fs.writeFile(path.join(out, 'data/apps.json'), JSON.stringify({ schemaVers
 const origin = resolveOrigin(process.env.PUBLIC_URL);
 // Social card: same HD2Lab header spec as PKPilot0001~0003 (100px mark + 62px wordmark).
 // The image URL is absolute so previews resolve even from a local build.
-const socialImage = `${origin ?? 'https://hyangdan2.github.io/ApplicationHub/'}assets/branding/share.png?v=20261115-thumbs`;
+const socialImage = `${origin ?? 'https://hyangdan2.github.io/ApplicationHub/'}assets/branding/share.png?v=20261116-soft-iris`;
 
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({ amp: '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] ?? c));
 
@@ -31,7 +31,7 @@ function head(prefix) {
   return [
     '<meta charset="utf-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
-    '<meta name="theme-color" content="#101110">',
+    '<meta name="theme-color" content="#FAFAFD">',
     `<title>${escapeHtml(title)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}">`,
     '<meta property="og:type" content="website">',

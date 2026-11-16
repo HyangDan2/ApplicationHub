@@ -1,5 +1,14 @@
 # Change log
 
+## 2026-11-16 — Soft Iris (white & violet) design language
+
+- Re-skinned the hub to the Soft Iris language from `HyangDan2/Server-HQ` (`HD2Lab/hub-common.css`): ground `#FAFAFD`, panels `#FFFFFF`, soft panel `#F4F1FC`, raised panel `#F7F5FD`, line `#E8E4F2`, strong line `#D4CCE8`, text `#1D192B`, muted `#68627A`, dim `#8A839C`, accent `#8B6CE8`, hover `#7655D9`, small-text accent `#6B4CD6`, `color-scheme: light`. Small accent labels (kicker, count, index hints, guide numbers) use `--accent-text` so they stay above 5:1 contrast on the light ground; the accent word, mark, dividers, and buttons stay `#8B6CE8` (white text on violet for primary actions).
+- Converted the hero browser mock to the light palette: white window on a `#E3DBFD` hairline, `#F7F5FD` chrome bar, `#C4B5FD` window dots, and a `#F1ECFE` lead tile with a violet border; the orbit rings, crosses, and radial wash became violet at low alpha.
+- `.mark` now draws in `#8B6CE8` (dual-skew geometry unchanged), and the favicon set was regenerated from the Soft Iris SVG (`#FAFAFD` round square, `#E8E4F2` hairline, `#8B6CE8` glyph) for `favicon.svg`, `favicon-32x32.png`, `apple-touch-icon.png`, and `favicon.ico`.
+- Regenerated `assets/branding/share.png` (1200×630) on the same card skeleton — 100px dual-skew mark, `HD2Lab | ApplicationHub` at 62px, `Pick your next app.`, three app tiles, footer — in Soft Iris, and moved the `og:image` / `twitter:image` cache buster to `?v=20261116-soft-iris`. The card counter now reads `07 APPS · NO INSTALL`, matching the seven published apps.
+- `theme-color` is `#FAFAFD`; the missing-thumbnail `assets/apps/placeholder.svg` and the fallback text colors were re-inked for the light ground.
+- Tests: `npm run validate` (7 apps), 8 unit checks, 14 Chromium checks pass; headless 1440×900 and 390×844 render with 0 console errors and 0 horizontal overflow.
+
 ## 2026-11-15 — Catalog thumbnails and share card refreshed to the dual-skew header
 
 - Re-captured the three out-of-date app card thumbnails from their live pages, so every card image now carries the unified `[.mark] HD2Lab | <App>` header instead of the retired rounded-box SVG badge: `assets/apps/shutterplate.jpg` (editor with the bundled Sony sample, 8-frame strip, EXIF inspector), `assets/apps/film-studio.jpg` (landing with the dual-skew hero mark and the nine film signatures), `assets/apps/midpoint.jpg` (Gangnam + Hongdae transit midpoint, 100% fairness). Each is a 16:9 1280×720 Chromium capture at device scale 2, downsampled to 960×540.
