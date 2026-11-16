@@ -25,13 +25,16 @@ const socialImage = `${origin ?? 'https://hyangdan2.github.io/ApplicationHub/'}a
 
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({ amp: '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] ?? c));
 
+// Runs in <head>, before the first paint: dark mode from localStorage('hd2-theme').
+const THEME_BOOT = "(function(){try{if(localStorage.getItem('hd2-theme')==='dark'){document.documentElement.dataset.theme='dark';var m=document.getElementById('theme-color');if(m)m.setAttribute('content','#0B1020');}}catch(e){}})();";
+
 function head(prefix) {
   const title = 'ApplicationHub — HD2Lab’s web app shelf';
   const description = 'HD2Lab’s web applications in one place. To-dos, photos, film developing, and machine-learning practice — all open right in your browser, no install.';
   return [
     '<meta charset="utf-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
-    '<meta name="theme-color" content="#FAFAFD">',
+    '<meta name="theme-color" id="theme-color" content="#FAFAFD">',
     `<title>${escapeHtml(title)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}">`,
     '<meta property="og:type" content="website">',
@@ -55,6 +58,8 @@ function head(prefix) {
     `<link rel="apple-touch-icon" href="${prefix}assets/branding/apple-touch-icon.png" sizes="180x180">`,
     `<link rel="shortcut icon" href="${prefix}assets/branding/favicon.ico">`,
     `<link rel="stylesheet" href="${prefix}css/style.css">`,
+    // Apply a stored theme before first paint so dark mode never flashes light.
+    `<script>${THEME_BOOT}</script>`,
   ].filter(Boolean).join('');
 }
 
