@@ -4,7 +4,7 @@
 - Live URL: https://hyangdan2.github.io/EDPilot0001/ — checked 2026-11-10, HTTP 200, page title `개인적인 머신러닝 공부 | HD2Lab`
 - Source: https://github.com/HyangDan2/EDPilot0001 (public, `main`, last push 2026-10-24)
 - Category / tags: `Learning` / Interactive · 5 Labs · Korean
-- Thumbnail: `assets/apps/machine-learning-lab.jpg` — 16:9 crop of a 1440×810 capture of the live cover page, resized to 960×540. The site header was trimmed out of the crop.
+- Thumbnail: `assets/apps/machine-learning-lab.jpg` — 16:9 capture of the live cover page in a 1280×720 Chromium viewport (device scale 2, so 2560×1440 pixels downsampled), resized to 960×540. Captured 2026-11-16: the Learning Archive header, the 개인적인 머신러닝 공부 title with its two entry buttons, and the From Observation to Understanding plate. The site keeps its own Learning Archive palette rather than the Soft Iris token set.
 
 ## What this record claims
 
