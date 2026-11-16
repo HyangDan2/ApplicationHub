@@ -1,5 +1,9 @@
 # Change log
 
+## 2026-11-16 — Hero mock counter follows the catalog
+
+- The decorative hero browser mock read `05 APPS`; it now reads `07 APPS`, matching the seven published apps the catalog count badge shows.
+
 ## 2026-11-16 — Soft Iris (white & violet) design language
 
 - Re-skinned the hub to the Soft Iris language from `HyangDan2/Server-HQ` (`HD2Lab/hub-common.css`): ground `#FAFAFD`, panels `#FFFFFF`, soft panel `#F4F1FC`, raised panel `#F7F5FD`, line `#E8E4F2`, strong line `#D4CCE8`, text `#1D192B`, muted `#68627A`, dim `#8A839C`, accent `#8B6CE8`, hover `#7655D9`, small-text accent `#6B4CD6`, `color-scheme: light`. Small accent labels (kicker, count, index hints, guide numbers) use `--accent-text` so they stay above 5:1 contrast on the light ground; the accent word, mark, dividers, and buttons stay `#8B6CE8` (white text on violet for primary actions).
