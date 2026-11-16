@@ -224,3 +224,66 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
   *, *:before, *:after { transition: none !important; animation: none !important; }
   .app-card:hover, .app-card:focus-visible, .app-card:hover .card-image img { transform: none; }
 }
+
+/* ══ Theme: Navy & Lavender (dark) ══════════════════════════════════
+   Soft Iris (light) stays the default. The floating toggle below writes
+   localStorage('hd2-theme'), the head snippet applies [data-theme="dark"]
+   before first paint, and these tokens repaint every surface. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0B1020;
+  --panel: #12192E;
+  --panel-soft: #1A2340;
+  --panel-raised: #16203A;
+  --line: #253154;
+  --line-strong: #344472;
+  --ink: #EEF2FF;
+  --muted: #94A3C4;
+  --dim: #6E7FA3;
+  --accent: #A78BFA;
+  --accent-hover: #8B6CE8;
+  --accent-text: #C4B5FD;
+  --accent-soft: rgba(167, 139, 250, 0.14);
+  --body: #C3CCE4;
+}
+[data-theme="dark"] ::selection { background: rgba(167, 139, 250, 0.3); color: #F4F6FF; }
+[data-theme="dark"] .brand em { border-left-color: var(--line-strong); }
+[data-theme="dark"] .hub-link, [data-theme="dark"] .web-hq-link { color: var(--muted); }
+[data-theme="dark"] .status-dot { box-shadow: 0 0 12px rgba(167, 139, 250, 0.45); }
+[data-theme="dark"] .hero-description { color: var(--body); }
+[data-theme="dark"] .hero-notes span + span:before { background: var(--dim); }
+[data-theme="dark"] .hero-art { background: radial-gradient(ellipse, rgba(167, 139, 250, 0.09), transparent 65%); }
+[data-theme="dark"] .orbit { border-color: rgba(167, 139, 250, 0.18); }
+[data-theme="dark"] .browser { border-color: var(--line-strong); background: linear-gradient(160deg, #16203A, #12192E); box-shadow: 0 18px 40px rgba(2, 5, 16, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06); }
+[data-theme="dark"] .browser-bar { border-bottom-color: var(--line); background: var(--panel-soft); }
+[data-theme="dark"] .browser-bar i { background: var(--line-strong); }
+[data-theme="dark"] .browser-bar i:first-child { background: var(--accent); }
+[data-theme="dark"] .tile { background: var(--panel); }
+[data-theme="dark"] .tile-lead { background: linear-gradient(145deg, #1D2745, #141B31); }
+[data-theme="dark"] .art-label { background: var(--panel); border-color: var(--line-strong); }
+[data-theme="dark"] .art-cross { color: rgba(167, 139, 250, 0.45); }
+[data-theme="dark"] .search-box:focus-within { border-color: var(--accent); }
+[data-theme="dark"] .search-box input::placeholder { color: var(--dim); }
+[data-theme="dark"] .filter-chip { color: var(--muted); }
+[data-theme="dark"] .app-card:hover, [data-theme="dark"] .app-card:focus-visible { box-shadow: 0 20px 44px rgba(2, 5, 16, 0.62); }
+[data-theme="dark"] .image-caption { background: rgba(4, 8, 20, 0.84); color: #DCE4FF; }
+[data-theme="dark"] .meta-pill { color: var(--muted); }
+[data-theme="dark"] .card-description { color: var(--body); }
+[data-theme="dark"] .site-footer > a { color: var(--muted); }
+/* Solid accent surfaces take navy ink so lavender stays readable. */
+[data-theme="dark"] .skip-link,
+[data-theme="dark"] .hero-action,
+[data-theme="dark"] .reset-button:hover:not(:disabled),
+[data-theme="dark"] .filter-chip[aria-pressed="true"],
+[data-theme="dark"] .primary,
+[data-theme="dark"] .load-message button { color: #0B1020; }
+[data-theme="dark"] .hero-action:hover,
+[data-theme="dark"] .primary:hover { background: #BCA5FF; }
+
+/* Floating Light/Dark toggle — fixed bottom-right on every hub page */
+.theme-toggle { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--panel); color: var(--ink); font-size: 12px; font-weight: 700; letter-spacing: .2px; box-shadow: 0 10px 26px rgba(29, 25, 43, .16); transition: background .15s, border-color .15s, color .15s, transform .15s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent-text); transform: translateY(-2px); }
+.theme-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.theme-toggle-icon { font-size: 15px; line-height: 1; }
+[data-theme="dark"] .theme-toggle { box-shadow: 0 12px 30px rgba(2, 5, 16, .66); }
+[data-theme="dark"] .theme-toggle:hover { background: var(--panel-soft); }
