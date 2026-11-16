@@ -107,6 +107,27 @@
       "evidencePath": "docs/onboarding/shutterplate.md"
     },
     {
+      "id": "dos-player",
+      "title": "DOS Player",
+      "subtitle": "Old DOS games, zero install.",
+      "description": "An instant-play player for classic DOS games and programs, with DOSBox running in the browser through js-dos v8 (WebAssembly). Boot Digger, shareware DOOM or the Dhrystone 2 benchmark in one click, or drop in your own .jsdos bundle. Fullscreen, sound and a touch gamepad are built in, and your files stay on device.",
+      "category": "Utility",
+      "tags": [
+        "js-dos",
+        "DOSBox WASM",
+        "Retro Games"
+      ],
+      "thumbnail": "assets/apps/dos-player.jpg",
+      "thumbnailAlt": "DOS Player screen: shareware DOOM running on its main menu inside the player, beside the instant-play library of Digger, DOOM and Dhrystone 2.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0006/",
+      "repositoryUrl": "https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0006",
+      "status": "published",
+      "sortOrder": 35,
+      "updatedAt": "2026-11-16",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/dos-player.md"
+    },
+    {
       "id": "machine-learning-lab",
       "title": "Machine Learning Lab",
       "subtitle": "Learn by experiment.",
