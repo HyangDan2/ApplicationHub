@@ -183,3 +183,19 @@ Environment: Linux, Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chr
 ### Not verified
 
 - No physical iOS/Android device test and no Safari/Firefox run. The hosted release is verified after the Pages workflow completes.
+
+## Hosted acceptance — 2026-11-16 (Soft Iris thumbnail refresh)
+
+- Release: squash merge of PR #14, commit `5d3b0a55f8da94d7798d6a02f01200ae8fd839b2`, [Actions run 43892764736](https://github.com/HyangDan2/ApplicationHub/actions/runs/43892764736) — build and deploy jobs both succeeded.
+- `PUBLIC_URL=https://hyangdan2.github.io/ApplicationHub/ npm run verify:hosted` → `Hosted release verified: 7 apps, launch links and icons intact.`
+- https://hyangdan2.github.io/ApplicationHub/ returned HTTP 200. All seven thumbnails were fetched from the live site and match the committed files byte for byte (sha256):
+  - `assets/apps/todo-master.jpg` 70,708 B — `ca9313e4b9866f5e`
+  - `assets/apps/photos.jpg` 84,775 B — `6a27f9e5e1222b9d`
+  - `assets/apps/midpoint.jpg` 181,207 B — `0ff87bb0ed73ebe6`
+  - `assets/apps/film-studio.jpg` 152,665 B — `a4d523e4654df233`
+  - `assets/apps/shutterplate.jpg` 94,048 B — `438ed4de0b50df29`
+  - `assets/apps/dos-player.jpg` 119,332 B — `5b76698efb38d2ea`
+  - `assets/apps/machine-learning-lab.jpg` 57,828 B — `04970738883e5fa8`
+- Live render in Chromium at 1440×1000 and 390×844: 7 cards, every thumbnail at natural size 960×540 with its `Live UI` caption, no console errors or page errors, and no horizontal overflow (scrollWidth = clientWidth at both widths).
+
+Not verified: physical iOS/Android devices, Safari and Firefox.
