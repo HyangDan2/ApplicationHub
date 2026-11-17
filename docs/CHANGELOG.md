@@ -1,5 +1,12 @@
 # Change log
 
+## 2026-11-18 — Shared hub navigation (desktop tabs + mobile drawer)
+
+- Replaced the old in-header link row (`Browse Apps`, `GameHub ↗`, `TechnicalHub ↗`, `Web-HQ ↗`) with the Web-HQ category tabs: `Home · Apps · Play · Tech · Diary · About` in `.header-nav`, rendered from the `HQ` / `HUBS` / `ABOUT` tables in `scripts/build.mjs`. `Apps` carries `.is-active` and `aria-current="page"`; the separate Web-HQ action link is gone now that `Home` and the drawer cover it.
+- Added the mobile menu: a 44×44 `.menu-button` (≡) replaces the tabs at `<= 820px`, and `js/nav.js` unfolds the right `.mobile-drawer` over a blurred `.drawer-backdrop`. The drawer lists `00 / HQ`, `01 / APPS`, `02 / PLAY`, `03 / EXPLORE`, `04 / DIARY`, `05 / ABOUT` with the current hub highlighted (`aria-current="page"`); Escape, the close button, the backdrop, and a link tap all close it, focus returns to the ≡ button, and `body.drawer-open` hides the floating `#theme-toggle`.
+- Header markup is now `.site-header > .header-inner.shell` (bar border spans the viewport, content keeps the shell width), matching Web-HQ. Stylesheet cache buster moved to `?v=20261118-hub-nav`.
+- Tests: the brand check now asserts the six tabs, their exact destinations, the single `aria-current`, and that `.web-hq-link` / `.hub-link` are gone; a new Chromium check drives the drawer (44×44 button, `aria-expanded`, `body.drawer-open`, six drawer entries ending in `05 / ABOUT → /about/`, hidden theme toggle, Escape restores focus). `npm run verify` passes: 7 apps validated, 8 unit checks, 18 Chromium checks.
+
 ## 2026-11-16 — Hero mock counter follows the catalog
 
 - The decorative hero browser mock read `05 APPS`; it now reads `07 APPS`, matching the seven published apps the catalog count badge shows.
