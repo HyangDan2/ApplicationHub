@@ -280,10 +280,16 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
 [data-theme="dark"] .hero-action:hover,
 [data-theme="dark"] .primary:hover { background: #BCA5FF; }
 
-/* Floating Light/Dark toggle — fixed bottom-right on every hub page */
-.theme-toggle { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--panel); color: var(--ink); font-size: 12px; font-weight: 700; letter-spacing: .2px; box-shadow: 0 10px 26px rgba(29, 25, 43, .16); transition: background .15s, border-color .15s, color .15s, transform .15s; }
-.theme-toggle:hover { border-color: var(--accent); color: var(--accent-text); transform: translateY(-2px); }
-.theme-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.theme-toggle-icon { font-size: 15px; line-height: 1; }
+/* Floating theme toggle — HD2Lab standard: one 44×44 round icon button (same spec
+   as Web-HQ). No text label, no emoji: a single-stroke moon in light mode,
+   a single-stroke sun in dark mode. */
+.theme-toggle { position: fixed; right: max(16px, env(safe-area-inset-right, 0px) + 16px); bottom: max(18px, env(safe-area-inset-bottom, 0px) + 18px); z-index: 60; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0; padding: 0; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--panel); color: var(--ink); box-shadow: 0 10px 26px rgba(29, 25, 43, .16); cursor: pointer; -webkit-tap-highlight-color: transparent; backdrop-filter: blur(10px); transition: background .2s, border-color .2s, color .2s, box-shadow .2s, transform .18s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle:active { transform: scale(.94); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.theme-toggle-ic { display: none; width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+html:not([data-theme="dark"]) .theme-toggle .theme-toggle-ic[data-icon="moon"],
+html[data-theme="dark"] .theme-toggle .theme-toggle-ic[data-icon="sun"] { display: block; }
 [data-theme="dark"] .theme-toggle { box-shadow: 0 12px 30px rgba(2, 5, 16, .66); }
 [data-theme="dark"] .theme-toggle:hover { background: var(--panel-soft); }
+@media (prefers-reduced-motion: reduce) { .theme-toggle, .theme-toggle:active { transition: none; transform: none; } }
