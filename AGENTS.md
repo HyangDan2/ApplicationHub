@@ -30,7 +30,7 @@ Cards follow the GameHub spec, and ApplicationHub should stay visually interchan
 - Soft Iris language (token source: `HyangDan2/Server-HQ` · `HD2Lab/hub-common.css`): ground `#FAFAFD`, panels `#FFFFFF`, soft panel `#F4F1FC`, line `#E8E4F2`, text `#1D192B`, muted `#68627A`, signature violet `--accent: #8B6CE8` (hover `#7655D9`, small-text `--accent-text: #6B4CD6`).
 - Header: `.mark` (HD2Lab dual-skew mark), `HD2Lab` wordmark, `<em>ApplicationHub</em>`, then links to GameHub, TechnicalHub, and Web-HQ.
 - Icons: `assets/branding/favicon.svg`, `favicon-32x32.png`, `apple-touch-icon.png`, `favicon.ico`, plus a 1200×630 `share.png`.
-- Theme: Soft Iris stays the default. The fixed bottom-right toggle (`#theme-toggle`, `js/theme.js`) switches to Navy & Lavender dark, whose tokens live in the `[data-theme="dark"]` block of `css/style.css`; the choice is stored in `localStorage('hd2-theme')` and applied by the inline `<head>` snippet before first paint. New colors belong on those tokens, not on hex literals.
+- Theme: Soft Iris stays the default. The fixed bottom-right toggle (`#theme-toggle`, `js/theme.js`) is the HD2Lab standard 44×44 round icon button — a single-stroke moon in light mode, a single-stroke sun in dark mode, no text label — and switches to Navy & Lavender dark, whose tokens live in the `[data-theme="dark"]` block of `css/style.css`; the choice is stored in `localStorage('hd2-theme')` and applied by the inline `<head>` snippet before first paint. New colors belong on those tokens, not on hex literals.
 
 ## Commands
 
