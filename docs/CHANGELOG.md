@@ -1,5 +1,11 @@
 # Change log
 
+## 2026-11-18 — Markdown Viewer registered
+
+- Registered Markdown Viewer (PKPilot0008) as the eighth published app: `id: markdown-viewer`, category `Productivity`, tags GFM / Frontmatter / Share Links, launch URL https://hyangdan2.github.io/PKPilot0008/, sort order 37, thumbnail `assets/apps/markdown-viewer.jpg` (960×540 from a 16:9 crop of a live 1919×992 Chromium capture), evidence `docs/onboarding/markdown-viewer.md`.
+- The decorative hero browser mock now reads `08 APPS`, matching the eight published cards.
+- The four dead `repositoryUrl` values and their `Source:` lines were already repointed on `main` before this branch, so this entry does not touch them.
+
 ## 2026-11-18 — Shared hub navigation (desktop tabs + mobile drawer)
 
 - Replaced the old in-header link row (`Browse Apps`, `GameHub ↗`, `TechnicalHub ↗`, `Web-HQ ↗`) with the Web-HQ category tabs: `Home · Apps · Play · Tech · Diary · About` in `.header-nav`, rendered from the `HQ` / `HUBS` / `ABOUT` tables in `scripts/build.mjs`. `Apps` carries `.is-active` and `aria-current="page"`; the separate Web-HQ action link is gone now that `Home` and the drawer cover it.

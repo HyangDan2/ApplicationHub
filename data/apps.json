@@ -128,6 +128,27 @@
       "evidencePath": "docs/onboarding/dos-player.md"
     },
     {
+      "id": "markdown-viewer",
+      "title": "Markdown Viewer",
+      "subtitle": "Read it as written.",
+      "description": "A read-only Markdown viewer that runs entirely in the browser. YAML frontmatter folds into a five-field card, a heading-based table of contents walks the document, code blocks copy in one click, and URL loading, compressed share links and print/PDF export finish the job — every rendered document sanitized.",
+      "category": "Productivity",
+      "tags": [
+        "GFM",
+        "Frontmatter",
+        "Share Links"
+      ],
+      "thumbnail": "assets/apps/markdown-viewer.jpg",
+      "thumbnailAlt": "Markdown Viewer screen: the sample document's title with its tag chips above an expanded five-field frontmatter card, beside the contents list.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0008/",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0008",
+      "status": "published",
+      "sortOrder": 37,
+      "updatedAt": "2026-11-18",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/markdown-viewer.md"
+    },
+    {
       "id": "machine-learning-lab",
       "title": "Machine Learning Lab",
       "subtitle": "Learn by experiment.",
