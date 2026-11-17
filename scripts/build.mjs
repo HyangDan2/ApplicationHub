@@ -57,7 +57,7 @@ function head(prefix) {
     `<link rel="icon" href="${prefix}assets/branding/favicon-32x32.png" sizes="32x32" type="image/png">`,
     `<link rel="apple-touch-icon" href="${prefix}assets/branding/apple-touch-icon.png" sizes="180x180">`,
     `<link rel="shortcut icon" href="${prefix}assets/branding/favicon.ico">`,
-    `<link rel="stylesheet" href="${prefix}css/style.css">`,
+    `<link rel="stylesheet" href="${prefix}css/style.css?v=20261117-toggle-ic">`,
     // Apply a stored theme before first paint so dark mode never flashes light.
     `<script>${THEME_BOOT}</script>`,
   ].filter(Boolean).join('');
