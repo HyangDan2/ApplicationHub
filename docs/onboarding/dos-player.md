@@ -2,7 +2,7 @@
 
 - App card ID: `dos-player`
 - Live URL: https://hyangdan2.github.io/PKPilot0006/ — checked 2026-11-16, HTTP 200, page title `HD2Lab | DOS Player (PKPilot0006)`
-- Source: https://github.com/HyangDan2/HyangDan2.github.io/tree/main/PKPilot0006 (folder inside the Web-HQ repository; no standalone repository exists). Added in PR #51, squash-merged as `235b020`.
+- Source: https://github.com/HyangDan2/PKPilot0006 (standalone repository; the app previously lived under `HyangDan2/HyangDan2.github.io/PKPilot0006` and was moved out). Added in PR #51, squash-merged as `235b020`.
 - Category / tags: `Utility` / js-dos · DOSBox WASM · Retro Games
 - Thumbnail: `assets/apps/dos-player.jpg` — 16:9 capture of the live site in a 1280×720 Chromium viewport (device scale 2, so 2560×1440 pixels downsampled), resized to 960×540. Captured 2026-11-16 with shareware DOOM booted and sitting on its title screen: the `HD2Lab | DOS Player` header with the `실행 중 · DOOM` chip, the player with DOOM's title art and its `NEW GAME / OPTIONS / LOAD GAME` menu inside the bezel, the `바로실행용` library (Digger, DOOM, Dhrystone 2), the key guide and the local-file dropzone. The page is scrolled to the player panel.
 
