@@ -57,22 +57,59 @@ function head(prefix) {
     `<link rel="icon" href="${prefix}assets/branding/favicon-32x32.png" sizes="32x32" type="image/png">`,
     `<link rel="apple-touch-icon" href="${prefix}assets/branding/apple-touch-icon.png" sizes="180x180">`,
     `<link rel="shortcut icon" href="${prefix}assets/branding/favicon.ico">`,
-    `<link rel="stylesheet" href="${prefix}css/style.css?v=20261117-toggle-ic">`,
+    `<link rel="stylesheet" href="${prefix}css/style.css?v=20261118-hub-nav">`,
     // Apply a stored theme before first paint so dark mode never flashes light.
     `<script>${THEME_BOOT}</script>`,
   ].filter(Boolean).join('');
 }
 
-const header = prefix => `<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header shell">
-  <a class="brand" href="${prefix}" aria-label="ApplicationHub home"><span class="mark" aria-hidden="true"></span><span class="brand-name">HD2Lab</span><em>ApplicationHub</em></a>
-  <nav aria-label="Main menu">
-    <a class="nav-active" href="${prefix}#apps">Browse Apps</a>
-    <a class="hub-link" href="https://hyangdan2.github.io/GameHub/">GameHub <span aria-hidden="true">↗</span></a>
-    <a class="hub-link" href="https://hyangdan2.github.io/TechnicalHub/">TechnicalHub <span aria-hidden="true">↗</span></a>
-    <a class="web-hq-link" href="https://hyangdan2.github.io/">Web-HQ <span aria-hidden="true">↗</span></a>
+// One navigation for the whole HD2Lab family (Web-HQ, ApplicationHub, GameHub,
+// TechnicalHub, HD2's Diary, About). Same markup and classes as Web-HQ so the
+// desktop tabs and the mobile drawer stay interchangeable between the hubs.
+const HQ = { key: 'home', label: 'Home', index: '00 / HQ', name: 'Web-HQ', desc: 'The front door of HD2Lab', href: 'https://hyangdan2.github.io/' };
+const HUBS = [
+  { key: 'apps', label: 'Apps', index: '01 / APPS', name: 'ApplicationHub', desc: 'Web applications &amp; tools', href: 'https://hyangdan2.github.io/ApplicationHub/' },
+  { key: 'play', label: 'Play', index: '02 / PLAY', name: 'GameHub', desc: 'Games &amp; interaction', href: 'https://hyangdan2.github.io/GameHub/' },
+  { key: 'tech', label: 'Tech', index: '03 / EXPLORE', name: 'TechnicalHub', desc: 'Technology, projects &amp; ideas', href: 'https://hyangdan2.github.io/TechnicalHub/' },
+  { key: 'diary', label: 'Diary', index: '04 / DIARY', name: 'HD2&rsquo;s Diary', desc: 'Build notes &amp; architecture', href: 'https://hyangdan2.github.io/diary/' },
+];
+const ABOUT = { key: 'about', label: 'About', index: '05 / ABOUT', name: 'About HD2Lab', desc: 'Who builds this and why', href: 'https://hyangdan2.github.io/about/' };
+
+const tab = (item, active) => item.key === active
+  ? `<a class="nav-tab is-active" href="${item.href}" aria-current="page">${item.label}</a>`
+  : `<a class="nav-tab" href="${item.href}">${item.label}</a>`;
+const drawerItem = (item, active) => `<a class="drawer-item${item.key === active ? ' is-current' : ''}" href="${item.href}"${item.key === active ? ' aria-current="page"' : ''}>
+        <span class="drawer-item-meta">${item.index}</span>
+        <span class="drawer-item-row"><strong>${item.name}</strong><span aria-hidden="true">↗</span></span>
+        <span class="drawer-item-desc">${item.desc}</span>
+      </a>`;
+
+const header = (prefix, active = 'apps') => `<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="header-inner shell">
+    <a class="brand" href="${prefix}" aria-label="ApplicationHub home"><span class="mark" aria-hidden="true"></span><span class="brand-name">HD2Lab</span><em>ApplicationHub</em></a>
+    <nav class="header-nav" aria-label="Hub categories">
+      ${tab(HQ, active)}
+      ${HUBS.map(hub => tab(hub, active)).join('\n      ')}
+      ${tab(ABOUT, active)}
+    </nav>
+    <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5.5H17M3 10H17M3 14.5H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+<div class="drawer-backdrop" hidden></div>
+<aside id="mobile-drawer" class="mobile-drawer" aria-label="Hub navigation" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="drawer-title"><span class="mark mark-sm" aria-hidden="true"></span><span>Navigation</span></span>
+    <button class="drawer-close" type="button" aria-label="Close menu">&times;</button>
+  </div>
+  <nav class="drawer-list" aria-label="Hub categories">
+      ${drawerItem(HQ, active)}
+      ${HUBS.map(hub => drawerItem(hub, active)).join('\n      ')}
+      ${drawerItem(ABOUT, active)}
   </nav>
-</header>`;
+</aside>`;
 
 const footer = `<footer class="shell site-footer">
   <div><span class="footer-brand">HD2Lab <span class="accent">/</span> ApplicationHub</span><p>A shelf of small, useful web apps.</p></div>
