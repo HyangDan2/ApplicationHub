@@ -57,7 +57,7 @@ function head(prefix) {
     `<link rel="icon" href="${prefix}assets/branding/favicon-32x32.png" sizes="32x32" type="image/png">`,
     `<link rel="apple-touch-icon" href="${prefix}assets/branding/apple-touch-icon.png" sizes="180x180">`,
     `<link rel="shortcut icon" href="${prefix}assets/branding/favicon.ico">`,
-    `<link rel="stylesheet" href="${prefix}css/style.css?v=20261118-accordion-nav">`,
+    `<link rel="stylesheet" href="${prefix}css/style.css?v=20261119-appsplay">`,
     // Apply a stored theme before first paint so dark mode never flashes light.
     `<script>${THEME_BOOT}</script>`,
   ].filter(Boolean).join('');
@@ -75,43 +75,60 @@ const HUBS = [
 ];
 const DIARY = { key: 'diary', label: 'Diary', name: 'Diary', href: 'https://hyangdan2.github.io/diary/' };
 const ABOUT = { key: 'about', label: 'About', name: 'About', href: 'https://hyangdan2.github.io/about/' };
-// The five diary sections, in the order the diary itself lists them.
+// The diary sections, in the order the diary itself lists them. There is no
+// "Top" entry: the Diary tab above is already the diary's top page.
 const DIARY_SECTIONS = [
-  { key: 'top', label: 'Top', href: 'https://hyangdan2.github.io/diary/' },
-  { key: 'devlog', label: 'Devlog', href: 'https://hyangdan2.github.io/diary/categories/devlog/' },
-  { key: 'architecture', label: 'Architecture', href: 'https://hyangdan2.github.io/diary/categories/architecture/' },
-  { key: 'troubleshooting', label: 'Troubleshooting', href: 'https://hyangdan2.github.io/diary/categories/troubleshooting/' },
-  { key: 'notes', label: 'Notes', href: 'https://hyangdan2.github.io/diary/categories/notes/' },
+  { label: 'Devlog', href: 'https://hyangdan2.github.io/diary/categories/devlog/' },
+  { label: 'Architecture', href: 'https://hyangdan2.github.io/diary/categories/architecture/' },
+  { label: 'Troubleshooting', href: 'https://hyangdan2.github.io/diary/categories/troubleshooting/' },
+  { label: 'Notes', href: 'https://hyangdan2.github.io/diary/categories/notes/' },
 ];
+// Apps come straight from the published catalog, so the menu can never drift
+// from data/apps.json (the same order the cards use).
+const APPS_SECTIONS = apps.map(({ title, launchUrl }) => ({ label: title, href: launchUrl }));
+// Play mirrors GameHub/data/games.json (published entries, playUrl).
+const PLAY_SECTIONS = [
+  { label: 'VALKYRIE EIRA', href: 'https://hyangdan2.github.io/AGPilot0001/' },
+  { label: 'Particle Beat', href: 'https://hyangdan2.github.io/CDXPilot0004/' },
+  { label: 'VALKYRIE', href: 'https://hyangdan2.github.io/CDXPilot0005/' },
+  { label: 'ChibiLink', href: 'https://hyangdan2.github.io/CDXPilot0006/' },
+];
+const SECTIONS = { apps: APPS_SECTIONS, play: PLAY_SECTIONS, diary: DIARY_SECTIONS };
 
 const tab = (item, active) => item.key === active
   ? `<a class="nav-tab is-active" href="${item.href}" aria-current="page">${item.label}</a>`
   : `<a class="nav-tab" href="${item.href}">${item.label}</a>`;
 
-// Desktop Diary tab: the label still goes to /diary/, hover or focus opens the
-// five section links underneath (CSS only, so it works before scripts run).
-const diaryTab = active => `<div class="nav-dropdown">
-        ${tab(DIARY, active).replace(`>${DIARY.label}</a>`, `>${DIARY.label}<span class="nav-caret" aria-hidden="true"></span></a>`)}
-        <nav class="nav-dropdown-panel" aria-label="Diary sections">
-          ${DIARY_SECTIONS.map(section => `<a class="nav-dropdown-link" href="${section.href}">${section.label}</a>`).join('\n          ')}
+// Desktop Apps / Play / Diary tabs: the label itself still goes to the hub's top
+// page, hover or keyboard focus opens the section links underneath (CSS only, so
+// it works before scripts run).
+const dropdownTab = (item, active) => `<div class="nav-dropdown" data-nav-group="${item.key}">
+        ${tab(item, active).replace(`>${item.label}</a>`, `>${item.label}<span class="nav-caret" aria-hidden="true"></span></a>`)}
+        <nav class="nav-dropdown-panel" aria-label="${item.name}">
+          ${SECTIONS[item.key].map(section => `<a class="nav-dropdown-link" href="${section.href}">${section.label}</a>`).join('\n          ')}
         </nav>
       </div>`;
 
 // Mobile drawer rows are one line each: no index meta, no description card.
 const drawerItem = (item, active) => `<a class="drawer-item${item.key === active ? ' is-current' : ''}" href="${item.href}"${item.key === active ? ' aria-current="page"' : ''}>${item.name}</a>`;
 
-// Mobile Diary accordion: the row links to /diary/, the caret unfolds sections.
-const drawerDiary = active => `<div class="drawer-group">
+// Mobile accordion: the row links to the hub's top page, the caret unfolds that
+// group's sections. The group for the hub you are on starts open.
+const drawerGroup = (item, active) => {
+  const open = item.key === active;
+  const id = `drawer-${item.key}`;
+  return `<div class="drawer-group${open ? ' is-open' : ''}" data-drawer-group="${item.key}">
         <div class="drawer-split">
-          ${drawerItem(DIARY, active)}
-          <button class="drawer-toggle" type="button" aria-expanded="false" aria-controls="drawer-diary" aria-label="Diary sections">
+          ${drawerItem(item, active)}
+          <button class="drawer-toggle" type="button" aria-expanded="${open}" aria-controls="${id}" aria-label="${item.name} sections">
             <svg class="drawer-caret" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3.5 5.75 8 10.25l4.5-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <div class="drawer-sub" id="drawer-diary">
-          ${DIARY_SECTIONS.map(section => `<a class="drawer-subitem" href="${section.href}">${section.label}</a>`).join('\n          ')}
+        <div class="drawer-sub" id="${id}">
+          ${SECTIONS[item.key].map(section => `<a class="drawer-subitem" href="${section.href}">${section.label}</a>`).join('\n          ')}
         </div>
       </div>`;
+};
 
 const header = (prefix, active = 'apps') => `<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
@@ -119,8 +136,10 @@ const header = (prefix, active = 'apps') => `<a class="skip-link" href="#main">S
     <a class="brand" href="${prefix}" aria-label="ApplicationHub home"><span class="mark" aria-hidden="true"></span><span class="brand-name">HD2Lab</span><em>ApplicationHub</em></a>
     <nav class="header-nav" aria-label="Hub categories">
       ${tab(HQ, active)}
-      ${HUBS.map(hub => tab(hub, active)).join('\n      ')}
-      ${diaryTab(active)}
+      ${dropdownTab(HUBS[0], active)}
+      ${dropdownTab(HUBS[1], active)}
+      ${tab(HUBS[2], active)}
+      ${dropdownTab(DIARY, active)}
       ${tab(ABOUT, active)}
     </nav>
     <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
@@ -136,8 +155,10 @@ const header = (prefix, active = 'apps') => `<a class="skip-link" href="#main">S
   </div>
   <nav class="drawer-list" aria-label="Hub categories">
       ${drawerItem(HQ, active)}
-      ${HUBS.map(hub => drawerItem(hub, active)).join('\n      ')}
-      ${drawerDiary(active)}
+      ${drawerGroup(HUBS[0], active)}
+      ${drawerGroup(HUBS[1], active)}
+      ${drawerItem(HUBS[2], active)}
+      ${drawerGroup(DIARY, active)}
       ${drawerItem(ABOUT, active)}
   </nav>
 </aside>`;

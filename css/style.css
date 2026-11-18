@@ -83,7 +83,7 @@ body.drawer-open .theme-toggle { opacity: 0; pointer-events: none; }
 .drawer-item { display: flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 9px; color: var(--ink); font-size: 15px; font-weight: 600; letter-spacing: -.01em; text-decoration: none; transition: background-color .18s, color .18s; }
 .drawer-item:hover, .drawer-item:focus-visible { color: var(--accent-text); background: var(--panel-soft); }
 .drawer-item.is-current { color: var(--accent-text); background: var(--accent-soft); font-weight: 700; }
-/* Diary accordion: the row links to /diary/, the 44px caret unfolds the five sections */
+/* Section accordions (Apps, Play, Diary): the row links to the hub's top page, the 44px caret unfolds its sections */
 .drawer-split { display: flex; align-items: stretch; gap: 2px; }
 .drawer-split .drawer-item { flex: 1 1 auto; min-width: 0; }
 .drawer-toggle { flex: 0 0 44px; width: 44px; min-height: 46px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 9px; background: transparent; color: var(--dim); transition: background-color .18s, color .18s; }
@@ -92,7 +92,7 @@ body.drawer-open .theme-toggle { opacity: 0; pointer-events: none; }
 .drawer-group.is-open .drawer-caret { transform: rotate(180deg); }
 .drawer-group.is-open .drawer-toggle { color: var(--accent-text); }
 .drawer-sub { display: flex; flex-direction: column; gap: 2px; overflow: hidden; max-height: 0; opacity: 0; transition: max-height .3s cubic-bezier(.22, 1, .36, 1), opacity .2s ease; }
-.drawer-group.is-open .drawer-sub { max-height: 300px; opacity: 1; }
+.drawer-group.is-open .drawer-sub { max-height: 480px; opacity: 1; }
 .drawer-subitem { display: flex; align-items: center; min-height: 40px; margin-left: 13px; padding: 0 12px 0 20px; border-left: 1px solid var(--line-strong); border-radius: 0 8px 8px 0; color: var(--muted); font-size: 13.5px; font-weight: 500; letter-spacing: -.01em; text-decoration: none; transition: color .16s, background-color .16s, border-color .16s; }
 .drawer-subitem:hover, .drawer-subitem:focus-visible { border-left-color: var(--accent); color: var(--accent-text); background: var(--panel-soft); }
 
