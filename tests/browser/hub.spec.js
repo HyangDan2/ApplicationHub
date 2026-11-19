@@ -110,9 +110,10 @@ test('HD2Lab brand, shared hub tabs, and icon links are in place', async ({ page
   await expect(page.locator('.brand .brand-name')).toHaveText('HD2Lab');
   await expect(page.locator('.brand em')).toHaveText('ApplicationHub');
 
-  // One tab row for the whole family: Home, Apps, Play, Tech, Diary (dropdown), About.
+  // One tab row for the whole family: Home, Apps, Play, Tech, Diary (dropdown),
+  // Info (dropdown), About.
   const tabs = page.locator('.header-nav .nav-tab');
-  await expect(tabs).toHaveCount(6);
+  await expect(tabs).toHaveCount(7);
   await expect(tabs.nth(0)).toHaveText('Home');
   await expect(tabs.nth(0)).toHaveAttribute('href', 'https://hyangdan2.github.io/');
   await expect(tabs.nth(1)).toHaveText('Apps');
@@ -120,8 +121,10 @@ test('HD2Lab brand, shared hub tabs, and icon links are in place', async ({ page
   await expect(tabs.nth(2)).toHaveAttribute('href', 'https://hyangdan2.github.io/GameHub/');
   await expect(tabs.nth(3)).toHaveAttribute('href', 'https://hyangdan2.github.io/TechnicalHub/');
   await expect(tabs.nth(4)).toHaveAttribute('href', 'https://hyangdan2.github.io/diary/');
-  await expect(tabs.nth(5)).toHaveText('About');
-  await expect(tabs.nth(5)).toHaveAttribute('href', 'https://hyangdan2.github.io/about/');
+  await expect(tabs.nth(5)).toHaveText('Info');
+  await expect(tabs.nth(5)).toHaveAttribute('href', 'https://hyangdan2.github.io/InformationHub/');
+  await expect(tabs.nth(6)).toHaveText('About');
+  await expect(tabs.nth(6)).toHaveAttribute('href', 'https://hyangdan2.github.io/about/');
   // Only this hub is marked current, and the old separate Web-HQ link is gone.
   await expect(page.locator('.header-nav [aria-current="page"]')).toHaveCount(1);
   await expect(tabs.nth(1)).toHaveAttribute('aria-current', 'page');
@@ -147,8 +150,11 @@ const DIARY_MENU = [
   ['Troubleshooting', 'https://hyangdan2.github.io/diary/categories/troubleshooting/'],
   ['Notes', 'https://hyangdan2.github.io/diary/categories/notes/'],
 ];
+const INFO_MENU = [
+  ['China AI', 'https://hyangdan2.github.io/InformationHub/china-ai/'],
+];
 
-test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Play, and Diary rows unfold on their own', async ({ page }) => {
+test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Play, Diary, and Info rows unfold on their own', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await ready(page);
   await expect(page.locator('.header-nav')).toBeHidden();
@@ -169,20 +175,21 @@ test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Pla
 
   // One compact line per hub: no index meta, no description card.
   const items = drawer.locator('.drawer-item');
-  await expect(items).toHaveCount(6);
-  for (const [index, label] of ['Web-HQ', 'Apps', 'Play', 'Tech', 'Diary', 'About'].entries()) {
+  await expect(items).toHaveCount(7);
+  for (const [index, label] of ['Web-HQ', 'Apps', 'Play', 'Tech', 'Diary', 'Info', 'About'].entries()) {
     await expect(items.nth(index)).toHaveText(label);
     const row = await items.nth(index).boundingBox();
     expect(row.height).toBeGreaterThanOrEqual(44);
     expect(row.height).toBeLessThanOrEqual(48);
   }
   await expect(items.nth(0)).toHaveAttribute('href', 'https://hyangdan2.github.io/');
-  await expect(items.nth(5)).toHaveAttribute('href', 'https://hyangdan2.github.io/about/');
+  await expect(items.nth(5)).toHaveAttribute('href', 'https://hyangdan2.github.io/InformationHub/');
+  await expect(items.nth(6)).toHaveAttribute('href', 'https://hyangdan2.github.io/about/');
   await expect(drawer.locator('.drawer-item-meta, .drawer-item-desc')).toHaveCount(0);
   await expect(drawer.locator('[aria-current="page"]')).toHaveCount(1);
   await expect(drawer.locator('[aria-current="page"]')).toHaveText('Apps');
-  // Web-HQ (Home), Tech, and About stay plain links: exactly three accordions.
-  await expect(drawer.locator('.drawer-group')).toHaveCount(3);
+  // Web-HQ (Home), Tech, and About stay plain links: exactly four accordions.
+  await expect(drawer.locator('.drawer-group')).toHaveCount(4);
   // No "Top" entry in any section list: the row label above is the top page.
   await expect(drawer.locator('.drawer-sub a').filter({ hasText: /^Top$/ })).toHaveCount(0);
 
@@ -229,6 +236,23 @@ test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Pla
     await expect(linksOf('diary').nth(index)).toHaveAttribute('href', href);
   }
   await expect.poll(() => heightOf(group('diary').locator('.drawer-sub'))).toBeGreaterThan(150);
+
+  // Info is its own accordion with the China AI channel under it.
+  const infoRow = group('info').locator('.drawer-split .drawer-item');
+  await expect(infoRow).toHaveAttribute('href', 'https://hyangdan2.github.io/InformationHub/');
+  const infoToggle = drawer.getByRole('button', { name: 'Info sections' });
+  await expect(infoToggle).toHaveAttribute('aria-expanded', 'false');
+  await infoToggle.click();
+  await expect(infoToggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(linksOf('info')).toHaveCount(INFO_MENU.length);
+  for (const [index, [label, href]] of INFO_MENU.entries()) {
+    await expect(linksOf('info').nth(index)).toHaveText(label);
+    await expect(linksOf('info').nth(index)).toHaveAttribute('href', href);
+  }
+  await expect.poll(() => heightOf(group('info').locator('.drawer-sub'))).toBeGreaterThan(38);
+  const infoLeft = (await infoRow.boundingBox()).x;
+  expect((await linksOf('info').first().boundingBox()).x - infoLeft).toBeGreaterThanOrEqual(12);
+
   // One step of indentation under the Diary row.
   const diaryLeft = (await diaryRow.boundingBox()).x;
   const sectionLeft = (await linksOf('diary').first().boundingBox()).x;
@@ -238,9 +262,13 @@ test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Pla
 
   await playToggle.click();
   await diaryToggle.click();
+  await infoToggle.click();
   await expect(playToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(diaryToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(infoToggle).toHaveAttribute('aria-expanded', 'false');
   await expect.poll(() => heightOf(group('play').locator('.drawer-sub'))).toBe(0);
   await expect.poll(() => heightOf(group('diary').locator('.drawer-sub'))).toBe(0);
+  await expect.poll(() => heightOf(group('info').locator('.drawer-sub'))).toBe(0);
 
   // The floating theme toggle steps aside while the drawer is open.
   await expect.poll(() => page.locator('#theme-toggle').evaluate(node => getComputedStyle(node).opacity)).toBe('0');
@@ -254,13 +282,14 @@ test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Pla
   await expect(menu).toBeFocused();
 });
 
-test('the Apps, Play, and Diary tabs unfold their sections on hover and keep their own links', async ({ page }) => {
+test('the Apps, Play, Diary, and Info tabs unfold their sections on hover and keep their own links', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await ready(page);
   const menus = [
     ['apps', 'Apps', 'https://hyangdan2.github.io/ApplicationHub/', published.map(app => [app.title, app.launchUrl])],
     ['play', 'Play', 'https://hyangdan2.github.io/GameHub/', PLAY_MENU],
     ['diary', 'Diary', 'https://hyangdan2.github.io/diary/', DIARY_MENU],
+    ['info', 'Info', 'https://hyangdan2.github.io/InformationHub/', INFO_MENU],
   ];
   for (const [key, label, href, entries] of menus) {
     const wrapper = page.locator(`.nav-dropdown[data-nav-group="${key}"]`);
@@ -290,9 +319,13 @@ test('the Apps, Play, and Diary tabs unfold their sections on hover and keep the
     await expect.poll(visibility).toBe('visible');
     await page.keyboard.press('Tab');
     await expect(panel.locator('a').first()).toBeFocused();
-    await page.keyboard.press('Tab');
-    await expect(panel.locator('a').nth(1)).toBeFocused();
     await expect.poll(visibility).toBe('visible');
+    // Info holds a single channel; the others have more than one link.
+    if (entries.length > 1) {
+      await page.keyboard.press('Tab');
+      await expect(panel.locator('a').nth(1)).toBeFocused();
+      await expect.poll(visibility).toBe('visible');
+    }
   }
 });
 

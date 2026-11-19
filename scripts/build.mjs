@@ -64,9 +64,9 @@ function head(prefix) {
 }
 
 // One navigation for the whole HD2Lab family (Web-HQ, ApplicationHub, GameHub,
-// TechnicalHub, HD2's Diary, About). Same markup and classes as Web-HQ so the
-// desktop tabs, the Diary dropdown, and the mobile drawer stay interchangeable
-// between the hubs.
+// TechnicalHub, HD2's Diary, InformationHub, About). Same markup and classes as
+// Web-HQ so the desktop tabs, the Diary and Info dropdowns, and the mobile
+// drawer stay interchangeable between the hubs.
 const HQ = { key: 'home', label: 'Home', name: 'Web-HQ', href: 'https://hyangdan2.github.io/' };
 const HUBS = [
   { key: 'apps', label: 'Apps', name: 'Apps', href: 'https://hyangdan2.github.io/ApplicationHub/' },
@@ -74,6 +74,7 @@ const HUBS = [
   { key: 'tech', label: 'Tech', name: 'Tech', href: 'https://hyangdan2.github.io/TechnicalHub/' },
 ];
 const DIARY = { key: 'diary', label: 'Diary', name: 'Diary', href: 'https://hyangdan2.github.io/diary/' };
+const INFO = { key: 'info', label: 'Info', name: 'Info', href: 'https://hyangdan2.github.io/InformationHub/' };
 const ABOUT = { key: 'about', label: 'About', name: 'About', href: 'https://hyangdan2.github.io/about/' };
 // The diary sections, in the order the diary itself lists them. There is no
 // "Top" entry: the Diary tab above is already the diary's top page.
@@ -82,6 +83,10 @@ const DIARY_SECTIONS = [
   { label: 'Architecture', href: 'https://hyangdan2.github.io/diary/categories/architecture/' },
   { label: 'Troubleshooting', href: 'https://hyangdan2.github.io/diary/categories/troubleshooting/' },
   { label: 'Notes', href: 'https://hyangdan2.github.io/diary/categories/notes/' },
+];
+// InformationHub channels; China AI is the first one.
+const INFO_SECTIONS = [
+  { label: 'China AI', href: 'https://hyangdan2.github.io/InformationHub/china-ai/' },
 ];
 // Apps come straight from the published catalog, so the menu can never drift
 // from data/apps.json (the same order the cards use).
@@ -93,14 +98,14 @@ const PLAY_SECTIONS = [
   { label: 'VALKYRIE', href: 'https://hyangdan2.github.io/CDXPilot0005/' },
   { label: 'ChibiLink', href: 'https://hyangdan2.github.io/CDXPilot0006/' },
 ];
-const SECTIONS = { apps: APPS_SECTIONS, play: PLAY_SECTIONS, diary: DIARY_SECTIONS };
+const SECTIONS = { apps: APPS_SECTIONS, play: PLAY_SECTIONS, diary: DIARY_SECTIONS, info: INFO_SECTIONS };
 
 const tab = (item, active) => item.key === active
   ? `<a class="nav-tab is-active" href="${item.href}" aria-current="page">${item.label}</a>`
   : `<a class="nav-tab" href="${item.href}">${item.label}</a>`;
 
-// Desktop Apps / Play / Diary tabs: the label itself still goes to the hub's top
-// page, hover or keyboard focus opens the section links underneath (CSS only, so
+// Desktop Apps / Play / Diary / Info tabs: the label itself still goes to the
+// hub's top page, hover or keyboard focus opens the section links underneath (CSS only, so
 // it works before scripts run).
 const dropdownTab = (item, active) => `<div class="nav-dropdown" data-nav-group="${item.key}">
         ${tab(item, active).replace(`>${item.label}</a>`, `>${item.label}<span class="nav-caret" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10" focusable="false"><path d="M1.8 3.5 5 6.7l3.2-3.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>`)}
@@ -140,6 +145,7 @@ const header = (prefix, active = 'apps') => `<a class="skip-link" href="#main">S
       ${dropdownTab(HUBS[1], active)}
       ${tab(HUBS[2], active)}
       ${dropdownTab(DIARY, active)}
+      ${dropdownTab(INFO, active)}
       ${tab(ABOUT, active)}
     </nav>
     <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
@@ -159,6 +165,7 @@ const header = (prefix, active = 'apps') => `<a class="skip-link" href="#main">S
       ${drawerGroup(HUBS[1], active)}
       ${drawerItem(HUBS[2], active)}
       ${drawerGroup(DIARY, active)}
+      ${drawerGroup(INFO, active)}
       ${drawerItem(ABOUT, active)}
   </nav>
 </aside>`;
