@@ -84,9 +84,10 @@ const DIARY_SECTIONS = [
   { label: 'Troubleshooting', href: 'https://hyangdan2.github.io/diary/categories/troubleshooting/' },
   { label: 'Notes', href: 'https://hyangdan2.github.io/diary/categories/notes/' },
 ];
-// InformationHub channels; China AI is the first one.
+// InformationHub channels, in the order the hub lists them: China AI, then US Markets.
 const INFO_SECTIONS = [
   { label: 'China AI', href: 'https://hyangdan2.github.io/InformationHub/china-ai/' },
+  { label: 'US Markets', href: 'https://hyangdan2.github.io/InformationHub/us-markets/' },
 ];
 // Apps come straight from the published catalog, so the menu can never drift
 // from data/apps.json (the same order the cards use).
