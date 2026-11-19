@@ -129,7 +129,7 @@
     },
     {
       "id": "markdown-viewer",
-      "title": "Markdown Viewer",
+      "title": "HD2Markdown Viewer",
       "subtitle": "Read it as written.",
       "description": "A read-only Markdown viewer that runs entirely in the browser. YAML frontmatter folds into a five-field card, a heading-based table of contents walks the document, code blocks copy in one click, and URL loading, compressed share links and print/PDF export finish the job — every rendered document sanitized.",
       "category": "Productivity",
