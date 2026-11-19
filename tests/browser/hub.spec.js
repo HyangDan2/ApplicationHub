@@ -152,6 +152,7 @@ const DIARY_MENU = [
 ];
 const INFO_MENU = [
   ['China AI', 'https://hyangdan2.github.io/InformationHub/china-ai/'],
+  ['US Markets', 'https://hyangdan2.github.io/InformationHub/us-markets/'],
 ];
 
 test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Play, Diary, and Info rows unfold on their own', async ({ page }) => {
