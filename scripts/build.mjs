@@ -60,6 +60,9 @@ function head(prefix) {
     `<link rel="stylesheet" href="${prefix}css/style.css?v=20261119-appsplay">`,
     // Apply a stored theme before first paint so dark mode never flashes light.
     `<script>${THEME_BOOT}</script>`,
+    // Visit counting for the whole HD2Lab family (hd2lab.goatcounter.com).
+    `<script data-goatcounter="https://hd2lab.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>`,
   ].filter(Boolean).join('');
 }
 
