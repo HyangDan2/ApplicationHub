@@ -168,6 +168,28 @@
       "updatedAt": "2026-10-24",
       "imageKind": "screenshot",
       "evidencePath": "docs/onboarding/machine-learning-lab.md"
+    },
+    {
+      "id": "vektra-var",
+      "title": "Vektra Vár",
+      "subtitle": "Objects, seen on your device.",
+      "description": "A client-side object-detection studio. YOLO11n looks at photos, a playing video, or a live webcam frame inside the browser, draws the COCO 80 boxes, and exports the annotated PNG or the raw JSON coordinates. Nothing is uploaded.",
+      "category": "Photo",
+      "tags": [
+        "YOLO11n",
+        "ONNX Runtime",
+        "WebGPU",
+        "Local Inference"
+      ],
+      "thumbnail": "assets/apps/vektra-var.jpg",
+      "thumbnailAlt": "Vektra Vár screen: a street photo under purple car and red person boxes, with confidence, IoU and COCO class controls on the right.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0012/",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0012",
+      "status": "published",
+      "sortOrder": 45,
+      "updatedAt": "2026-11-20",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/vektra-var.md"
     }
   ]
 }
