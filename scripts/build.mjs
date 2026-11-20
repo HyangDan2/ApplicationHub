@@ -63,6 +63,8 @@ function head(prefix) {
     // Visit counting for the whole HD2Lab family (hd2lab.goatcounter.com).
     `<script data-goatcounter="https://hd2lab.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>`,
+    // Today · Total pill in the footer, fed by the same counter's public JSON.
+    `<script src="${prefix}js/visit-badge.js?v=20261120-visits" defer></script>`,
   ].filter(Boolean).join('');
 }
 
@@ -176,6 +178,12 @@ const header = (prefix, active = 'apps') => `<a class="skip-link" href="#main">S
 
 const footer = `<footer class="shell site-footer">
   <div><span class="footer-brand">HD2Lab <span class="accent">/</span> ApplicationHub</span><p>A shelf of small, useful web apps.</p></div>
+  <span class="visit-badge" data-visit-badge hidden>
+    <svg class="visit-eye" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M1.7 8S3.9 4.1 8 4.1 14.3 8 14.3 8 12.1 11.9 8 11.9 1.7 8 1.7 8Z"/><circle cx="8" cy="8" r="1.9"/></svg>
+    <span>Today <b class="visit-num" data-visit-today>—</b></span>
+    <span class="visit-sep" aria-hidden="true">·</span>
+    <span>Total <b class="visit-num" data-visit-total>—</b></span>
+  </span>
   <a href="https://github.com/HyangDan2">Made by HyangDan2 <span aria-hidden="true">↗</span></a>
 </footer>`;
 
