@@ -10,13 +10,14 @@
   const drawer = document.getElementById('mobile-drawer');
   if (!menuButton || !drawer) return;
 
-  // Section accordions (Apps, Play, Diary): each group unfolds on its own. A
-  // collapsed panel keeps its height transition, so the links inside must leave
-  // the tab order some other way than display:none.
-  drawer.querySelectorAll('.drawer-group').forEach(group => {
+  // Section accordions (Apps, Play, Diary, Info): only one group stays unfolded at a
+  // time — opening another folds the one that was open. A collapsed panel keeps its
+  // height transition, so the links inside must leave the tab order some other way
+  // than display:none.
+  const groups = [...drawer.querySelectorAll('.drawer-group')].map(group => {
     const toggle = group.querySelector('.drawer-toggle');
     const panel = group.querySelector('.drawer-sub');
-    if (!toggle || !panel) return;
+    if (!toggle || !panel) return null;
     const setOpen = open => {
       group.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
@@ -24,8 +25,19 @@
       if (open) panel.removeAttribute('aria-hidden');
       else panel.setAttribute('aria-hidden', 'true');
     };
-    setOpen(toggle.getAttribute('aria-expanded') === 'true');
-    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    return { group, toggle, setOpen };
+  }).filter(Boolean);
+
+  const isOpenGroup = entry => entry.toggle.getAttribute('aria-expanded') === 'true';
+  const foldOthers = current => groups.forEach(entry => { if (entry !== current) entry.setOpen(false); });
+
+  groups.forEach(entry => {
+    entry.setOpen(isOpenGroup(entry));
+    entry.toggle.addEventListener('click', () => {
+      const open = !isOpenGroup(entry);
+      if (open) foldOthers(entry);
+      entry.setOpen(open);
+    });
   });
 
   const backdrop = document.querySelector('.drawer-backdrop');
