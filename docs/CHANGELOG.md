@@ -1,5 +1,14 @@
 # Change log
 
+## 2026-11-21 — Four apps retired from the shelf (15 → 11)
+
+- `data/apps.json`: removed `todo-master` (AGPilot0002), `photos` (PKPilot0001), `hljya-hljom` (PKPilot0016) and `slinga` (PKPilot0017) at the owner's request. The catalog now publishes 11 apps: Midpoint, Film Studio, Shutterplate, DOS Player, HD2Markdown Viewer, Machine Learning Lab, Nordlys, Vektra Vár, Vísna Sól, Sága Glitra, Mynda Ljósa.
+- The `Apps` dropdown, the mobile `Apps` accordion and the cards all render from the catalog, so they now list the same 11 entries in the same order. The 224px scroll window and the one-group-at-a-time accordion behaviour are unchanged.
+- Hero mock: the lead tile and the second tile no longer name the retired apps (`Midpoint / fairest center`, `Plates`), and the counter reads `11 APPS`.
+- The meta/OG description no longer offers to-dos and photos as examples; it now names film developing, photo plates, a coding sandbox and machine-learning practice.
+- Tests: the unit search assertions and the two Chromium checks that used the retired ids now use Midpoint, Shutterplate and DOS Player (`midpoint`, `shutterplate`, `dos-player`); the app-count, drawer-scroll and accordion assertions stay catalog-driven.
+- The four thumbnails (`assets/apps/todo-master.jpg`, `photos.jpg`, `hljya-hljom.jpg`, `slinga.jpg`) and their `docs/onboarding/*.md` notes stay in place, unreferenced, so any of the apps can be registered again without recapturing them.
+
 ## 2026-11-21 — Diary-style social card
 
 - Replaced `assets/branding/share.png` (1200×630) with the `HD2's Diary` share-card layout: Soft Iris wash, dual-skew `.mark` + `HD2Lab | ApplicationHub` header, `Pick your / next app.` headline, the page's own description and two chips on the left, and one white summary card on the right listing the four published categories with their app counts (Productivity 2, Photo 4, Utility 2, Learning 2 — 10 published apps).

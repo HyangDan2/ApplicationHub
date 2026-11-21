@@ -87,22 +87,22 @@ test('catalog failure offers a working retry', async ({ page }) => {
 });
 
 test('broken thumbnail falls back to the local placeholder', async ({ page }) => {
-  await page.route('**/assets/apps/photos.jpg', route => route.abort());
+  await page.route('**/assets/apps/midpoint.jpg', route => route.abort());
   await ready(page);
-  await expect(page.locator('[data-app="photos"] img')).toHaveAttribute('src', './assets/apps/placeholder.svg');
+  await expect(page.locator('[data-app="midpoint"] img')).toHaveAttribute('src', './assets/apps/placeholder.svg');
 });
 
 test('draft, maintenance, and hostile metadata render safely', async ({ page }) => {
   const data = structuredClone(catalog);
-  data.apps.find(app => app.id === 'photos').status = 'draft';
-  data.apps.find(app => app.id === 'film-studio').status = 'maintenance';
-  data.apps.find(app => app.id === 'todo-master').title = '<img src=x onerror=alert(1)>';
+  data.apps.find(app => app.id === 'midpoint').status = 'draft';
+  data.apps.find(app => app.id === 'shutterplate').status = 'maintenance';
+  data.apps.find(app => app.id === 'dos-player').title = '<img src=x onerror=alert(1)>';
   await page.route('**/data/apps.json', route => route.fulfill({ json: data }));
   await page.goto('./');
   await expect(page.locator('.app-card')).toHaveCount(published.length - 2);
-  await expect(page.locator('[data-app="film-studio"]')).toHaveCount(0);
-  await expect(page.locator('[data-app="todo-master"] h3')).toHaveText('<img src=x onerror=alert(1)>');
-  await expect(page.locator('[data-app="todo-master"] h3 img')).toHaveCount(0);
+  await expect(page.locator('[data-app="shutterplate"]')).toHaveCount(0);
+  await expect(page.locator('[data-app="dos-player"] h3')).toHaveText('<img src=x onerror=alert(1)>');
+  await expect(page.locator('[data-app="dos-player"] h3 img')).toHaveCount(0);
 });
 
 test('HD2Lab brand, shared hub tabs, and icon links are in place', async ({ page }) => {
