@@ -190,6 +190,28 @@
       "updatedAt": "2026-11-20",
       "imageKind": "screenshot",
       "evidencePath": "docs/onboarding/vektra-var.md"
+    },
+    {
+      "id": "visna-sol",
+      "title": "Vísna Sól",
+      "subtitle": "Git, Python, Linux and SQL by typing.",
+      "description": "A coding sandbox in a VS Code-style IDE that runs entirely in the browser. Practise Git commands against a live commit graph, run real Python through Pyodide, work a POSIX-ish shell over a virtual file system, and query SQLite — twenty guided missions across four tracks, nothing uploaded.",
+      "category": "Learning",
+      "tags": [
+        "Git Graph",
+        "Pyodide",
+        "SQLite",
+        "Local Sandbox"
+      ],
+      "thumbnail": "assets/apps/visna-sol.jpg",
+      "thumbnailAlt": "Vísna Sól screen: the Git track's VS Code-style workspace — explorer and mission list left, editor and terminal centre, and the mission card above a four-commit graph on the right.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0013/",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0013",
+      "status": "published",
+      "sortOrder": 50,
+      "updatedAt": "2026-11-21",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/visna-sol.md"
     }
   ]
 }
