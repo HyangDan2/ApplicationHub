@@ -1,5 +1,10 @@
 # Change log
 
+## 2026-11-22 — Social card follows the 11-app catalog
+
+- Re-rendered `assets/branding/share.png` (1200×630) on the unchanged `HD2's Diary` card layout: the chip now reads `11 apps`, and the right-hand summary card carries the current published counts from `data/apps.json` — Productivity 1 (Markdown Viewer), Photo 5 (Film Studio · Shutterplate · Vektra Vár +2), Utility 2 (Midpoint · DOS Player), Learning 3 (ML Lab · Vísna Sól · Sága Glitra).
+- `og:image` / `twitter:image` cache buster → `?v=20261122-og` in `scripts/build.mjs`. `og:title`, `og:description`, `og:image:alt`, the favicon set and the page itself are unchanged.
+
 ## 2026-11-21 — Four apps retired from the shelf (15 → 11)
 
 - `data/apps.json`: removed `todo-master` (AGPilot0002), `photos` (PKPilot0001), `hljya-hljom` (PKPilot0016) and `slinga` (PKPilot0017) at the owner's request. The catalog now publishes 11 apps: Midpoint, Film Studio, Shutterplate, DOS Player, HD2Markdown Viewer, Machine Learning Lab, Nordlys, Vektra Vár, Vísna Sól, Sága Glitra, Mynda Ljósa.
