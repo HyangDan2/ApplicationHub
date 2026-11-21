@@ -18,13 +18,13 @@ test('catalog satisfies the app schema and publishes a stable order', () => {
 
 test('Search matches title, subtitle, description, category, and tags with AND semantics', () => {
   const photo = filterApps(catalog.apps, { q: 'photo', category: '' });
-  assert.ok(photo.some(app => app.id === 'photos'));
+  assert.ok(photo.some(app => app.id === 'vektra-var'));
   assert.ok(photo.some(app => app.id === 'film-studio'));
   assert.equal(filterApps(catalog.apps, { q: 'photo', category: 'Learning' }).length, 0);
   assert.ok(filterApps(catalog.apps, { q: 'webgl2', category: '' }).some(app => app.id === 'film-studio'));
-  assert.ok(filterApps(catalog.apps, { q: 'pwa', category: '' }).length >= 2);
-  assert.ok(filterApps(catalog.apps, { q: 'LOCAL storage', category: 'Productivity' }).some(app => app.id === 'todo-master'));
-  assert.deepEqual(filterApps(catalog.apps, { q: 'photo library', category: '' }).map(app => app.id), ['photos']);
+  assert.ok(filterApps(catalog.apps, { q: 'local', category: '' }).length >= 2);
+  assert.ok(filterApps(catalog.apps, { q: 'LOCAL sandbox', category: 'Learning' }).some(app => app.id === 'visna-sol'));
+  assert.deepEqual(filterApps(catalog.apps, { q: 'fairest center', category: '' }).map(app => app.id), ['midpoint']);
   assert.equal(filterApps(catalog.apps, { q: 'nomatchterm', category: '' }).length, 0);
 });
 

@@ -2,48 +2,6 @@
   "schemaVersion": 1,
   "apps": [
     {
-      "id": "todo-master",
-      "title": "Todo Master",
-      "subtitle": "Today, in order.",
-      "description": "A to-do manager that reads one plain-language line and sets the due date, priority, and repeat rule from it. Subtasks, today's focus, backup and restore — all inside your browser.",
-      "category": "Productivity",
-      "tags": [
-        "PWA",
-        "Offline",
-        "Local Storage"
-      ],
-      "thumbnail": "assets/apps/todo-master.jpg",
-      "thumbnailAlt": "Todo Master screen: the All Tasks board with its progress summary, task rows and the day's schedule panel.",
-      "launchUrl": "https://hyangdan2.github.io/AGPilot0002/",
-      "repositoryUrl": "https://github.com/HyangDan2/AGPilot0002",
-      "status": "published",
-      "sortOrder": 10,
-      "updatedAt": "2026-11-07",
-      "imageKind": "screenshot",
-      "evidencePath": "docs/onboarding/todo-master.md"
-    },
-    {
-      "id": "photos",
-      "title": "Photos",
-      "subtitle": "A quiet photo library.",
-      "description": "A photo library that carries the feel of the iOS Photos app. Albums, EXIF details, filter adjustments, a secret album, and member passcode sign-in, all in a single static page.",
-      "category": "Photo",
-      "tags": [
-        "PWA",
-        "EXIF",
-        "Filter"
-      ],
-      "thumbnail": "assets/apps/photos.jpg",
-      "thumbnailAlt": "Photos screen: the library collection with the guest-mode notice above a photo grid.",
-      "launchUrl": "https://hyangdan2.github.io/PKPilot0001/",
-      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0001",
-      "status": "published",
-      "sortOrder": 20,
-      "updatedAt": "2026-11-10",
-      "imageKind": "screenshot",
-      "evidencePath": "docs/onboarding/photos.md"
-    },
-    {
       "id": "midpoint",
       "title": "Midpoint",
       "subtitle": "Fair meeting point finder.",
@@ -214,28 +172,6 @@
       "evidencePath": "docs/onboarding/visna-sol.md"
     },
     {
-      "id": "hljya-hljom",
-      "title": "Hlýja Hljóm",
-      "subtitle": "Every codec, straight from your disk.",
-      "description": "An all-codec music player for the files already on your machine. Browsers decode MP3, AAC, FLAC, WAV, OGG and Opus; ffmpeg.wasm converts WMA, APE, AC-3, DTS, AIFF and ALAC inside the tab. 10-band EQ, synced .lrc lyrics, gapless and crossfade transitions, an IndexedDB library.",
-      "category": "Utility",
-      "tags": [
-        "All Codecs",
-        "ffmpeg.wasm",
-        "Local Playback",
-        "10-Band EQ"
-      ],
-      "thumbnail": "assets/apps/hljya-hljom.jpg",
-      "thumbnailAlt": "Hlýja Hljóm playing a tagged MP3: the console shows its cover art, codec and engine chips and the transport, with the open buttons and library on the right.",
-      "launchUrl": "https://hyangdan2.github.io/PKPilot0016/",
-      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0016",
-      "status": "published",
-      "sortOrder": 55,
-      "updatedAt": "2026-11-21",
-      "imageKind": "screenshot",
-      "evidencePath": "docs/onboarding/hljya-hljom.md"
-    },
-    {
       "id": "nordlys",
       "title": "Nordlys",
       "subtitle": "Film grades and frames, photo or clip.",
@@ -300,28 +236,6 @@
       "updatedAt": "2026-11-21",
       "imageKind": "screenshot",
       "evidencePath": "docs/onboarding/mynda-ljosa.md"
-    },
-    {
-      "id": "slinga",
-      "title": "Slinga",
-      "subtitle": "Write the whole thread first.",
-      "description": "A thread workspace that opens straight into the composer. Chain every part of a thread before posting, attach up to four images, tag with #hashtags, then search, bookmark, quote and reply — all kept in IndexedDB with JSON and Markdown export. No account, no upload.",
-      "category": "Productivity",
-      "tags": [
-        "Threaded Notes",
-        "Hashtags",
-        "Micro Feed",
-        "JSON / Markdown"
-      ],
-      "thumbnail": "assets/apps/slinga.jpg",
-      "thumbnailAlt": "Slinga with five sample threads: an empty composer with + 타래 잇기, the 전체 and 북마크 tabs above tag chips, a three-part thread on its spine, and the search, tags and backup rail.",
-      "launchUrl": "https://hyangdan2.github.io/PKPilot0017/",
-      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0017",
-      "status": "published",
-      "sortOrder": 75,
-      "updatedAt": "2026-11-21",
-      "imageKind": "screenshot",
-      "evidencePath": "docs/onboarding/slinga.md"
     }
   ]
 }

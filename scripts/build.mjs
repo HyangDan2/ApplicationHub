@@ -30,7 +30,7 @@ const THEME_BOOT = "(function(){try{if(localStorage.getItem('hd2-theme')==='dark
 
 function head(prefix) {
   const title = 'ApplicationHub — HD2Lab’s web app shelf';
-  const description = 'HD2Lab’s web applications in one place. To-dos, photos, film developing, and machine-learning practice — all open right in your browser, no install.';
+  const description = 'HD2Lab’s web applications in one place. Film developing, photo plates, a coding sandbox, and machine-learning practice — all open right in your browser, no install.';
   return [
     '<meta charset="utf-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
