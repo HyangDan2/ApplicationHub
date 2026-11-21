@@ -212,6 +212,28 @@
       "updatedAt": "2026-11-21",
       "imageKind": "screenshot",
       "evidencePath": "docs/onboarding/visna-sol.md"
+    },
+    {
+      "id": "hljya-hljom",
+      "title": "Hlýja Hljóm",
+      "subtitle": "Every codec, straight from your disk.",
+      "description": "An all-codec music player for the files already on your machine. Browsers decode MP3, AAC, FLAC, WAV, OGG and Opus; ffmpeg.wasm converts WMA, APE, AC-3, DTS, AIFF and ALAC inside the tab. 10-band EQ, synced .lrc lyrics, gapless and crossfade transitions, an IndexedDB library.",
+      "category": "Utility",
+      "tags": [
+        "All Codecs",
+        "ffmpeg.wasm",
+        "Local Playback",
+        "10-Band EQ"
+      ],
+      "thumbnail": "assets/apps/hljya-hljom.jpg",
+      "thumbnailAlt": "Hlýja Hljóm playing a tagged MP3: the console shows its cover art, codec and engine chips and the transport, with the open buttons and library on the right.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0016/",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0016",
+      "status": "published",
+      "sortOrder": 55,
+      "updatedAt": "2026-11-21",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/hljya-hljom.md"
     }
   ]
 }
