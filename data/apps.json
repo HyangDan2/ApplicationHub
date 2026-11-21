@@ -234,6 +234,94 @@
       "updatedAt": "2026-11-21",
       "imageKind": "screenshot",
       "evidencePath": "docs/onboarding/hljya-hljom.md"
+    },
+    {
+      "id": "nordlys",
+      "title": "Nordlys",
+      "subtitle": "Film grades and frames, photo or clip.",
+      "description": "Film Studio and Shutterplate in one browser studio: a photo or clip goes on the stage, 9 HD2Lab films and 58 Margarine looks grade it live, then 13 plate styles print it — 11 for photos and clips, 2 four-cut. WebGL2 grading, HDR-safe input, H.264 with sound out. No upload.",
+      "category": "Photo",
+      "tags": [
+        "69 Filters",
+        "13 Frames",
+        "WebGL2",
+        "WebCodecs"
+      ],
+      "thumbnail": "assets/apps/nordlys.jpg",
+      "thumbnailAlt": "Nordlys editor on the sample landscape: the film rail with VESTRA chosen and graded thumbnails, the framed plate on stage, and the grade sliders on the right.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0011/",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0011",
+      "status": "published",
+      "sortOrder": 60,
+      "updatedAt": "2026-11-21",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/nordlys.md"
+    },
+    {
+      "id": "saga-glitra",
+      "title": "Sága Glitra",
+      "subtitle": "Slides that study with you.",
+      "description": "A study room built from Markdown: import a deck, split it into 16:9 slides with GFM, KaTeX, Mermaid and highlighted code, then keep a note, highlighter and pen strokes on every slide. Reveal ==masked== keywords, present full screen, run a 25-minute focus timer. IndexedDB only.",
+      "category": "Learning",
+      "tags": [
+        "Markdown Slides",
+        "KaTeX",
+        "Mermaid",
+        "Study Room"
+      ],
+      "thumbnail": "assets/apps/saga-glitra.jpg",
+      "thumbnailAlt": "Sága Glitra study room: the slide rail with five slides, a code slide with TS and BASH badges and copy buttons above its checkboxes, and that slide's own note on the right.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0014/",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0014",
+      "status": "published",
+      "sortOrder": 65,
+      "updatedAt": "2026-11-21",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/saga-glitra.md"
+    },
+    {
+      "id": "mynda-ljosa",
+      "title": "Mynda Ljósa",
+      "subtitle": "Draw your own four-cut frame.",
+      "description": "Design the four-cut frame yourself: drag slots 1–4 on the canvas, set the background, film perforation, text variables and an emblem, then save a .shutterframe.json or copy a #frame= link that Shutterplate and Nordlys print as-is. Five presets, an IndexedDB design shelf, no upload.",
+      "category": "Photo",
+      "tags": [
+        "4-Cut Frames",
+        "Canvas Editor",
+        "JSON Preset",
+        "Share Link"
+      ],
+      "thumbnail": "assets/apps/mynda-ljosa.jpg",
+      "thumbnailAlt": "Mynda Ljósa: a Classic Strip four-cut frame with four artwork slots, the frame-properties drawer open on canvas size, background and perforation, and the save and share chips.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0015/",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0015",
+      "status": "published",
+      "sortOrder": 70,
+      "updatedAt": "2026-11-21",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/mynda-ljosa.md"
+    },
+    {
+      "id": "slinga",
+      "title": "Slinga",
+      "subtitle": "Write the whole thread first.",
+      "description": "A thread workspace that opens straight into the composer. Chain every part of a thread before posting, attach up to four images, tag with #hashtags, then search, bookmark, quote and reply — all kept in IndexedDB with JSON and Markdown export. No account, no upload.",
+      "category": "Productivity",
+      "tags": [
+        "Threaded Notes",
+        "Hashtags",
+        "Micro Feed",
+        "JSON / Markdown"
+      ],
+      "thumbnail": "assets/apps/slinga.jpg",
+      "thumbnailAlt": "Slinga with five sample threads: an empty composer with + 타래 잇기, the 전체 and 북마크 tabs above tag chips, a three-part thread on its spine, and the search, tags and backup rail.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0017/",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0017",
+      "status": "published",
+      "sortOrder": 75,
+      "updatedAt": "2026-11-21",
+      "imageKind": "screenshot",
+      "evidencePath": "docs/onboarding/slinga.md"
     }
   ]
 }
