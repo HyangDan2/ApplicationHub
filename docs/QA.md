@@ -209,3 +209,15 @@ Not verified: physical iOS/Android devices, Safari and Firefox.
 - The four retired thumbnails and `docs/onboarding/` notes remain in the repo, unreferenced on purpose.
 
 Not verified here: physical iOS/Android devices, Safari and Firefox. The 1440×1100 / 390×900 card geometry checks from earlier entries still apply (no CSS changed).
+
+## Hosted acceptance — 2026-11-22 (social card on the 11-app catalog)
+
+- Release: squash merge of PR #37, commit `9ccb073fa1728121ebb2bb016fd491584b20a9e1`, [Actions run 44959321547](https://github.com/HyangDan2/ApplicationHub/actions/runs/44959321547) — build and deploy jobs both succeeded. The PR run (44959203181) passed the same build job with `deploy: skipped`.
+- Local before the merge: `npm run validate` → `Validated 11 apps (11 published).`, `npm test` → 8/8, `npm run test:e2e` → 19/19 Chromium checks, `npm run build` → `Built 11 published apps in dist/ (base /ApplicationHub/).`, `npm run check:links` → 25 destinations HTTP 200. The render of `share.png` measured exactly 1200×630 with `overflow []`, the summary card back at `752,155 → 384×320`, and no row's note wider than its column.
+- Live https://hyangdan2.github.io/ApplicationHub/ returned HTTP 200 and its head carries `…/assets/branding/share.png?v=20261122-og` for both `og:image` and `twitter:image`.
+- Live image `https://hyangdan2.github.io/ApplicationHub/assets/branding/share.png?v=20261122-og` → HTTP 200, `content-type: image/png`, 197,209 bytes, 1200×630, SHA-256 `b4eaa0dfee8d5f0ff2f300595463cab98c25bec0e79d3721ce38ad5db1d24971` — identical to the committed file. Opened in Chromium it renders the `11 apps` chip and the four category rows (Productivity 1, Photo 5, Utility 2, Learning 3).
+- `/release.json` reads `{"count":11}`; `/data/apps.json` serves the same 11 ids, and its category split is Photo 5, Learning 3, Utility 2, Productivity 1 — the counts the card shows.
+- Page loaded in Chromium: 11 `.app-card` links numbered 01–11, count badge `11`, hero mock `11 APPS`, no console error.
+- The merged branch `og/11-apps-share-card` was deleted from the remote after the merge.
+
+Not verified here: social-platform renderers (KakaoTalk, X, Slack, Facebook) were not exercised, and the preview caches of those platforms are outside this repository's control.
