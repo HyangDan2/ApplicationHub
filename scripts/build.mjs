@@ -115,7 +115,7 @@ const tab = (item, active) => item.key === active
 // it works before scripts run).
 const dropdownTab = (item, active) => `<div class="nav-dropdown" data-nav-group="${item.key}">
         ${tab(item, active).replace(`>${item.label}</a>`, `>${item.label}<span class="nav-caret" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10" focusable="false"><path d="M1.8 3.5 5 6.7l3.2-3.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>`)}
-        <nav class="nav-dropdown-panel" aria-label="${item.name}">
+        <nav class="nav-dropdown-panel${SECTIONS[item.key].length > 5 ? ' is-scroll' : ''}" aria-label="${item.name}">
           ${SECTIONS[item.key].map(section => `<a class="nav-dropdown-link" href="${section.href}">${section.label}</a>`).join('\n          ')}
         </nav>
       </div>`;
@@ -135,7 +135,7 @@ const drawerGroup = (item, active) => {
             <span class="drawer-caret" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" focusable="false"><path d="M3.5 5.75 8 10.25l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </button>
         </div>
-        <div class="drawer-sub" id="${id}">
+        <div class="drawer-sub${SECTIONS[item.key].length > 5 ? ' is-scroll' : ''}" id="${id}">
           ${SECTIONS[item.key].map(section => `<a class="drawer-subitem" href="${section.href}">${section.label}</a>`).join('\n          ')}
         </div>
       </div>`;

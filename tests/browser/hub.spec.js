@@ -155,7 +155,7 @@ const INFO_MENU = [
   ['US Markets', 'https://hyangdan2.github.io/InformationHub/us-markets/'],
 ];
 
-test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Play, Diary, and Info rows unfold on their own', async ({ page }) => {
+test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Play, Diary, and Info rows unfold one at a time', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await ready(page);
   await expect(page.locator('.header-nav')).toBeHidden();
@@ -206,15 +206,24 @@ test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Pla
     await expect(linksOf('apps').nth(index)).toHaveText(label);
     await expect(linksOf('apps').nth(index)).toHaveAttribute('href', href);
   }
-  expect(await heightOf(group('apps').locator('.drawer-sub'))).toBeGreaterThan(published.length * 38);
+  // The catalogue is longer than the 224px window the Apps group unfolds into, so
+  // that panel scrolls instead of pushing Play / Tech / Diary off the drawer.
+  const appsSub = group('apps').locator('.drawer-sub');
+  await expect(appsSub).toHaveClass(/is-scroll/);
+  expect(await appsSub.evaluate(node => getComputedStyle(node).maxHeight)).toBe('224px');
+  expect(await appsSub.evaluate(node => getComputedStyle(node).overflowY)).toBe('auto');
+  expect(await heightOf(appsSub)).toBe(224);
+  expect(await appsSub.evaluate(node => node.scrollHeight)).toBeGreaterThan(224);
 
-  // Play starts closed and unfolds without touching Apps.
+  // Play starts closed. Opening it folds Apps — one accordion at a time.
   const playToggle = drawer.getByRole('button', { name: 'Play sections' });
   await expect(playToggle).toHaveAttribute('aria-expanded', 'false');
   expect(await heightOf(group('play').locator('.drawer-sub'))).toBe(0);
   expect(await linksOf('play').first().evaluate(node => node.closest('[inert]') !== null)).toBe(true);
   await playToggle.click();
   await expect(playToggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(appsToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect.poll(() => heightOf(appsSub)).toBe(0);
   await expect(linksOf('play')).toHaveCount(PLAY_MENU.length);
   for (const [index, [label, href]] of PLAY_MENU.entries()) {
     await expect(linksOf('play').nth(index)).toHaveText(label);
@@ -222,21 +231,27 @@ test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Pla
   }
   await expect.poll(() => heightOf(group('play').locator('.drawer-sub'))).toBeGreaterThan(PLAY_MENU.length * 38);
   expect(await linksOf('play').first().evaluate(node => node.closest('[inert]') !== null)).toBe(false);
-  await expect(appsToggle).toHaveAttribute('aria-expanded', 'true');
 
-  // Diary is its own accordion with the four categories under it.
+  // Diary is its own accordion with the four categories under it, and it folds Play.
   const diaryRow = group('diary').locator('.drawer-split .drawer-item');
   await expect(diaryRow).toHaveAttribute('href', 'https://hyangdan2.github.io/diary/');
   const diaryToggle = drawer.getByRole('button', { name: 'Diary sections' });
   await expect(diaryToggle).toHaveAttribute('aria-expanded', 'false');
   await diaryToggle.click();
   await expect(diaryToggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(playToggle).toHaveAttribute('aria-expanded', 'false');
   await expect(linksOf('diary')).toHaveCount(DIARY_MENU.length);
   for (const [index, [label, href]] of DIARY_MENU.entries()) {
     await expect(linksOf('diary').nth(index)).toHaveText(label);
     await expect(linksOf('diary').nth(index)).toHaveAttribute('href', href);
   }
   await expect.poll(() => heightOf(group('diary').locator('.drawer-sub'))).toBeGreaterThan(150);
+
+  // One step of indentation under the Diary row.
+  const diaryLeft = (await diaryRow.boundingBox()).x;
+  const sectionLeft = (await linksOf('diary').first().boundingBox()).x;
+  expect(sectionLeft - diaryLeft).toBeGreaterThanOrEqual(12);
+  expect(await linksOf('diary').first().evaluate(node => getComputedStyle(node).paddingLeft)).toBe('20px');
 
   // Info is its own accordion with the China AI channel under it.
   const infoRow = group('info').locator('.drawer-split .drawer-item');
@@ -251,18 +266,13 @@ test('the mobile ≡ unfolds the right drawer as a one-line list whose Apps, Pla
     await expect(linksOf('info').nth(index)).toHaveAttribute('href', href);
   }
   await expect.poll(() => heightOf(group('info').locator('.drawer-sub'))).toBeGreaterThan(38);
+  await expect(diaryToggle).toHaveAttribute('aria-expanded', 'false');
   const infoLeft = (await infoRow.boundingBox()).x;
   expect((await linksOf('info').first().boundingBox()).x - infoLeft).toBeGreaterThanOrEqual(12);
 
-  // One step of indentation under the Diary row.
-  const diaryLeft = (await diaryRow.boundingBox()).x;
-  const sectionLeft = (await linksOf('diary').first().boundingBox()).x;
-  expect(sectionLeft - diaryLeft).toBeGreaterThanOrEqual(12);
-  expect(await linksOf('diary').first().evaluate(node => getComputedStyle(node).paddingLeft)).toBe('20px');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
-  await playToggle.click();
-  await diaryToggle.click();
+  // Folding the open group leaves every accordion closed.
   await infoToggle.click();
   await expect(playToggle).toHaveAttribute('aria-expanded', 'false');
   await expect(diaryToggle).toHaveAttribute('aria-expanded', 'false');
@@ -310,6 +320,15 @@ test('the Apps, Play, Diary, and Info tabs unfold their sections on hover and ke
     }
     await expect(panel.locator('a').filter({ hasText: /^Top$/ })).toHaveCount(0);
     await expect(panel.locator('a').first()).toBeVisible();
+    // A section longer than five entries scrolls inside the menu instead of running off screen.
+    if (entries.length > 5) {
+      await expect(panel).toHaveClass(/is-scroll/);
+      expect(await panel.evaluate(node => getComputedStyle(node).maxHeight)).toBe('224px');
+      expect(await panel.evaluate(node => getComputedStyle(node).overflowY)).toBe('auto');
+      expect(await panel.evaluate(node => node.scrollHeight)).toBeGreaterThan(await panel.evaluate(node => node.clientHeight));
+    } else {
+      await expect(panel).not.toHaveClass(/is-scroll/);
+    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
     await page.mouse.move(10, 600);
