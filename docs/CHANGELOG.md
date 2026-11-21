@@ -1,5 +1,10 @@
 # Change log
 
+## 2026-11-21 — Diary-style social card
+
+- Replaced `assets/branding/share.png` (1200×630) with the `HD2's Diary` share-card layout: Soft Iris wash, dual-skew `.mark` + `HD2Lab | ApplicationHub` header, `Pick your / next app.` headline, the page's own description and two chips on the left, and one white summary card on the right listing the four published categories with their app counts (Productivity 2, Photo 4, Utility 2, Learning 2 — 10 published apps).
+- `og:image` / `twitter:image` cache buster → `?v=20261121-og` in `scripts/build.mjs`. `og:title`, `og:description`, the favicon set, and the GoatCounter snippet are unchanged.
+
 ## 2026-11-18 — Markdown Viewer registered
 
 - Registered Markdown Viewer (PKPilot0008) as the eighth published app: `id: markdown-viewer`, category `Productivity`, tags GFM / Frontmatter / Share Links, launch URL https://hyangdan2.github.io/PKPilot0008/, sort order 37, thumbnail `assets/apps/markdown-viewer.jpg` (960×540 from a 16:9 crop of a live 1919×992 Chromium capture), evidence `docs/onboarding/markdown-viewer.md`.
