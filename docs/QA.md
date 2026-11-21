@@ -199,3 +199,13 @@ Environment: Linux, Node 24.19.0 (`.nvmrc`), Playwright 1.64.1 with headless Chr
 - Live render in Chromium at 1440×1000 and 390×844: 7 cards, every thumbnail at natural size 960×540 with its `Live UI` caption, no console errors or page errors, and no horizontal overflow (scrollWidth = clientWidth at both widths).
 
 Not verified: physical iOS/Android devices, Safari and Firefox.
+
+## Hosted acceptance — 2026-11-21 (four apps retired, 15 → 11)
+
+- Release: squash merge of PR #35, commit `4cfb77dc5590cc198600358d5a99d1ea6a3edd03`, [Actions run 44907949997](https://github.com/HyangDan2/ApplicationHub/actions/runs/44907949997) — build and deploy jobs both succeeded.
+- CI in that run: `Validated 11 apps (11 published).`, 8 unit checks, 19 Chromium checks (the drawer test drives 390×844 and reads all 11 Apps rows in catalog order), `Built 11 published apps in dist/ (base /ApplicationHub/).`, `check:links` clean.
+- Live https://hyangdan2.github.io/ApplicationHub/ returned HTTP 200; `/data/apps.json` serves exactly 11 published ids (`midpoint`, `film-studio`, `shutterplate`, `dos-player`, `markdown-viewer`, `machine-learning-lab`, `vektra-var`, `visna-sol`, `nordlys`, `saga-glitra`, `mynda-ljosa`) and `/release.json` reads `{"count":11}`.
+- Page in a real Chromium session: 11 `.app-card` links numbered 01–11, count badge `11`, hero mock `11 APPS`, `Apps` dropdown 11 rows, every thumbnail loaded at 960×540, no console error or unhandled rejection while loading and while filtering (Photo → 05, Reset → 11), no HTTP 4xx/5xx resource, and no mention of `AGPilot0002`, `PKPilot0001`, `PKPilot0016` or `PKPilot0017` anywhere in the document.
+- The four retired thumbnails and `docs/onboarding/` notes remain in the repo, unreferenced on purpose.
+
+Not verified here: physical iOS/Android devices, Safari and Firefox. The 1440×1100 / 390×900 card geometry checks from earlier entries still apply (no CSS changed).
