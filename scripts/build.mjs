@@ -21,7 +21,7 @@ await fs.writeFile(path.join(out, 'data/apps.json'), JSON.stringify({ schemaVers
 const origin = resolveOrigin(process.env.PUBLIC_URL);
 // Social card: same HD2Lab header spec as PKPilot0001~0003 (100px mark + 62px wordmark).
 // The image URL is absolute so previews resolve even from a local build.
-const socialImage = `${origin ?? 'https://hyangdan2.github.io/ApplicationHub/'}assets/branding/share.png?v=20261121-og`;
+const socialImage = `${origin ?? 'https://hyangdan2.github.io/ApplicationHub/'}assets/branding/share.png?v=20261122-og`;
 
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({ amp: '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] ?? c));
 
