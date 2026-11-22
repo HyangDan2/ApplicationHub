@@ -1,4 +1,8 @@
-# Onboarding — Sága Glitra (PKPilot0014)
+# Onboarding — SlideDeck (PKPilot0014)
+
+> Renamed 2026-11-22: the shelf entry is `SlideDeck` (was `Sága Glitra`). The app repository `PKPilot0014` carries
+> the matching title, OG tags and in-app lockup; the dated live checks below were recorded under
+> the previous name and are kept as recorded.
 
 - App card ID: `saga-glitra`
 - Live URL: https://hyangdan2.github.io/PKPilot0014/ — HTTP 200, page title `Sága Glitra — HD2Lab 강의 라이브러리 · 마크다운 스터디 스튜디오`, checked 2026-11-21

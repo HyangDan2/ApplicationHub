@@ -1,4 +1,8 @@
-# Onboarding — Vísna Sól (PKPilot0013)
+# Onboarding — CodePlayground (PKPilot0013)
+
+> Renamed 2026-11-22: the shelf entry is `CodePlayground` (was `Vísna Sól`). The app repository `PKPilot0013` carries
+> the matching title, OG tags and in-app lockup; the dated live checks below were recorded under
+> the previous name and are kept as recorded.
 
 - App card ID: `visna-sol`
 - Live URL: https://hyangdan2.github.io/PKPilot0013/ — HTTP 200, page title `Vísna Sól — HD2Lab 코딩·CLI 학습 샌드박스`, checked 2026-11-21

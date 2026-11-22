@@ -1,4 +1,8 @@
-# Onboarding — Vektra Vár (PKPilot0012)
+# Onboarding — ObjectLens (PKPilot0012)
+
+> Renamed 2026-11-22: the shelf entry is `ObjectLens` (was `Vektra Vár`). The app repository `PKPilot0012` carries
+> the matching title, OG tags and in-app lockup; the dated live checks below were recorded under
+> the previous name and are kept as recorded.
 
 - App card ID: `vektra-var`
 - Live URL: https://hyangdan2.github.io/PKPilot0012/ — HTTP 200, page title `Vektra Vár — HD2Lab 객체 탐지 스튜디오`, checked 2026-11-20

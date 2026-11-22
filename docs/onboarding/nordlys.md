@@ -1,4 +1,8 @@
-# Onboarding — Nordlys (PKPilot0011)
+# Onboarding — CinePlate (PKPilot0011)
+
+> Renamed 2026-11-22: the shelf entry is `CinePlate` (was `Nordlys`). The app repository `PKPilot0011` carries
+> the matching title, OG tags and in-app lockup; the dated live checks below were recorded under
+> the previous name and are kept as recorded.
 
 - App card ID: `nordlys`
 - Live URL: https://hyangdan2.github.io/PKPilot0011/ — HTTP 200, page title `Nordlys — HD2Lab Film & Frame Studio`, checked 2026-11-21
