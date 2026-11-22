@@ -129,7 +129,7 @@
     },
     {
       "id": "vektra-var",
-      "title": "Vektra Vár",
+      "title": "ObjectLens",
       "subtitle": "Objects, seen on your device.",
       "description": "A client-side object-detection studio. YOLO11n looks at photos, a playing video, or a live webcam frame inside the browser, draws the COCO 80 boxes, and exports the annotated PNG or the raw JSON coordinates. Nothing is uploaded.",
       "category": "Photo",
@@ -140,7 +140,7 @@
         "Local Inference"
       ],
       "thumbnail": "assets/apps/vektra-var.jpg",
-      "thumbnailAlt": "Vektra Vár screen: a street photo under purple car and red person boxes, with confidence, IoU and COCO class controls on the right.",
+      "thumbnailAlt": "ObjectLens screen: a street photo under purple car and red person boxes, with confidence, IoU and COCO class controls on the right.",
       "launchUrl": "https://hyangdan2.github.io/PKPilot0012/",
       "repositoryUrl": "https://github.com/HyangDan2/PKPilot0012",
       "status": "published",
@@ -151,7 +151,7 @@
     },
     {
       "id": "visna-sol",
-      "title": "Vísna Sól",
+      "title": "CodePlayground",
       "subtitle": "Git, Python, Linux and SQL by typing.",
       "description": "A coding sandbox in a VS Code-style IDE that runs entirely in the browser. Practise Git commands against a live commit graph, run real Python through Pyodide, work a POSIX-ish shell over a virtual file system, and query SQLite — twenty guided missions across four tracks, nothing uploaded.",
       "category": "Learning",
@@ -162,7 +162,7 @@
         "Local Sandbox"
       ],
       "thumbnail": "assets/apps/visna-sol.jpg",
-      "thumbnailAlt": "Vísna Sól screen: the Git track's VS Code-style workspace — explorer and mission list left, editor and terminal centre, and the mission card above a four-commit graph on the right.",
+      "thumbnailAlt": "CodePlayground screen: the Git track's VS Code-style workspace — explorer and mission list left, editor and terminal centre, mission card over a four-commit graph.",
       "launchUrl": "https://hyangdan2.github.io/PKPilot0013/",
       "repositoryUrl": "https://github.com/HyangDan2/PKPilot0013",
       "status": "published",
@@ -173,7 +173,7 @@
     },
     {
       "id": "nordlys",
-      "title": "Nordlys",
+      "title": "CinePlate",
       "subtitle": "Film grades and frames, photo or clip.",
       "description": "Film Studio and Shutterplate in one browser studio: a photo or clip goes on the stage, 9 HD2Lab films and 58 Margarine looks grade it live, then 13 plate styles print it — 11 for photos and clips, 2 four-cut. WebGL2 grading, HDR-safe input, H.264 with sound out. No upload.",
       "category": "Photo",
@@ -184,7 +184,7 @@
         "WebCodecs"
       ],
       "thumbnail": "assets/apps/nordlys.jpg",
-      "thumbnailAlt": "Nordlys editor on the sample landscape: the film rail with VESTRA chosen and graded thumbnails, the framed plate on stage, and the grade sliders on the right.",
+      "thumbnailAlt": "CinePlate editor on the sample landscape: the film rail with VESTRA chosen and graded thumbnails, the framed plate on stage, and the grade sliders on the right.",
       "launchUrl": "https://hyangdan2.github.io/PKPilot0011/",
       "repositoryUrl": "https://github.com/HyangDan2/PKPilot0011",
       "status": "published",
@@ -195,7 +195,7 @@
     },
     {
       "id": "saga-glitra",
-      "title": "Sága Glitra",
+      "title": "SlideDeck",
       "subtitle": "Slides that study with you.",
       "description": "A study room built from Markdown: import a deck, split it into 16:9 slides with GFM, KaTeX, Mermaid and highlighted code, then keep a note, highlighter and pen strokes on every slide. Reveal ==masked== keywords, present full screen, run a 25-minute focus timer. IndexedDB only.",
       "category": "Learning",
@@ -206,7 +206,7 @@
         "Study Room"
       ],
       "thumbnail": "assets/apps/saga-glitra.jpg",
-      "thumbnailAlt": "Sága Glitra study room: the slide rail with five slides, a code slide with TS and BASH badges and copy buttons above its checkboxes, and that slide's own note on the right.",
+      "thumbnailAlt": "SlideDeck study room: the slide rail with five slides, a code slide with TS and BASH badges and copy buttons above its checkboxes, and that slide's own note on the right.",
       "launchUrl": "https://hyangdan2.github.io/PKPilot0014/",
       "repositoryUrl": "https://github.com/HyangDan2/PKPilot0014",
       "status": "published",
@@ -217,9 +217,9 @@
     },
     {
       "id": "mynda-ljosa",
-      "title": "Mynda Ljósa",
+      "title": "FrameBuilder",
       "subtitle": "Draw your own four-cut frame.",
-      "description": "Design the four-cut frame yourself: drag slots 1–4 on the canvas, set the background, film perforation, text variables and an emblem, then save a .shutterframe.json or copy a #frame= link that Shutterplate and Nordlys print as-is. Five presets, an IndexedDB design shelf, no upload.",
+      "description": "Design the four-cut frame yourself: drag slots 1–4 on the canvas, set the background, film perforation, text variables and an emblem, then save a .shutterframe.json or copy a #frame= link that Shutterplate and CinePlate print as-is. Five presets, an IndexedDB design shelf, no upload.",
       "category": "Photo",
       "tags": [
         "4-Cut Frames",
@@ -228,7 +228,7 @@
         "Share Link"
       ],
       "thumbnail": "assets/apps/mynda-ljosa.jpg",
-      "thumbnailAlt": "Mynda Ljósa: a Classic Strip four-cut frame with four artwork slots, the frame-properties drawer open on canvas size, background and perforation, and the save and share chips.",
+      "thumbnailAlt": "FrameBuilder: a Classic Strip four-cut frame with four artwork slots, the frame-properties drawer open on canvas size, background and perforation, and the save and share chips.",
       "launchUrl": "https://hyangdan2.github.io/PKPilot0015/",
       "repositoryUrl": "https://github.com/HyangDan2/PKPilot0015",
       "status": "published",

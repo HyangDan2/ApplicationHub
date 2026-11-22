@@ -1,5 +1,11 @@
 # Change log
 
+## 2026-11-22 — Five apps renamed on the shelf
+
+- `data/apps.json`: the display names are now `CinePlate` (PKPilot0011, was Nordlys), `ObjectLens` (PKPilot0012, was Vektra Vár), `CodePlayground` (PKPilot0013, was Vísna Sól), `SlideDeck` (PKPilot0014, was Sága Glitra) and `FrameBuilder` (PKPilot0015, was Mynda Ljósa). IDs, slugs, thumbnail files, `launchUrl` / `repositoryUrl` and the sort order are unchanged, so the cards, the `Apps` dropdown and the mobile `Apps` accordion follow the catalog automatically. The FrameBuilder description now names CinePlate as the app that prints a `#frame=` link, and the five `thumbnailAlt` lines use the new names.
+- `assets/branding/share.png`: the Photo row reads `Film Studio · Shutterplate · CinePlate +2` and the Learning row `ML Lab · CodePlayground · SlideDeck`; the rest of the card is unchanged. `og:image` / `twitter:image` cache buster → `?v=20261122-og2` in `scripts/build.mjs`.
+- The five `docs/onboarding/*.md` records keep their dated live checks verbatim (taken under the old names) and gain a rename note under the heading; PKPilot0011~0015 carry the matching title, OG and in-app lockup rename in their own repositories.
+
 ## 2026-11-22 — Social card follows the 11-app catalog
 
 - Re-rendered `assets/branding/share.png` (1200×630) on the unchanged `HD2's Diary` card layout: the chip now reads `11 apps`, and the right-hand summary card carries the current published counts from `data/apps.json` — Productivity 1 (Markdown Viewer), Photo 5 (Film Studio · Shutterplate · Vektra Vár +2), Utility 2 (Midpoint · DOS Player), Learning 3 (ML Lab · Vísna Sól · Sága Glitra).

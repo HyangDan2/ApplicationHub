@@ -1,4 +1,8 @@
-# Onboarding — Mynda Ljósa (PKPilot0015)
+# Onboarding — FrameBuilder (PKPilot0015)
+
+> Renamed 2026-11-22: the shelf entry is `FrameBuilder` (was `Mynda Ljósa`). The app repository `PKPilot0015` carries
+> the matching title, OG tags and in-app lockup; the dated live checks below were recorded under
+> the previous name and are kept as recorded.
 
 - App card ID: `mynda-ljosa`
 - Live URL: https://hyangdan2.github.io/PKPilot0015/ — HTTP 200, page title `Mynda Ljósa — HD2Lab 커스텀 4컷 프레임 스튜디오`, checked 2026-11-21
