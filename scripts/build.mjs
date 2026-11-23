@@ -57,7 +57,7 @@ function head(prefix) {
     `<link rel="icon" href="${prefix}assets/branding/favicon-32x32.png" sizes="32x32" type="image/png">`,
     `<link rel="apple-touch-icon" href="${prefix}assets/branding/apple-touch-icon.png" sizes="180x180">`,
     `<link rel="shortcut icon" href="${prefix}assets/branding/favicon.ico">`,
-    `<link rel="stylesheet" href="${prefix}css/style.css?v=20261119-appsplay">`,
+    `<link rel="stylesheet" href="${prefix}css/style.css?v=20261124-share">`,
     // Apply a stored theme before first paint so dark mode never flashes light.
     `<script>${THEME_BOOT}</script>`,
     // Visit counting for the whole HD2Lab family (hd2lab.goatcounter.com).
@@ -154,9 +154,12 @@ const header = (prefix, active = 'apps') => `<a class="skip-link" href="#main">S
       ${dropdownTab(INFO, active)}
       ${tab(ABOUT, active)}
     </nav>
-    <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5.5H17M3 10H17M3 14.5H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-    </button>
+    <div class="header-actions">
+      <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-switch-thumb" aria-hidden="true"></span><svg class="theme-switch-ic" data-icon="sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.1"/><path d="M12 2.7v2.3M12 19v2.3M2.7 12h2.3M19 12h2.3M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg><svg class="theme-switch-ic" data-icon="moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.4 14.4A8.6 8.6 0 0 1 9.6 3.6a8.6 8.6 0 1 0 10.8 10.8z"/></svg></button>
+      <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5.5H17M3 10H17M3 14.5H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 <div class="drawer-backdrop" hidden></div>
