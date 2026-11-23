@@ -70,12 +70,12 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 .nav-dropdown-panel.is-scroll::-webkit-scrollbar-track { background: transparent; }
 .nav-dropdown-panel.is-scroll::-webkit-scrollbar-thumb { border-radius: 999px; background: var(--line-strong); }
 .nav-dropdown-panel.is-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+.header-actions { display: flex; align-items: center; gap: 10px; flex: none; }
 .menu-button { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--panel); color: var(--ink); transition: border-color .2s, color .2s, background-color .2s; }
 .menu-button:hover { border-color: var(--accent); color: var(--accent-text); background: var(--accent-soft); }
 
 /* Mobile right unfolding drawer */
 body.drawer-open { overflow: hidden; }
-body.drawer-open .theme-toggle { opacity: 0; pointer-events: none; }
 .drawer-backdrop { position: fixed; inset: 0; z-index: 40; background: rgb(29 25 43 / 36%); backdrop-filter: blur(4px); opacity: 0; transition: opacity .24s ease; }
 .drawer-backdrop.is-visible { opacity: 1; }
 .mobile-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 50; width: min(320px, 84vw); display: flex; flex-direction: column; background: var(--panel); border-left: 1px solid var(--line); box-shadow: -20px 0 50px rgb(29 25 43 / 18%); transform: translateX(100%); visibility: hidden; transition: transform .28s cubic-bezier(.22, 1, .36, 1), visibility .28s; }
@@ -234,7 +234,9 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
   .app-guide { grid-template-columns: 1fr 1fr; row-gap: 28px; }
 }
 
-@media (max-width: 820px) {
+/* The tab row plus the theme switch needs ~900px; below that the drawer takes
+   over so the actions never push past the header's gutter. */
+@media (max-width: 900px) {
   .header-nav { display: none; }
   .menu-button { display: inline-flex; }
   .header-inner { min-height: 66px; gap: 16px; }
@@ -345,19 +347,35 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
 [data-theme="dark"] .hero-action:hover,
 [data-theme="dark"] .primary:hover { background: #BCA5FF; }
 
-/* Floating theme toggle — HD2Lab standard: one 44×44 round icon button (same spec
-   as Web-HQ). No text label, no emoji: a single-stroke moon in light mode,
-   a single-stroke sun in dark mode. */
-.theme-toggle { position: fixed; right: max(16px, env(safe-area-inset-right, 0px) + 16px); bottom: max(18px, env(safe-area-inset-bottom, 0px) + 18px); z-index: 60; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0; padding: 0; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--panel); color: var(--ink); box-shadow: 0 10px 26px rgba(29, 25, 43, .16); cursor: pointer; -webkit-tap-highlight-color: transparent; backdrop-filter: blur(10px); transition: background .2s, border-color .2s, color .2s, box-shadow .2s, transform .18s, opacity .2s; }
-.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-.theme-toggle:active { transform: scale(.94); }
-.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.theme-toggle-ic { display: none; width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-html:not([data-theme="dark"]) .theme-toggle .theme-toggle-ic[data-icon="moon"],
-html[data-theme="dark"] .theme-toggle .theme-toggle-ic[data-icon="sun"] { display: block; }
-[data-theme="dark"] .theme-toggle { box-shadow: 0 12px 30px rgba(2, 5, 16, .66); }
-[data-theme="dark"] .theme-toggle:hover { background: var(--panel-soft); }
-@media (prefers-reduced-motion: reduce) { .theme-toggle, .theme-toggle:active { transition: none; transform: none; } .mobile-drawer, .drawer-backdrop, .drawer-item, .drawer-sub, .drawer-caret, .nav-dropdown-panel, .nav-caret { transition: none; } }
+/* Header theme switch — HD2Lab standard: a 56×30 capsule with a sun at the
+   left, a moon at the right, and a round thumb that slides to the active side.
+   It closes the top navigation on PC and sits left of ≡ on mobile. */
+.theme-switch { position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none; width: 56px; height: 30px; margin: 0; padding: 0; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--accent-soft); color: var(--muted); cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background .2s, border-color .2s; }
+.theme-switch:hover { border-color: var(--accent); }
+.theme-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.theme-switch-thumb { position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; border-radius: 999px; background: var(--accent); box-shadow: 0 2px 6px rgba(29, 25, 43, .24); transition: transform .22s cubic-bezier(.4, 0, .2, 1), background .2s; }
+html[data-theme="dark"] .theme-switch-thumb { transform: translateX(26px); }
+.theme-switch-ic { position: absolute; top: 50%; width: 13px; height: 13px; transform: translateY(-50%); fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; transition: color .2s; pointer-events: none; }
+.theme-switch-ic[data-icon="sun"] { left: 7.5px; color: #FFFFFF; }
+.theme-switch-ic[data-icon="moon"] { right: 7.5px; color: var(--muted); }
+html[data-theme="dark"] .theme-switch { background: var(--panel-soft); border-color: #344472; }
+html[data-theme="dark"] .theme-switch-thumb { background: #A78BFA; }
+html[data-theme="dark"] .theme-switch-ic[data-icon="sun"] { color: #8494B6; }
+html[data-theme="dark"] .theme-switch-ic[data-icon="moon"] { color: #FFFFFF; }
+
+/* Bottom-right share button — 48×48 solid Soft Iris disc with a white
+   three-dot share icon and a soft glow, in both themes. */
+.share-toggle { position: fixed; right: max(16px, env(safe-area-inset-right, 0px) + 16px); bottom: max(18px, env(safe-area-inset-bottom, 0px) + 18px); z-index: 60; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin: 0; padding: 0; border: 0; border-radius: 999px; background: #7C5CFF; color: #FFFFFF; box-shadow: 0 10px 24px rgba(124, 92, 255, .38), 0 2px 6px rgba(29, 25, 43, .18); cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background .2s, box-shadow .2s, transform .18s; }
+.share-toggle:hover { background: #8B6CE8; box-shadow: 0 14px 30px rgba(124, 92, 255, .46), 0 2px 6px rgba(29, 25, 43, .2); }
+.share-toggle:active { transform: scale(.94); }
+.share-toggle:focus-visible { outline: 2px solid #A78BFA; outline-offset: 3px; }
+.share-toggle svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+[data-theme="dark"] .share-toggle { box-shadow: 0 12px 28px rgba(124, 92, 255, .52), 0 2px 8px rgba(0, 0, 0, .46); }
+[data-theme="dark"] .share-toggle:hover { background: #8B6CE8; box-shadow: 0 16px 34px rgba(124, 92, 255, .58), 0 2px 8px rgba(0, 0, 0, .5); }
+.share-toast { position: fixed; right: max(76px, env(safe-area-inset-right, 0px) + 76px); bottom: max(25px, env(safe-area-inset-bottom, 0px) + 25px); z-index: 61; max-width: min(280px, calc(100vw - 124px)); padding: 9px 14px; border-radius: 10px; background: #1D192B; color: #FFFFFF; font-size: 12.5px; font-weight: 600; letter-spacing: .01em; line-height: 1.2; box-shadow: 0 10px 26px rgba(29, 25, 43, .24); opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .18s ease, transform .18s ease; }
+.share-toast.is-visible { opacity: 1; transform: translateY(0); }
+[data-theme="dark"] .share-toast { background: #241E38; border: 1px solid #3B3358; box-shadow: 0 12px 30px rgba(0, 0, 0, .52); }
+@media (prefers-reduced-motion: reduce) { .theme-switch, .theme-switch-thumb, .theme-switch-ic, .share-toggle, .share-toggle:active, .share-toast { transition: none; transform: none; } .mobile-drawer, .drawer-backdrop, .drawer-item, .drawer-sub, .drawer-caret, .nav-dropdown-panel, .nav-caret { transition: none; } }
 
 /* ── Footer visitor badge — Today · Total ─────────────────────────────────
    The numbers come from the public GoatCounter JSON API (js/visit-badge.js).

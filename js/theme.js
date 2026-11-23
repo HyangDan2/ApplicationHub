@@ -1,8 +1,8 @@
 // HD2Lab hub theme: Soft Iris light (default) ↔ Navy & Lavender dark.
 // The <head> snippet applies the stored theme before first paint; this binds
-// the floating toggle, keeps the theme-color meta in sync, and keeps the
-// button's accessible name current. The button itself is icon-only (44×44):
-// CSS shows the moon in light mode and the sun in dark mode.
+// the header slide switch, keeps the theme-color meta in sync, and keeps the
+// switch's accessible name and checked state current. The switch is a 56×30
+// capsule: a thumb slides between the sun (light) and the moon (dark).
 (() => {
   const STORAGE_KEY = 'hd2-theme';
   const root = document.documentElement;
@@ -16,7 +16,7 @@
     root.dataset.theme = dark ? 'dark' : 'light';
     if (meta) meta.setAttribute('content', dark ? '#0B1020' : '#FAFAFD');
     const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
-    toggle.setAttribute('aria-pressed', String(dark));
+    toggle.setAttribute(toggle.getAttribute('role') === 'switch' ? 'aria-checked' : 'aria-pressed', String(dark));
     toggle.setAttribute('aria-label', label);
     toggle.setAttribute('title', label);
   };
