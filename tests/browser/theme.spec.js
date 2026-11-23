@@ -24,8 +24,8 @@ test('the header toggle switches to Navy & Lavender and persists', async ({ page
   expect(box.x).toBeGreaterThan(about.x + about.width - 1);
   await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark');
 
-  // A 56×30 slide switch: sun, moon and a thumb that sits on the active side.
-  expect(Math.round(box.width)).toBe(56);
+  // A 58×30 slide switch: sun, moon and a thumb that sits on the active side.
+  expect(Math.round(box.width)).toBe(58);
   expect(Math.round(box.height)).toBe(30);
   expect(await toggle.evaluate(node => getComputedStyle(node).borderRadius)).toBe('999px');
   expect(await toggle.getAttribute('role')).toBe('switch');
@@ -37,7 +37,7 @@ test('the header toggle switches to Navy & Lavender and persists', async ({ page
 
   await toggle.click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await expect(thumb(page)).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 26, 0)');
+  await expect(thumb(page)).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 28, 0)');
   await expect(toggle).toHaveAttribute('aria-checked', 'true');
   await expect(toggle).toHaveAttribute('aria-label', 'Switch to light mode');
   await expect(toggle).toHaveAttribute('title', 'Switch to light mode');
@@ -47,7 +47,7 @@ test('the header toggle switches to Navy & Lavender and persists', async ({ page
 
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await expect(thumb(page)).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 26, 0)');
+  await expect(thumb(page)).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 28, 0)');
 
   await page.locator('#theme-toggle').click();
   await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark');
@@ -68,7 +68,7 @@ test('on mobile the toggle sits immediately left of the menu button', async ({ p
   await expect(toggle).toBeVisible();
   const t = await toggle.boundingBox();
   const m = await menu.boundingBox();
-  expect(Math.round(t.width)).toBe(56);
+  expect(Math.round(t.width)).toBe(58);
   expect(Math.round(t.height)).toBe(30);
   expect(t.x + t.width).toBeLessThanOrEqual(m.x);
   expect(m.x - (t.x + t.width)).toBeLessThanOrEqual(16);
