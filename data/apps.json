@@ -86,6 +86,34 @@
       "evidencePath": "docs/onboarding/dos-player.md"
     },
     {
+      "id": "statelia",
+      "title": "Statelia",
+      "subtitle": "Statistical engineering suite.",
+      "description": "Professional statistical analysis, engineering modeling, process quality control and multi-response optimization, computed entirely in the browser on Sigrdrifa Engine v1.0: hypothesis tests, ANOVA, regression, SPC, capability, DOE/RSM and 3D surfaces. Nothing is uploaded.",
+      "category": "Engineering & Analytics",
+      "tags": [
+        "Sigrdrifa Engine",
+        "DOE & RSM",
+        "Quality & SPC"
+      ],
+      "symbol": "assets/apps/statelia-symbol.png",
+      "version": "v1.0.0",
+      "engine": "Sigrdrifa Engine v1.0",
+      "releaseState": "preview",
+      "releaseNote": "v1.0.0 branding build — the portable download follows the official release.",
+      "thumbnail": "assets/apps/statelia.jpg",
+      "thumbnailAlt": "Statelia splash: the star-and-wings symbol and STATELIA wordmark above five capability panels, beside a 3D response-surface workspace.",
+      "launchUrl": "https://hyangdan2.github.io/PKPilot0018/",
+      "homepageUrl": "https://hyangdan2.github.io/",
+      "contactEmail": "hyperdimensionaldesignlab@gmail.com",
+      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0018",
+      "status": "published",
+      "sortOrder": 35,
+      "updatedAt": "2026-11-28",
+      "imageKind": "artwork",
+      "evidencePath": "docs/onboarding/statelia.md"
+    },
+    {
       "id": "markdown-viewer",
       "title": "HD2Markdown Viewer",
       "subtitle": "Read it as written.",
@@ -236,32 +264,6 @@
       "updatedAt": "2026-11-21",
       "imageKind": "screenshot",
       "evidencePath": "docs/onboarding/mynda-ljosa.md"
-    },
-    {
-      "id": "statelia",
-      "title": "Statelia",
-      "subtitle": "Statistical engineering suite.",
-      "description": "Professional statistical analysis, engineering modeling, process quality control and multi-response optimization, computed entirely in the browser on Sigrdrifa Engine v1.0: hypothesis tests, ANOVA, regression, SPC, capability, DOE/RSM and 3D surfaces. Nothing is uploaded.",
-      "category": "Engineering & Analytics",
-      "tags": [
-        "Sigrdrifa Engine",
-        "DOE & RSM",
-        "Quality & SPC"
-      ],
-      "symbol": "assets/apps/statelia-symbol.png",
-      "version": "v1.0.0",
-      "engine": "Sigrdrifa Engine v1.0",
-      "releaseState": "preview",
-      "releaseNote": "v1.0.0 branding build — the portable download follows the official release.",
-      "thumbnail": "assets/apps/statelia.jpg",
-      "thumbnailAlt": "Statelia splash: the star-and-wings symbol and STATELIA wordmark above five capability panels, beside a 3D response-surface workspace.",
-      "launchUrl": "https://hyangdan2.github.io/PKPilot0018/",
-      "repositoryUrl": "https://github.com/HyangDan2/PKPilot0018",
-      "status": "published",
-      "sortOrder": 35,
-      "updatedAt": "2026-11-28",
-      "imageKind": "artwork",
-      "evidencePath": "docs/onboarding/statelia.md"
     }
   ]
 }

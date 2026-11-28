@@ -86,6 +86,18 @@ function card(app, index) {
     body.append(release);
   }
 
+  /* FIX-02: an app may publish the owner's official home page and enquiry
+     address. The card is itself a link, so these are shown as plain text
+     (no nested anchors) and are readable at a glance. */
+  if (app.homepageUrl || app.contactEmail) {
+    const contact = element('div', 'card-contact');
+    if (app.homepageUrl) {
+      contact.append(element('span', 'contact-home', String(app.homepageUrl).replace(/^https?:\/\//, '').replace(/\/$/, '')));
+    }
+    if (app.contactEmail) contact.append(element('span', 'contact-email', app.contactEmail));
+    body.append(contact);
+  }
+
   const note = element('span', 'card-open', launchable ? 'Open app' : 'Under maintenance right now');
   if (launchable) {
     const arrow = element('span', '', '↗');

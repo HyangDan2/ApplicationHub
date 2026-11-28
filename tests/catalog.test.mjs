@@ -83,6 +83,16 @@ test('unsafe external values are not treated as launchable', () => {
   assert.equal(safeUrl('not a url'), false);
 });
 
+test('Statelia publishes the official HD2Lab contact and home page', () => {
+  const statelia = catalog.apps.find(app => app.id === 'statelia');
+  assert.ok(statelia, 'statelia is registered');
+  assert.equal(statelia.contactEmail, 'hyperdimensionaldesignlab@gmail.com');
+  assert.equal(statelia.homepageUrl, 'https://hyangdan2.github.io/');
+  for (const app of catalog.apps) {
+    if (app.contactEmail) assert.equal(app.contactEmail, 'hyperdimensionaldesignlab@gmail.com', app.id);
+  }
+});
+
 test('paths that escape the content directories are rejected', async () => {
   const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'apphub-'));
   try {

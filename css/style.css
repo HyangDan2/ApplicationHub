@@ -206,6 +206,8 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
 .release-engine { color: var(--accent-text); font-weight: 600; }
 .release-state { color: var(--muted); border: 1px dashed var(--line-strong); border-radius: 4px; padding: 2px 6px; }
 .release-note { color: var(--muted); flex-basis: 100%; line-height: 1.6; }
+.card-contact { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 0 0 14px; font-family: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace; font-size: 10px; color: var(--muted); }
+.card-contact span { overflow-wrap: anywhere; }
 .card-open { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 15px; border-top: 1px solid var(--line); font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: var(--muted); transition: color .15s; }
 .card-open span { font-size: 16px; }
 .app-card:hover .card-open, .app-card:focus-visible .card-open { color: var(--accent-text); }

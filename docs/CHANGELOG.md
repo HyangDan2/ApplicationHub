@@ -4,8 +4,10 @@
 
 - `data/apps.json`: new entry `statelia` — Statelia v1.0.0, category `Engineering & Analytics`,
   engine `Sigrdrifa Engine v1.0`, launch `https://hyangdan2.github.io/PKPilot0018/`,
-  repository `HyangDan2/PKPilot0018`, sort order 35. The app was published as **Sigrún**
-  before WO-BRAND-001 renamed it; the repository and the launch URL do not change.
+  repository `HyangDan2/PKPilot0018`, sort order 35, home page `https://hyangdan2.github.io/`
+  and contact `hyperdimensionaldesignlab@gmail.com`. The app was published under its
+  previous product name before WO-BRAND-001 renamed it; the repository and the launch URL
+  do not change.
 - `assets/apps/statelia.jpg` (960×540) and `assets/apps/statelia-symbol.png` are cropped from
   the official splash artwork the owner supplied — the card image is a 16:9 crop, the symbol
   has its background removed. Neither is redrawn.

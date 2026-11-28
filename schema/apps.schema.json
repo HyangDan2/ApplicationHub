@@ -145,6 +145,16 @@
             "type": "string",
             "maxLength": 160,
             "pattern": "\\S"
+          },
+          "homepageUrl": {
+            "type": "string",
+            "pattern": "^https://",
+            "maxLength": 2048
+          },
+          "contactEmail": {
+            "type": "string",
+            "maxLength": 120,
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
           }
         }
       }
