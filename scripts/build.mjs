@@ -65,6 +65,9 @@ function head(prefix) {
         async src="//gc.zgo.at/count.js"></script>`,
     // Today · Total pill in the footer, fed by the same counter's public JSON.
     `<script src="${prefix}js/visit-badge.js?v=20261120-visits" defer></script>`,
+    // Shared Apps/Play menu sync across the six hubs (published apps and games
+    // straight from their source catalogs; a failed fetch keeps this build).
+    '<script src="https://hyangdan2.github.io/nav-catalog.js?v=20261128" defer></script>',
   ].filter(Boolean).join('');
 }
 
