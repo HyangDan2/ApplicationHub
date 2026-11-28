@@ -31,6 +31,8 @@ export async function validateCatalog(catalog, base = root) {
     if (launchUrls.has(app.launchUrl)) throw Error(`Duplicate launch URL: ${app.id}`);
     launchUrls.add(app.launchUrl);
     if (app.repositoryUrl && !safeUrl(app.repositoryUrl)) throw Error(`Unsafe repository URL: ${app.id}`);
+    if (app.releaseUrl && !safeUrl(app.releaseUrl)) throw Error(`Unsafe release URL: ${app.id}`);
+    if (app.downloadUrl && !safeUrl(app.downloadUrl)) throw Error(`Unsafe download URL: ${app.id}`);
     if (!isRealDate(app.updatedAt)) throw Error(`Invalid date: ${app.id}`);
     if (app.status === 'published' && (app.imageKind === undefined)) throw Error(`Missing imageKind: ${app.id}`);
     if (!app.description.trim()) throw Error(`Empty description: ${app.id}`);

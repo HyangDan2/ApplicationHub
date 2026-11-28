@@ -1,5 +1,20 @@
 # Change log
 
+## 2026-11-28 — Statelia v1.0.0 published: the card goes stable
+
+- `data/apps.json`: `statelia` moves from `preview` to `stable` now that the release
+  exists. `releaseNote` reads `v1.0.0 is published — the portable build downloads from the
+  release.`, and the entry gains `releaseUrl`
+  (`https://github.com/HyangDan2/PKPilot0018/releases/tag/v1.0.0`) and `downloadUrl`
+  (`…/releases/download/v1.0.0/Statelia-v1.0.0-Portable.zip`).
+- `schema/apps.schema.json`: optional `releaseUrl`, `downloadUrl` (both `^https://`).
+  `scripts/validate-catalog.mjs` rejects an unsafe value for either.
+- `js/app.js` / `css/style.css`: an entry that carries either URL gets a `.card-actions`
+  row of links **beside** the card — the card itself stays one `<a>`, so no link is
+  nested. Entries without the two fields render exactly as before (11 of 12 cards are
+  byte-for-byte the same markup).
+- `docs/onboarding/statelia.md`: the release URLs, the stable state and the action row.
+
 ## 2026-11-28 — Statelia registered (PKPilot0018)
 
 - `data/apps.json`: new entry `statelia` — Statelia v1.0.0, category `Engineering & Analytics`,

@@ -38,6 +38,25 @@ test('the card itself is the link and no separate action button remains', async 
   await expect(page).toHaveURL(published[0].launchUrl);
 });
 
+test('a stable release offers its artefacts beside the card, never inside it', async ({ page }) => {
+  await ready(page);
+  const offering = published.filter(app => app.releaseUrl || app.downloadUrl);
+  expect(offering.length).toBeGreaterThan(0);
+  for (const app of offering) {
+    const card = page.locator(`a.app-card[data-app="${app.id}"]`);
+    await expect(card).toHaveCount(1);
+    await expect(card.locator('a')).toHaveCount(0);
+    const shell = page.locator('.card-shell').filter({ has: card });
+    await expect(shell).toHaveCount(1);
+    const actions = shell.locator('.card-action');
+    await expect(actions).toHaveCount((app.releaseUrl ? 1 : 0) + (app.downloadUrl ? 1 : 0));
+    if (app.releaseUrl) await expect(shell.getByRole('link', { name: 'Release notes' })).toHaveAttribute('href', app.releaseUrl);
+    if (app.downloadUrl) await expect(shell.getByRole('link', { name: 'Portable download' })).toHaveAttribute('href', app.downloadUrl);
+  }
+  const statelia = page.locator('.card-shell');
+  await expect(statelia.locator('.app-card[data-app="statelia"] .card-release')).toContainText('v1.0.0 is published');
+});
+
 for (const width of [360, 390, 768, 1440]) {
   test(`layout and assets at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });

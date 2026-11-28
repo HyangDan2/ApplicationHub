@@ -107,7 +107,32 @@ function card(app, index) {
   body.append(note);
 
   item.append(picture, body);
-  return item;
+
+  /* WO-BRAND-001 FIX-05 step 5: a published release may point at its own
+     artefacts. The card is itself a link, so these live in an action row
+     beside the card — never inside it — and the card keeps its shape when the
+     two values are absent (every other card renders exactly as before). */
+  const actions = actionRow(app);
+  if (!actions) return item;
+  const shell = element('div', 'card-shell');
+  shell.append(item, actions);
+  return shell;
+}
+
+function actionRow(app) {
+  const links = [];
+  if (safeUrl(app.releaseUrl)) links.push(['Release notes', app.releaseUrl]);
+  if (safeUrl(app.downloadUrl)) links.push(['Portable download', app.downloadUrl]);
+  if (!links.length) return null;
+  const bar = element('div', 'card-actions');
+  for (const [label, href] of links) {
+    const link = element('a', 'card-action', label);
+    link.href = href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    bar.append(link);
+  }
+  return bar;
 }
 
 function renderFilters() {

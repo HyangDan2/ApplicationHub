@@ -213,6 +213,16 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
 .app-card:hover .card-open, .app-card:focus-visible .card-open { color: var(--accent-text); }
 .app-card.unavailable .card-open { color: var(--dim); }
 
+/* WO-BRAND-001 FIX-05: a published release offers its artefacts beside the
+   card, never inside it (the card itself is one link). Cards whose catalogue
+   entry carries no releaseUrl/downloadUrl are appended to the grid directly
+   and keep their previous markup. */
+.card-shell { display: flex; flex-direction: column; min-width: 0; }
+.card-shell > .app-card { flex: 1; }
+.card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.card-action { flex: 1 1 120px; text-align: center; padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--panel-soft); color: var(--accent-text); font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; text-decoration: none; transition: background .15s, color .15s, border-color .15s; }
+.card-action:hover, .card-action:focus-visible { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+
 .empty { grid-column: 1 / -1; text-align: center; background: var(--panel); padding: 56px 20px; border: 1px dashed var(--line-strong); border-radius: 10px; }
 .empty-icon { font-size: 38px; color: var(--accent); }
 .empty h3 { font-size: 20px; margin: 10px 0 8px; }

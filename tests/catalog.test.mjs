@@ -54,6 +54,8 @@ test('duplicate IDs, unsafe URLs, missing assets, and bad dates are rejected', a
     value => { value.apps[0].launchUrl = 'javascript:alert(1)'; },
     value => { value.apps[0].launchUrl = 'http://hyangdan2.github.io/AGPilot0002/'; },
     value => { value.apps[0].repositoryUrl = 'https://user:pass@example.com/repo'; },
+    value => { value.apps[0].downloadUrl = 'javascript:alert(1)'; },
+    value => { value.apps[0].releaseUrl = 'http://github.com/HyangDan2/PKPilot0018/releases/tag/v1.0.0'; },
     value => { value.apps[0].thumbnail = 'assets/apps/missing.jpg'; },
     value => { value.apps[0].thumbnail = '../package.json'; },
     value => { value.apps[0].updatedAt = '2026-02-30'; },
@@ -90,6 +92,17 @@ test('Statelia publishes the official HD2Lab contact and home page', () => {
   assert.equal(statelia.homepageUrl, 'https://hyangdan2.github.io/');
   for (const app of catalog.apps) {
     if (app.contactEmail) assert.equal(app.contactEmail, 'hyperdimensionaldesignlab@gmail.com', app.id);
+  }
+});
+
+test('Statelia v1.0.0 is a stable release with its own release and download URLs', () => {
+  const statelia = catalog.apps.find(app => app.id === 'statelia');
+  assert.equal(statelia.releaseState, 'stable');
+  assert.match(statelia.releaseNote, /v1\.0\.0 is published/);
+  assert.equal(statelia.releaseUrl, 'https://github.com/HyangDan2/PKPilot0018/releases/tag/v1.0.0');
+  assert.equal(statelia.downloadUrl, 'https://github.com/HyangDan2/PKPilot0018/releases/download/v1.0.0/Statelia-v1.0.0-Portable.zip');
+  for (const app of catalog.apps) {
+    if (app.downloadUrl) assert.ok(app.downloadUrl.endsWith('.zip'), app.id);
   }
 });
 

@@ -146,6 +146,16 @@
             "maxLength": 160,
             "pattern": "\\S"
           },
+          "releaseUrl": {
+            "type": "string",
+            "pattern": "^https://",
+            "maxLength": 2048
+          },
+          "downloadUrl": {
+            "type": "string",
+            "pattern": "^https://",
+            "maxLength": 2048
+          },
           "homepageUrl": {
             "type": "string",
             "pattern": "^https://",
