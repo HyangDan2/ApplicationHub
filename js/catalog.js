@@ -1,4 +1,4 @@
-export const categories = ['Productivity', 'Photo', 'Learning', 'Utility'];
+export const categories = ['Productivity', 'Photo', 'Learning', 'Utility', 'Engineering & Analytics'];
 
 export function sortApps(apps) {
   return [...apps].sort((a, b) => a.sortOrder - b.sortOrder || a.id.localeCompare(b.id));

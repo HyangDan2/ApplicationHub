@@ -58,7 +58,8 @@
               "Productivity",
               "Photo",
               "Learning",
-              "Utility"
+              "Utility",
+              "Engineering & Analytics"
             ]
           },
           "tags": {
@@ -118,6 +119,32 @@
           "evidencePath": {
             "type": "string",
             "pattern": "^docs/onboarding/[a-z0-9-]+\\.md$"
+          },
+          "symbol": {
+            "type": "string",
+            "pattern": "^assets/apps/[a-z0-9-]+\\.(png|webp|svg)$"
+          },
+          "version": {
+            "type": "string",
+            "maxLength": 16,
+            "pattern": "\\S"
+          },
+          "engine": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "\\S"
+          },
+          "releaseState": {
+            "enum": [
+              "stable",
+              "preview",
+              "unreleased"
+            ]
+          },
+          "releaseNote": {
+            "type": "string",
+            "maxLength": 160,
+            "pattern": "\\S"
           }
         }
       }

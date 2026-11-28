@@ -1,5 +1,23 @@
 # Change log
 
+## 2026-11-28 — Statelia registered (PKPilot0018)
+
+- `data/apps.json`: new entry `statelia` — Statelia v1.0.0, category `Engineering & Analytics`,
+  engine `Sigrdrifa Engine v1.0`, launch `https://hyangdan2.github.io/PKPilot0018/`,
+  repository `HyangDan2/PKPilot0018`, sort order 35. The app was published as **Sigrún**
+  before WO-BRAND-001 renamed it; the repository and the launch URL do not change.
+- `assets/apps/statelia.jpg` (960×540) and `assets/apps/statelia-symbol.png` are cropped from
+  the official splash artwork the owner supplied — the card image is a 16:9 crop, the symbol
+  has its background removed. Neither is redrawn.
+- `schema/apps.schema.json`: optional `symbol`, `version`, `engine`, `releaseState`,
+  `releaseNote`; `Engineering & Analytics` added to the category enum. Existing entries
+  validate unchanged and no card changes shape when those fields are absent.
+- `js/app.js` / `css/style.css`: the card shows the symbol, the version and an honest release
+  line. **No download link is offered** — the `Statelia-v1.0.0-Portable.zip` exists and is
+  verified on the `feat/statelia-branding` branch of PKPilot0018 but has not been published,
+  so the card says `Preview build` instead of claiming a stable download.
+- `docs/onboarding/statelia.md`: the onboarding record, including what is deliberately absent.
+
 ## 2026-11-22 — Five apps renamed on the shelf
 
 - `data/apps.json`: the display names are now `CinePlate` (PKPilot0011, was Nordlys), `ObjectLens` (PKPilot0012, was Vektra Vár), `CodePlayground` (PKPilot0013, was Vísna Sól), `SlideDeck` (PKPilot0014, was Sága Glitra) and `FrameBuilder` (PKPilot0015, was Mynda Ljósa). IDs, slugs, thumbnail files, `launchUrl` / `repositoryUrl` and the sort order are unchanged, so the cards, the `Apps` dropdown and the mobile `Apps` accordion follow the catalog automatically. The FrameBuilder description now names CinePlate as the app that prints a `#frame=` link, and the five `thumbnailAlt` lines use the new names.

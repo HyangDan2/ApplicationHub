@@ -188,6 +188,24 @@ h2 { font-size: 27px; letter-spacing: -1px; margin: 0; line-height: 1.4; }
 .card-description { font-size: 13px; line-height: 1.8; color: #4E4766; margin: 0 0 20px; flex: 1; word-break: keep-all; overflow-wrap: anywhere; }
 .card-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
 .meta-pill { font-size: 10px; color: #544E68; background: var(--bg); border: 1px solid var(--line-strong); padding: 5px 8px; border-radius: 4px; }
+.card-title-row { display: flex; align-items: center; gap: 9px; margin: 0 0 6px; }
+.card-title-row .card-title { margin: 0; }
+.card-symbol {
+  width: 30px; height: 30px; object-fit: contain; flex: 0 0 auto;
+  /* The official symbol is light artwork; a brand-dark tile keeps it visible
+     on the light card without altering the image itself. */
+  background: #0B1024; border-radius: 8px; padding: 4px; box-sizing: border-box;
+}
+.card-version {
+  font-family: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace;
+  font-size: 10px; font-weight: 600; color: var(--accent-text);
+  border: 1px solid var(--line-strong); border-radius: 4px; padding: 2px 6px;
+  white-space: nowrap; transform: translateY(1px);
+}
+.card-release { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0 0 16px; font-size: 10px; }
+.release-engine { color: var(--accent-text); font-weight: 600; }
+.release-state { color: var(--muted); border: 1px dashed var(--line-strong); border-radius: 4px; padding: 2px 6px; }
+.release-note { color: var(--muted); flex-basis: 100%; line-height: 1.6; }
 .card-open { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 15px; border-top: 1px solid var(--line); font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: var(--muted); transition: color .15s; }
 .card-open span { font-size: 16px; }
 .app-card:hover .card-open, .app-card:focus-visible .card-open { color: var(--accent-text); }

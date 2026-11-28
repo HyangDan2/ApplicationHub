@@ -50,13 +50,41 @@ function card(app, index) {
   for (const tag of app.tags) meta.append(element('span', 'meta-pill', tag));
   meta.append(element('span', 'meta-pill', 'Runs in browser'));
 
+  /* WO-B05: an app may carry its own symbol, version and engine. They are
+     optional so the existing cards render exactly as before. */
+  const titleRow = element('div', 'card-title-row');
+  if (app.symbol) {
+    const mark = element('img', 'card-symbol');
+    mark.src = `./${app.symbol}`;
+    mark.alt = '';
+    mark.width = 30;
+    mark.height = 30;
+    mark.loading = 'lazy';
+    mark.decoding = 'async';
+    titleRow.append(mark);
+  }
+  titleRow.append(element('h3', 'card-title', app.title));
+  if (app.version) titleRow.append(element('span', 'card-version', app.version));
+
   body.append(
     kicker,
-    element('h3', 'card-title', app.title),
+    titleRow,
     element('p', 'card-subtitle', app.subtitle ?? ''),
     element('p', 'card-description', app.description),
     meta,
   );
+
+  /* A release line states what the catalogue can actually stand behind: no
+     download is offered until a release artefact is published (WO-B05). */
+  if (app.engine || app.releaseNote || app.releaseState) {
+    const release = element('div', 'card-release');
+    if (app.engine) release.append(element('span', 'release-engine', app.engine));
+    if (app.releaseState && app.releaseState !== 'stable') {
+      release.append(element('span', 'release-state', app.releaseState === 'preview' ? 'Preview build' : 'Not released'));
+    }
+    if (app.releaseNote) release.append(element('span', 'release-note', app.releaseNote));
+    body.append(release);
+  }
 
   const note = element('span', 'card-open', launchable ? 'Open app' : 'Under maintenance right now');
   if (launchable) {
